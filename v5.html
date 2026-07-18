@@ -24,7 +24,7 @@
   --mx: clamp(24px,8vw,120px);
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{-webkit-font-smoothing:antialiased}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
 body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weight:300;font-size:clamp(15px,1.1vw,17px);line-height:1.7;overflow-x:hidden;cursor:none}
 
 /* PROGRESS */
@@ -32,9 +32,10 @@ body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weigh
 .progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--neon))}
 
 /* CURSOR */
-.cursor{position:fixed;width:10px;height:10px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode:difference;transition:transform .12s var(--ease)}
+.cursor{position:fixed;width:10px;height:10px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode:difference;transition:transform .15s var(--ease)}
 .cursor.big{transform:scale(5);background:var(--neon)}
 .cursor-glow{position:fixed;width:500px;height:500px;background:radial-gradient(circle,rgba(196,162,101,.05) 0%,transparent 70%);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%)}
+.cursor-trail{position:fixed;width:6px;height:6px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9998;opacity:0;transition:opacity .3s}
 
 /* GRAIN */
 .grain{position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px}
@@ -56,9 +57,9 @@ body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weigh
 .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width .5s var(--ease)}
 .nav-links a:hover{color:var(--gold-light)}
 .nav-links a:hover::after{width:100%}
-.nav-cta{color:var(--gold)!important;border:1px solid var(--gold-dim);padding:8px 24px}
-.nav-cta:hover{background:var(--gold)!important;color:var(--ink)!important}
-.nav-cta::after{display:none!important}
+.nav-shop{color:var(--ink)!important;background:var(--gold);padding:10px 28px!important;font-weight:600!important;letter-spacing:.25em!important;transition:all .4s var(--ease)!important}
+.nav-shop::after{display:none!important}
+.nav-shop:hover{background:var(--gold-light)!important;letter-spacing:.3em!important}
 .burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:101}
 .burger span{display:block;width:24px;height:1.5px;background:var(--gold);transition:all .4s var(--ease)}
 .burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
@@ -74,7 +75,9 @@ body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weigh
 .mob-menu.open a:nth-child(3){transition-delay:.15s}
 .mob-menu.open a:nth-child(4){transition-delay:.2s}
 .mob-menu.open a:nth-child(5){transition-delay:.25s}
+.mob-menu.open a:nth-child(6){transition-delay:.3s}
 .mob-menu a:hover{color:var(--gold)}
+.mob-shop{background:var(--gold)!important;color:var(--ink)!important;padding:16px 40px;font-family:var(--sans)!important;font-size:14px!important;font-style:normal!important;letter-spacing:.3em!important;text-transform:uppercase}
 
 /* HERO */
 .hero{position:relative;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center}
@@ -87,10 +90,9 @@ body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weigh
 .hero-title .word{display:inline-block;white-space:pre}
 .hero-sub{font-size:clamp(14px,1.2vw,18px);color:var(--stone-lt);max-width:520px;margin:0 auto 50px;opacity:0;animation:fadeUp 1s 1.5s var(--ease) forwards}
 .hero-ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp 1s 1.8s var(--ease) forwards}
-.hero-rail{position:absolute;bottom:40px;left:var(--mx);z-index:2;display:flex;align-items:flex-end;gap:16px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--stone);opacity:0;animation:fadeUp .8s 2.2s var(--ease) forwards}
-.hero-rail b{color:var(--gold-light);font-weight:500}
-.hero-scroll{position:absolute;bottom:40px;right:var(--mx);z-index:2;opacity:0;animation:fadeUp .8s 2.2s var(--ease) forwards}
-.hero-scroll i{display:block;width:1px;height:60px;background:linear-gradient(to bottom,rgba(196,162,101,.6),transparent);animation:pulse 2.5s var(--ease) infinite}
+.hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:2;opacity:0;animation:fadeUp .8s 2.2s var(--ease) forwards;display:flex;flex-direction:column;align-items:center;gap:8px}
+.hero-scroll span{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--stone)}
+.hero-scroll i{display:block;width:1px;height:50px;background:linear-gradient(to bottom,rgba(196,162,101,.6),transparent);animation:pulse 2.5s var(--ease) infinite}
 
 @keyframes charIn{to{opacity:1;transform:translateY(0) rotateX(0)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
@@ -98,12 +100,17 @@ body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weigh
 
 /* BUTTONS */
 .btn{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:400;letter-spacing:.25em;text-transform:uppercase;text-decoration:none;padding:16px 40px;transition:all .5s var(--ease);position:relative;overflow:hidden}
+.btn::before{content:'';position:absolute;inset:0;background:var(--neon);transform:translateY(102%);transition:transform .5s var(--ease);z-index:-1}
+.btn:hover::before{transform:translateY(0)}
 .btn-gold{background:var(--gold);color:var(--ink)}
-.btn-gold:hover{letter-spacing:.35em}
+.btn-gold:hover{color:var(--white);letter-spacing:.3em}
 .btn-ghost{color:var(--gold-light);border:1px solid var(--gold-dim)}
-.btn-ghost:hover{background:rgba(196,162,101,.1);border-color:rgba(196,162,101,.5)}
+.btn-ghost:hover{border-color:var(--neon);color:var(--white)}
 .btn-dark{background:var(--ink);color:var(--white);border:1px solid rgba(255,255,255,.12)}
-.btn-dark:hover{border-color:var(--gold)}
+.btn-dark:hover{border-color:var(--neon);color:var(--white)}
+.btn-lg{padding:20px 56px;font-size:13px;letter-spacing:.3em}
+.btn-arrow::after{content:'→';margin-left:8px;transition:transform .3s var(--ease);display:inline-block}
+.btn-arrow:hover::after{transform:translateX(5px)}
 
 /* MARQUEE */
 .marquee{overflow:hidden;white-space:nowrap;padding:24px 0;border-top:1px solid var(--gold-dim);border-bottom:1px solid var(--gold-dim)}
@@ -113,7 +120,7 @@ body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weigh
 
 /* SECTIONS */
 .s{padding:clamp(80px,15vh,180px) var(--mx);position:relative}
-.s__inner{max-width:1100px;margin:0 auto}
+.s__inner{max-width:1200px;margin:0 auto}
 
 /* REVEALS */
 .rv{opacity:0;transform:translateY(60px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
@@ -130,6 +137,39 @@ body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weigh
 .h-lg{font-size:clamp(28px,3.5vw,52px);font-weight:700;line-height:1.05;letter-spacing:-.015em;text-wrap:balance}
 .grad{background:linear-gradient(135deg,var(--gold-light),var(--gold),#eba530);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
+/* ============ SHOP SECTION (immediately after hero) ============ */
+.shop{background:var(--ink)}
+.shop-header{text-align:center;margin-bottom:6vh}
+.shop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.2vw,32px)}
+.shop-card{position:relative;overflow:hidden;background:var(--ink2);border:1px solid rgba(196,162,101,.06);transition:all .6s var(--ease);transform-style:preserve-3d;text-decoration:none;color:inherit;display:flex;flex-direction:column}
+.shop-card .tilt-hl{position:absolute;inset:0;pointer-events:none;z-index:5;opacity:0;transition:opacity .3s}
+.shop-card:hover .tilt-hl{opacity:1}
+.shop-card:hover{border-color:rgba(196,162,101,.25);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.shop-card-img{aspect-ratio:1/1;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,var(--ink3),var(--ink2))}
+.shop-card-img img{max-width:80%;max-height:80%;object-fit:contain;transition:transform 1.2s var(--ease);will-change:transform;filter:drop-shadow(0 20px 40px rgba(0,0,0,.3))}
+.shop-card:hover .shop-card-img img{transform:scale(1.08) translateY(-8px)}
+.shop-card-tag{position:absolute;top:16px;right:16px;font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);background:var(--gold);padding:6px 14px;z-index:6}
+.shop-card-body{padding:clamp(20px,2.5vw,36px);flex:1;display:flex;flex-direction:column}
+.shop-card-name{font-size:clamp(20px,1.8vw,26px);font-weight:700;margin-bottom:6px}
+.shop-card-desc{font-size:13px;color:var(--stone-lt);line-height:1.6;margin-bottom:16px;flex:1}
+.shop-card-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid var(--gold-dim)}
+.shop-card-price{font-size:clamp(18px,1.5vw,24px);font-weight:700;color:var(--gold)}
+.shop-card-price small{display:block;font-size:11px;font-weight:400;color:var(--stone);letter-spacing:.1em}
+.shop-btn{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--ink);padding:12px 24px;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;transition:all .4s var(--ease);position:relative;overflow:hidden}
+.shop-btn::before{content:'';position:absolute;inset:0;background:var(--neon);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease);z-index:0}
+.shop-btn:hover::before{transform:scaleX(1)}
+.shop-btn span{position:relative;z-index:1}
+.shop-btn:hover{color:var(--white)}
+
+/* FEATURES STRIP */
+.features-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--gold-dim)}
+.fs-item{padding:clamp(24px,3vw,40px);text-align:center;border-right:1px solid var(--gold-dim);transition:background .4s var(--ease)}
+.fs-item:last-child{border-right:none}
+.fs-item:hover{background:rgba(196,162,101,.04)}
+.fs-icon{font-size:clamp(28px,3vw,40px);margin-bottom:12px;display:block}
+.fs-label{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:4px}
+.fs-value{font-size:14px;color:var(--stone-lt)}
+
 /* INTRO */
 .intro-layout{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(40px,6vw,100px);align-items:center}
 .intro-media{position:relative;overflow:hidden;border-radius:4px}
@@ -141,68 +181,34 @@ body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weigh
 .intro-copy p{font-family:var(--serif);font-style:italic;font-size:clamp(16px,1.3vw,20px);color:var(--stone-lt);line-height:1.8}
 .intro-rule{width:50px;height:1px;background:rgba(196,162,101,.4);margin:24px 0}
 
-/* WIDE MEDIA (parallax image) */
+/* WIDE MEDIA (parallax) */
 .wide-media{margin:clamp(60px,10vh,120px) 0 0;overflow:hidden;position:relative}
 .wide-media img{width:100%;height:60vh;object-fit:cover;display:block;will-change:transform}
 .wide-media figcaption{position:absolute;bottom:24px;left:var(--mx);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--stone-lt)}
 .wide-media figcaption b{display:block;color:var(--gold-light);font-weight:500;margin-top:4px}
 
-/* 360 VIEWER CALLOUT */
+/* 360 VIEWER */
 .viewer-callout{background:var(--ink2)}
 .viewer-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(40px,6vw,80px);align-items:center}
 .viewer-video{position:relative;overflow:hidden;border-radius:4px}
 .viewer-video video{width:100%;display:block}
-.viewer-video span{position:absolute;bottom:12px;left:16px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--stone);opacity:.6}
-
-/* COLLECTION */
-.products{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,30px)}
-.p-card{position:relative;overflow:hidden;border:1px solid rgba(196,162,101,.04);background:var(--ink2);transition:border-color .5s var(--ease),transform .6s var(--ease-spring);transform-style:preserve-3d;text-decoration:none;color:inherit;display:block}
-.p-card .tilt-hl{position:absolute;inset:0;pointer-events:none;z-index:2;opacity:0;transition:opacity .3s}
-.p-card:hover .tilt-hl{opacity:1}
-.p-card:hover{border-color:rgba(196,162,101,.2)}
-.p-card-img{aspect-ratio:4/5;overflow:hidden;position:relative;background:linear-gradient(180deg,var(--ink3),var(--ink2))}
-.p-card-img img{width:100%;height:100%;object-fit:contain;padding:10%;transition:transform 1s var(--ease)}
-.p-card:hover .p-card-img img{transform:scale(1.06)}
-.p-card-info{padding:clamp(20px,2.5vw,32px)}
-.p-card-name{font-size:18px;font-weight:600;margin-bottom:4px}
-.p-card-sub{font-size:12px;color:var(--stone);margin-bottom:8px}
-.p-card-price{font-size:14px;color:var(--gold);letter-spacing:.05em}
-.p-card-tag{position:absolute;top:16px;right:16px;font-size:9px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);background:var(--gold);padding:5px 12px;z-index:3}
-.p-card-btn{display:block;margin-top:16px;text-align:center;padding:12px;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold-dim);text-decoration:none;transition:all .4s var(--ease)}
-.p-card-btn:hover{background:rgba(196,162,101,.1);border-color:rgba(196,162,101,.5)}
 
 /* TECH STAGE */
 .tech-stage{position:relative;min-height:70vh;display:flex;align-items:stretch;overflow:hidden}
 .tech-img{position:absolute;inset:0;opacity:0;transition:opacity .8s var(--ease)}
 .tech-img.active{opacity:1}
 .tech-img img{width:100%;height:100%;object-fit:cover}
-.tech-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,17,15,.85) 0%,rgba(7,17,15,.4) 60%,rgba(7,17,15,.2) 100%)}
+.tech-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,17,15,.88) 0%,rgba(7,17,15,.4) 60%,rgba(7,17,15,.15) 100%)}
 .tech-ui{position:relative;z-index:2;padding:clamp(40px,6vh,80px) var(--mx);display:flex;flex-direction:column;justify-content:center;max-width:550px}
 .tech-tabs{display:flex;flex-direction:column;gap:0}
 .tech-tab{background:none;border:none;text-align:left;padding:20px 0;cursor:pointer;border-bottom:1px solid rgba(196,162,101,.08);transition:all .4s var(--ease);color:var(--stone)}
 .tech-tab.active{color:var(--white)}
-.tech-tab span{font-size:11px;letter-spacing:.3em;color:var(--gold);display:block;margin-bottom:4px}
 .tech-tab b{font-size:clamp(16px,1.5vw,20px);font-weight:600;display:block}
 .tech-tab small{font-size:12px;opacity:.6;display:block;margin-top:4px}
-.tech-tab.active::before{content:'';display:inline-block;width:20px;height:1px;background:var(--gold);margin-right:8px;vertical-align:middle}
+.tech-tab.active{border-left:2px solid var(--gold);padding-left:16px}
 .tech-metric{margin-top:40px;padding:20px 0;border-top:1px solid var(--gold-dim)}
 .tech-metric strong{font-size:clamp(32px,3vw,48px);font-weight:700;color:var(--gold);display:block}
 .tech-metric span{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--stone)}
-
-/* EXPERIENCES BENTO */
-.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:auto auto;gap:clamp(8px,1vw,16px)}
-.bento-card{position:relative;overflow:hidden;border-radius:4px;min-height:280px;transition:transform .6s var(--ease-spring);transform-style:preserve-3d}
-.bento-card:hover{z-index:2}
-.bento-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.2s var(--ease)}
-.bento-card:hover img{transform:scale(1.06)}
-.bento-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,17,15,.8) 0%,transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(16px,2vw,28px)}
-.bento-overlay span{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
-.bento-overlay h3{font-size:clamp(16px,1.5vw,22px);font-weight:600;margin-bottom:4px}
-.bento-overlay p{font-size:13px;color:var(--stone-lt);max-width:30ch}
-.bento-wide{grid-column:span 2}
-.bento-tall{grid-row:span 2}
-.bento-text{display:flex;align-items:center;justify-content:center;background:var(--ink2);border:1px solid var(--gold-dim)}
-.bento-text .bento-overlay{position:relative;background:none}
 
 /* STATEMENT (full-bleed parallax) */
 .statement{position:relative;min-height:80vh;display:flex;align-items:center;overflow:hidden}
@@ -212,11 +218,25 @@ body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weigh
 .statement-copy{position:relative;z-index:2;padding:0 var(--mx);max-width:600px}
 .statement-copy p{color:var(--stone-lt);margin:20px 0 30px;line-height:1.8}
 
+/* EXPERIENCES BENTO */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:auto auto;gap:clamp(8px,1vw,16px)}
+.bento-card{position:relative;overflow:hidden;border-radius:4px;min-height:280px;transition:transform .6s var(--ease-spring);transform-style:preserve-3d}
+.bento-card:hover{z-index:2}
+.bento-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.2s var(--ease)}
+.bento-card:hover img{transform:scale(1.06)}
+.bento-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,17,15,.8) 0%,transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(16px,2vw,28px)}
+.bento-overlay h3{font-size:clamp(16px,1.5vw,22px);font-weight:600;margin-bottom:4px}
+.bento-overlay p{font-size:13px;color:var(--stone-lt);max-width:30ch}
+.bento-wide{grid-column:span 2}
+.bento-tall{grid-row:span 2}
+.bento-text{display:flex;align-items:center;justify-content:center;background:var(--ink2);border:1px solid var(--gold-dim)}
+.bento-text .bento-overlay{position:relative;background:none}
+
 /* AUDITORY FEATURE */
 .auditory{background:var(--ink2)}
 .auditory-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:center}
 .auditory-visual{position:relative;display:flex;align-items:center;justify-content:center}
-.auditory-visual img{max-width:380px;width:100%;position:relative;z-index:2;transition:transform 1s var(--ease)}
+.auditory-visual img{max-width:380px;width:100%;position:relative;z-index:2;transition:transform 1s var(--ease);filter:drop-shadow(0 20px 60px rgba(196,162,101,.15))}
 .auditory-visual:hover img{transform:scale(1.04)}
 .auditory-halo{position:absolute;width:110%;height:110%;border-radius:50%;background:radial-gradient(circle,rgba(196,162,101,.08),transparent 70%);animation:haloPulse 5s ease-in-out infinite}
 @keyframes haloPulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.1);opacity:1}}
@@ -224,9 +244,10 @@ body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weigh
 .auditory-copy dl div{display:flex;gap:16px;padding:12px 0;border-bottom:1px solid var(--gold-dim)}
 .auditory-copy dt{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);min-width:80px}
 .auditory-copy dd{color:var(--stone-lt);font-size:14px}
+.auditory-cta{margin-top:32px;display:flex;gap:16px;flex-wrap:wrap}
 
 /* QUOTE */
-.quote-section{min-height:70vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;background:var(--ink2)}
+.quote-section{min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;background:var(--ink2)}
 .quote-text{font-family:var(--serif);font-size:clamp(24px,3.2vw,48px);font-weight:400;font-style:italic;line-height:1.35;max-width:850px;margin:0 auto 30px;padding:0 var(--mx)}
 .quote-text .wr{display:inline-block;opacity:.1;transition:opacity .4s var(--ease),transform .4s var(--ease);transform:translateY(4px)}
 .quote-text .wr.lit{opacity:1;transform:translateY(0)}
@@ -240,7 +261,7 @@ body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weigh
 .config .h-lg{color:var(--ink)}
 .config p{color:#555;line-height:1.8}
 .config-visual{position:relative;display:flex;flex-direction:column;align-items:center}
-.config-visual img{max-width:320px;width:100%;transition:transform 1s var(--ease)}
+.config-visual img{max-width:320px;width:100%;transition:transform 1s var(--ease);filter:drop-shadow(0 20px 40px rgba(0,0,0,.15))}
 .config-visual:hover img{transform:scale(1.04) rotate(2deg)}
 .swatches{display:flex;gap:10px;margin-top:24px}
 .swatches i{width:28px;height:28px;border-radius:50%;background:var(--sw);border:2px solid transparent;cursor:pointer;transition:all .3s}
@@ -248,7 +269,7 @@ body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weigh
 .config-orbit{position:absolute;width:140%;height:140%;border:1px dashed rgba(196,162,101,.12);border-radius:50%;animation:spin 40s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* CTA */
+/* CTA FINAL */
 .cta{min-height:50vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden}
 .cta-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(196,162,101,.1),transparent 70%);animation:ctaP 6s ease-in-out infinite}
 @keyframes ctaP{0%,100%{opacity:.5}50%{opacity:1}}
@@ -258,7 +279,7 @@ body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weigh
 
 /* FOOTER */
 .footer{padding:60px var(--mx);border-top:1px solid var(--gold-dim)}
-.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
 .footer-copy{font-size:11px;color:var(--stone);letter-spacing:.1em}
 .footer-links{display:flex;gap:30px}
 .footer-links a{font-size:11px;color:var(--stone);text-decoration:none;letter-spacing:.1em;transition:color .3s}
@@ -267,16 +288,18 @@ body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weigh
 /* MOBILE */
 @media(max-width:768px){
   body{cursor:auto}
-  .cursor,.cursor-glow{display:none}
+  .cursor,.cursor-glow,.cursor-trail{display:none}
   .nav-links{display:none}
   .burger{display:flex}
-  .hero-rail{display:none}
   .intro-layout,.auditory-grid,.config-grid,.viewer-grid{grid-template-columns:1fr}
-  .products{grid-template-columns:1fr}
+  .shop-grid{grid-template-columns:1fr}
   .bento{grid-template-columns:1fr;grid-template-rows:auto}
   .bento-wide,.bento-tall{grid-column:span 1;grid-row:span 1}
   .tech-stage{min-height:auto;flex-direction:column}
-  .tech-shade{background:rgba(7,17,15,.85)}
+  .tech-shade{background:rgba(7,17,15,.88)}
+  .features-strip{grid-template-columns:1fr 1fr}
+  .fs-item:nth-child(2){border-right:none}
+  .fs-item:nth-child(3),.fs-item:nth-child(4){border-top:1px solid var(--gold-dim)}
   .footer-inner{flex-direction:column;gap:20px;text-align:center}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
@@ -288,8 +311,8 @@ body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weigh
 <div class="vbanner">
   <span>Version</span>
   <a href="index.html" class="inactive">V3</a>
-  <a href="v4.html" class="active">V4</a>
-  <a href="v5.html" class="inactive">V5</a>
+  <a href="v4.html" class="inactive">V4</a>
+  <a href="v5.html" class="active">V5</a>
 </div>
 
 <div class="progress"><div class="progress-bar" id="pbar"></div></div>
@@ -297,78 +320,154 @@ body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weigh
 <div class="cursor-glow" id="glow"></div>
 <div class="grain"></div>
 
-<!-- NAV -->
+<!-- CURSOR TRAIL -->
+<div class="cursor-trail" id="trail0"></div>
+<div class="cursor-trail" id="trail1"></div>
+<div class="cursor-trail" id="trail2"></div>
+<div class="cursor-trail" id="trail3"></div>
+<div class="cursor-trail" id="trail4"></div>
+<div class="cursor-trail" id="trail5"></div>
+
+<!-- NAV with SHOP NOW -->
 <nav class="nav" id="nav">
   <a href="#" class="nav-logo">Solodome</a>
   <ul class="nav-links">
-    <li><a href="#intro">About</a></li>
+    <li><a href="#about">About</a></li>
     <li><a href="#tech">Technology</a></li>
     <li><a href="#experiences">Experiences</a></li>
-    <li><a href="#collection">Collection</a></li>
-    <li><a href="#contact" class="nav-cta">Experience</a></li>
+    <li><a href="#collection" class="nav-shop btn-mag">Shop Now</a></li>
   </ul>
   <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 <div class="mob-menu" id="mobMenu">
   <nav>
-    <a href="#intro">About</a>
+    <a href="#about">About</a>
     <a href="#tech">Technology</a>
     <a href="#experiences">Experiences</a>
-    <a href="#collection">Collection</a>
-    <a href="#contact">Experience</a>
+    <a href="#collection" class="mob-shop">Shop Now</a>
   </nav>
 </div>
 
 <!-- HERO — FULL VIDEO -->
 <section class="hero" id="hero">
-  <video autoplay muted loop playsinline poster="assets/new-hero-image.jpg" class="hero-poster">
+  <video autoplay muted loop playsinline poster="assets/new-hero-image.jpg">
     <source src="assets/hero-cinematic-mobile.mp4" type="video/mp4" media="(max-width:720px)">
     <source src="assets/hero-cinematic-desktop.mp4" type="video/mp4">
   </video>
   <div class="hero-shade"></div>
   <div class="hero-content" data-parallax="-.15">
-    <p class="hero-kicker">Personal audio architecture &middot; California</p>
+    <p class="hero-kicker">Personal audio architecture</p>
     <h1 class="hero-title" id="heroTitle"></h1>
     <p class="hero-sub">A handcrafted listening sanctuary that turns music, film and therapeutic frequencies into a physical experience.</p>
     <div class="hero-ctas">
-      <a href="#collection" class="btn btn-gold btn-mag">Discover the collection</a>
-      <a href="#tech" class="btn btn-ghost btn-mag">Explore the engineering</a>
+      <a href="#collection" class="btn btn-gold btn-lg btn-mag btn-arrow"><span>Shop Now</span></a>
+      <a href="#about" class="btn btn-ghost btn-mag">Learn More</a>
     </div>
   </div>
-  <div class="hero-rail"><span>01</span><b>SoloDome</b><small>Immersive sound, made personal</small></div>
-  <div class="hero-scroll"><i></i></div>
+  <div class="hero-scroll"><span>Scroll</span><i></i></div>
 </section>
 
 <!-- MARQUEE -->
 <div class="marquee"><div class="marquee-track" id="mqTrack">
   <span class="marquee-item"><span class="dot"></span>Immersive Sound</span>
   <span class="marquee-item"><span class="dot"></span>Made in California</span>
-  <span class="marquee-item"><span class="dot"></span>The Shape of Sound</span>
+  <span class="marquee-item"><span class="dot"></span>Free Delivery</span>
   <span class="marquee-item"><span class="dot"></span>Sound Therapy</span>
-  <span class="marquee-item"><span class="dot"></span>24K Speakers</span>
+  <span class="marquee-item"><span class="dot"></span>White Glove Setup</span>
   <span class="marquee-item"><span class="dot"></span>Infinite Customization</span>
   <span class="marquee-item"><span class="dot"></span>Wellness Redefined</span>
   <span class="marquee-item"><span class="dot"></span>Immersive Sound</span>
   <span class="marquee-item"><span class="dot"></span>Made in California</span>
-  <span class="marquee-item"><span class="dot"></span>The Shape of Sound</span>
+  <span class="marquee-item"><span class="dot"></span>Free Delivery</span>
   <span class="marquee-item"><span class="dot"></span>Sound Therapy</span>
-  <span class="marquee-item"><span class="dot"></span>24K Speakers</span>
+  <span class="marquee-item"><span class="dot"></span>White Glove Setup</span>
   <span class="marquee-item"><span class="dot"></span>Infinite Customization</span>
   <span class="marquee-item"><span class="dot"></span>Wellness Redefined</span>
 </div></div>
 
-<!-- INTRO -->
-<section class="s" id="intro">
+<!-- ============ SHOP COLLECTION (right after hero — primary CTA) ============ -->
+<section class="s shop" id="collection">
+  <div class="s__inner">
+    <div class="shop-header rv rv-h">
+      <div class="eyebrow">The collection</div>
+      <h2 class="h-xl">Choose your SoloDome.</h2>
+    </div>
+    <div class="shop-grid">
+
+      <!-- Classic -->
+      <div class="shop-card tilt rv rv-c" style="--i:0">
+        <div class="tilt-hl"></div>
+        <div class="shop-card-img">
+          <img src="assets/classic.png" alt="SoloDome Classic" loading="lazy">
+        </div>
+        <div class="shop-card-body">
+          <div class="shop-card-name">Classic</div>
+          <div class="shop-card-desc">The original personal sound sanctuary. Four-speaker immersion, sculpted comfort, and room-filling bass — without filling the room.</div>
+          <div class="shop-card-bottom">
+            <div class="shop-card-price">$5,999<small>Starting price</small></div>
+            <a href="classic.html" class="shop-btn btn-mag"><span>Shop Now →</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Deluxe -->
+      <div class="shop-card tilt rv rv-c" style="--i:1">
+        <div class="tilt-hl"></div>
+        <div class="shop-card-tag">Most Popular</div>
+        <div class="shop-card-img">
+          <img src="assets/deluxe.jpg" alt="SoloDome Deluxe" loading="lazy">
+        </div>
+        <div class="shop-card-body">
+          <div class="shop-card-name">Deluxe</div>
+          <div class="shop-card-desc">Greater scale, comfort and presence. Expanded acoustic chamber with premium upholstery and enhanced bass response.</div>
+          <div class="shop-card-bottom">
+            <div class="shop-card-price">$7,999<small>Starting price</small></div>
+            <a href="deluxe.html" class="shop-btn btn-mag"><span>Shop Now →</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Auditory -->
+      <div class="shop-card tilt rv rv-c" style="--i:2">
+        <div class="tilt-hl"></div>
+        <div class="shop-card-tag">Premium</div>
+        <div class="shop-card-img" style="background:var(--ink)">
+          <img src="assets/auditory_deluxe_new.png" alt="SoloDome Auditory" loading="lazy">
+        </div>
+        <div class="shop-card-body">
+          <div class="shop-card-name">Auditory</div>
+          <div class="shop-card-desc">Personalized clarity, calibrated to you. Proprietary software creates a custom audio profile for users with hearing considerations.</div>
+          <div class="shop-card-bottom">
+            <div class="shop-card-price">$14,999<small>Starting price</small></div>
+            <a href="auditory.html" class="shop-btn btn-mag"><span>Shop Now →</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES STRIP -->
+<div class="features-strip rv">
+  <div class="fs-item"><span class="fs-icon">🔊</span><span class="fs-label">Speakers</span><span class="fs-value">4-speaker 2.1 system</span></div>
+  <div class="fs-item"><span class="fs-icon">🎧</span><span class="fs-label">Frequency</span><span class="fs-value">20 Hz – 20 kHz</span></div>
+  <div class="fs-item"><span class="fs-icon">📡</span><span class="fs-label">Connectivity</span><span class="fs-value">Bluetooth, XLR, RCA, 3.5mm</span></div>
+  <div class="fs-item"><span class="fs-icon">🏠</span><span class="fs-label">Setup</span><span class="fs-value">White-glove delivery</span></div>
+</div>
+
+<!-- ABOUT / INTRO -->
+<section class="s" id="about">
   <div class="s__inner intro-layout">
     <div class="intro-media rv-l">
       <img src="assets/qualitysound.jpg" alt="Listener in SoloDome" loading="lazy">
-      <div class="intro-caption"><span>Near-field listening</span><b>Studio detail, no room treatment</b></div>
+      <div class="intro-caption"><span>Near-field listening</span><b>No room treatment needed</b></div>
     </div>
     <div class="intro-copy rv-r" data-parallax="-.06">
       <div class="eyebrow">A room within a room</div>
       <h2 class="h-lg">The world disappears. The sound remains.</h2>
       <div class="intro-rule"></div>
       <p>SoloDome places a calibrated acoustic environment directly around the listener — reducing distance, room reflections and distraction. Four speakers, focused low-frequency energy and enveloping comfort create an experience no conventional chair can match.</p>
+      <a href="#collection" class="btn btn-gold btn-mag btn-arrow" style="margin-top:32px"><span>Find your SoloDome</span></a>
     </div>
   </div>
   <figure class="wide-media rv" data-parallax-img>
@@ -377,20 +476,22 @@ body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weigh
   </figure>
 </section>
 
-<!-- 360 VIEWER CALLOUT -->
+<!-- 360 VIEWER -->
 <section class="s viewer-callout" id="viewer">
   <div class="s__inner viewer-grid">
     <div class="viewer-video rv-l">
       <video autoplay muted loop playsinline poster="assets/360/solodome-video-poster.webp">
         <source src="assets/360/solodome-rotation.mp4" type="video/mp4">
       </video>
-      <span>Interactive product exploration</span>
     </div>
     <div class="rv-r" data-parallax="-.05">
-      <div class="eyebrow">Closer than photography</div>
-      <h2 class="h-lg">Turn the SoloDome yourself.</h2>
-      <p style="color:var(--stone-lt);margin:16px 0 30px;line-height:1.8">Inspect the shell, interior and sculptural profile through a drag-controlled product experience built for desktop and mobile.</p>
-      <a href="classic.html#product-viewer" class="btn btn-gold btn-mag">Open the 360&deg; viewer</a>
+      <div class="eyebrow">See every angle</div>
+      <h2 class="h-lg">Drag. Rotate. Explore.</h2>
+      <p style="color:var(--stone-lt);margin:16px 0 30px;line-height:1.8">Inspect the shell, interior and sculptural profile through a full product experience on desktop and mobile.</p>
+      <div style="display:flex;gap:16px;flex-wrap:wrap">
+        <a href="classic.html#product-viewer" class="btn btn-gold btn-mag btn-arrow"><span>Open 360&deg; Viewer</span></a>
+        <a href="#collection" class="btn btn-ghost btn-mag"><span>Shop Collection</span></a>
+      </div>
     </div>
   </div>
 </section>
@@ -406,11 +507,12 @@ body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weigh
       <div class="eyebrow">Engineered for presence</div>
       <h2 class="h-lg" style="margin-bottom:32px">Acoustics become architecture.</h2>
       <div class="tech-tabs">
-        <button class="tech-tab active" data-tab="sound" type="button"><span>01</span><b>Binaural sound field</b><small>Four-speaker 2.1 architecture</small></button>
-        <button class="tech-tab" data-tab="signal" type="button"><span>02</span><b>Precision signal path</b><small>DSP-led acoustic control</small></button>
-        <button class="tech-tab" data-tab="connection" type="button"><span>03</span><b>Professional connectivity</b><small>Bluetooth, 3.5mm, RCA or XLR</small></button>
+        <button class="tech-tab active" data-tab="sound" type="button"><b>Binaural sound field</b><small>Four-speaker 2.1 architecture</small></button>
+        <button class="tech-tab" data-tab="signal" type="button"><b>Precision signal path</b><small>DSP-led acoustic control</small></button>
+        <button class="tech-tab" data-tab="connection" type="button"><b>Professional connectivity</b><small>Bluetooth, 3.5mm, RCA or XLR</small></button>
       </div>
       <div class="tech-metric"><strong>20–20k</strong><span>Hz frequency response</span></div>
+      <a href="#collection" class="btn btn-gold btn-mag btn-arrow" style="margin-top:24px"><span>Shop Now</span></a>
     </div>
   </div>
 </section>
@@ -422,7 +524,7 @@ body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weigh
     <div class="eyebrow">Sound you can feel</div>
     <h2 class="h-xl">A more physical<br>way to listen.</h2>
     <p>Low frequencies become gentle, embodied energy — bringing new depth to meditation, recovery, breathwork and the simple act of listening.</p>
-    <a href="#experiences" class="btn btn-ghost btn-mag">Enter the experience</a>
+    <a href="#collection" class="btn btn-gold btn-mag btn-arrow"><span>Shop Now</span></a>
   </div>
 </section>
 
@@ -434,38 +536,13 @@ body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weigh
       <h2 class="h-xl">Designed around the way you live.</h2>
     </div>
     <div class="bento">
-      <div class="bento-card bento-wide tilt rv rv-c" style="--i:0"><img src="assets/audiophile.jpg" alt="Audiophile"><div class="bento-overlay"><span>Listening</span><h3>Audiophile precision</h3><p>Hear every detail without filling the room with equipment.</p></div><div class="tilt-hl"></div></div>
-      <div class="bento-card bento-tall tilt rv rv-c" style="--i:1"><img src="assets/sleep.jpg" alt="Immersion"><div class="bento-overlay"><span>Immersion</span><h3>Film, games & spatial worlds</h3></div><div class="tilt-hl"></div></div>
-      <div class="bento-card tilt rv rv-c" style="--i:2"><img src="assets/focus.jpg" alt="Wellness"><div class="bento-overlay"><span>Wellness</span><h3>A private daily ritual</h3></div><div class="tilt-hl"></div></div>
-      <div class="bento-card bento-text tilt rv rv-c" style="--i:3"><div class="bento-overlay"><span>Work</span><h3>Deep focus, between calls.</h3><p>An acoustically rich sanctuary inside the room you already have.</p></div><div class="tilt-hl"></div></div>
+      <div class="bento-card bento-wide tilt rv rv-c" style="--i:0"><img src="assets/audiophile.jpg" alt="Audiophile"><div class="bento-overlay"><h3>Audiophile precision</h3><p>Hear every detail without filling the room with equipment.</p></div><div class="tilt-hl"></div></div>
+      <div class="bento-card bento-tall tilt rv rv-c" style="--i:1"><img src="assets/sleep.jpg" alt="Immersion"><div class="bento-overlay"><h3>Film, games & spatial worlds</h3></div><div class="tilt-hl"></div></div>
+      <div class="bento-card tilt rv rv-c" style="--i:2"><img src="assets/focus.jpg" alt="Wellness"><div class="bento-overlay"><h3>A private daily ritual</h3></div><div class="tilt-hl"></div></div>
+      <div class="bento-card bento-text tilt rv rv-c" style="--i:3"><div class="bento-overlay"><h3>Deep focus, between calls.</h3><p>An acoustically rich sanctuary inside the room you already have.</p></div><div class="tilt-hl"></div></div>
     </div>
-  </div>
-</section>
-
-<!-- COLLECTION -->
-<section class="s" id="collection">
-  <div class="s__inner">
-    <div class="rv rv-h" style="text-align:center;margin-bottom:8vh">
-      <div class="eyebrow">The collection</div>
-      <h2 class="h-xl">Three expressions.<br>One acoustic philosophy.</h2>
-    </div>
-    <div class="products">
-      <a class="p-card tilt rv rv-c" href="classic.html" style="--i:0">
-        <div class="tilt-hl"></div>
-        <div class="p-card-img"><img src="assets/classic.png" alt="Classic" loading="lazy"></div>
-        <div class="p-card-info"><div class="p-card-name">Classic</div><div class="p-card-sub">The original personal sound sanctuary</div><div class="p-card-price">From $5,999</div></div>
-      </a>
-      <a class="p-card tilt rv rv-c" href="deluxe.html" style="--i:1">
-        <div class="tilt-hl"></div>
-        <div class="p-card-tag">Most Popular</div>
-        <div class="p-card-img"><img src="assets/deluxe.jpg" alt="Deluxe" loading="lazy"></div>
-        <div class="p-card-info"><div class="p-card-name">Deluxe</div><div class="p-card-sub">Greater scale, comfort and presence</div><div class="p-card-price">From $7,999</div></div>
-      </a>
-      <a class="p-card tilt rv rv-c" href="auditory.html" style="--i:2">
-        <div class="tilt-hl"></div>
-        <div class="p-card-img" style="background:var(--ink)"><img src="assets/auditory_deluxe_new.png" alt="Auditory" loading="lazy"></div>
-        <div class="p-card-info"><div class="p-card-name">Auditory</div><div class="p-card-sub">Personalized clarity, calibrated to you</div><div class="p-card-price">From $14,999</div></div>
-      </a>
+    <div style="text-align:center;margin-top:6vh" class="rv rv-t">
+      <a href="#collection" class="btn btn-gold btn-lg btn-mag btn-arrow"><span>Shop the Collection</span></a>
     </div>
   </div>
 </section>
@@ -486,7 +563,10 @@ body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weigh
         <div><dt>System</dt><dd>Chair, tablet, stand and ottoman</dd></div>
         <div><dt>Service</dt><dd>White-glove setup and training</dd></div>
       </dl>
-      <a href="auditory.html" class="btn btn-gold btn-mag" style="margin-top:32px">Discover Auditory</a>
+      <div class="auditory-cta">
+        <a href="auditory.html" class="btn btn-gold btn-mag btn-arrow"><span>Shop Auditory</span></a>
+        <a href="#collection" class="btn btn-ghost btn-mag">View All Models</a>
+      </div>
     </div>
   </div>
 </section>
@@ -506,26 +586,36 @@ body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weigh
       <div class="eyebrow">Made for your space</div>
       <h2 class="h-lg">Your color.<br>Your texture.<br>Your SoloDome.</h2>
       <p>Begin with Classic or Deluxe, then select an exterior finish, interior tone and professional audio options.</p>
-      <a href="configure.html" class="btn btn-dark btn-mag" style="margin-top:32px">Open the configurator</a>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:32px">
+        <a href="configure.html" class="btn btn-dark btn-mag btn-arrow"><span>Configure Yours</span></a>
+        <a href="#collection" class="btn btn-ghost btn-mag" style="color:var(--ink);border-color:rgba(7,17,15,.2)">Shop Now</a>
+      </div>
     </div>
     <div class="config-visual rv-r">
       <div class="config-orbit"></div>
       <img src="assets/classic.png" alt="Configurable SoloDome" loading="lazy">
       <div class="swatches">
-        <i style="--sw:#f4f2eb"></i><i style="--sw:#0b1011"></i><i style="--sw:#1e3b48"></i><i style="--sw:#7d2d25"></i><i style="--sw:#b99c6e"></i>
+        <i style="--sw:#f4f2eb" title="Ivory"></i>
+        <i style="--sw:#0b1011" title="Midnight"></i>
+        <i style="--sw:#1e3b48" title="Ocean"></i>
+        <i style="--sw:#7d2d25" title="Oxblood"></i>
+        <i style="--sw:#b99c6e" title="Gold"></i>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
+<!-- CTA FINAL -->
 <section class="cta s" id="contact">
   <div class="cta-glow"></div>
   <div class="cta-copy rv">
-    <div class="eyebrow">Created around you</div>
+    <div class="eyebrow">Ready?</div>
     <h2 class="h-xl">Build your personal<br>world of sound.</h2>
-    <p>Select your model, finish, upholstery and professional audio options. Every SoloDome is handcrafted to order in California.</p>
-    <a href="configure.html" class="btn btn-gold btn-mag">Configure your SoloDome</a>
+    <p>Every SoloDome is handcrafted to order in Chatsworth, California. Select your model, finish, and audio options.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="#collection" class="btn btn-gold btn-lg btn-mag btn-arrow"><span>Shop Now</span></a>
+      <a href="configure.html" class="btn btn-ghost btn-mag">Configure</a>
+    </div>
   </div>
 </section>
 
@@ -549,12 +639,30 @@ const isMob=window.innerWidth<=768;
 const cur=document.getElementById('cur');
 const glo=document.getElementById('glow');
 
-/* CURSOR */
+/* CURSOR + TRAIL */
 if(!isMob){
   let cx=0,cy=0;
+  const trail=[];
+  for(let i=0;i<6;i++)trail.push({el:document.getElementById('trail'+i),x:0,y:0});
+
   document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;glo.style.left=mx+'px';glo.style.top=my+'px'},{passive:true});
-  (function ac(){cx+=(mx-cx)*.12;cy+=(my-cy)*.12;cur.style.left=(cx-5)+'px';cur.style.top=(cy-5)+'px';requestAnimationFrame(ac)})();
-  document.querySelectorAll('a,button,.p-card,.bento-card,.tilt').forEach(el=>{
+
+  (function ac(){
+    cx+=(mx-cx)*.12;cy+=(my-cy)*.12;
+    cur.style.left=(cx-5)+'px';cur.style.top=(cy-5)+'px';
+    trail.forEach((t,i)=>{
+      const prev=i===0?{x:cx,y:cy}:trail[i-1];
+      t.x+=(prev.x-t.x)*(.15-i*.015);
+      t.y+=(prev.y-t.y)*(.15-i*.015);
+      t.el.style.left=(t.x-3)+'px';
+      t.el.style.top=(t.y-3)+'px';
+      t.el.style.opacity=(.5-i*.08);
+      t.el.style.transform='scale('+(1-i*.12)+')';
+    });
+    requestAnimationFrame(ac);
+  })();
+
+  document.querySelectorAll('a,button,.shop-card,.bento-card,.tilt').forEach(el=>{
     el.addEventListener('mouseenter',()=>cur.classList.add('big'));
     el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
   });
@@ -593,11 +701,9 @@ function px(){
   pxEls.forEach(el=>{const s=parseFloat(el.dataset.parallax);const r=el.getBoundingClientRect();const o=(r.top+r.height/2-window.innerHeight/2)*s;el.style.transform='translateY('+o+'px)'});
 }
 
-/* PARALLAX IMAGES (cover zoom on scroll) */
-document.querySelectorAll('[data-parallax-img] img').forEach(img=>{
-  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){const r=e.target.parentElement.getBoundingClientRect();const p=(window.innerHeight-r.top)/(window.innerHeight+r.height);e.target.style.transform='translateY('+(-(p-.5)*40)+'px) scale(1.08)'}})},{threshold:0});
-  obs.observe(img);
-});
+/* PARALLAX IMAGES */
+const pxImgObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){const r=e.target.parentElement.getBoundingClientRect();const p=(window.innerHeight-r.top)/(window.innerHeight+r.height);e.target.style.transform='translateY('+(-(p-.5)*40)+'px) scale(1.08)'}})},{threshold:0});
+document.querySelectorAll('[data-parallax-img] img').forEach(img=>pxImgObs.observe(img));
 
 /* PARALLAX BG */
 function pxBg(){
@@ -668,7 +774,7 @@ const mqTrack=document.getElementById('mqTrack');
 let mqX=0,mqW=0;
 setTimeout(()=>{mqW=mqTrack.scrollWidth/2},100);
 
-/* SCROLL PROGRESS */
+/* PROGRESS */
 const pbar=document.getElementById('pbar');
 
 /* ANCHORS */
@@ -678,11 +784,9 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',
 (function loop(){
   requestAnimationFrame(loop);
   px();pxBg();uq();
-  // marquee
   const spd=1+Math.min(sv*.08,4);
   mqX-=spd;if(mqW&&mqX<=-mqW)mqX+=mqW;
   mqTrack.style.transform='translateX('+mqX+'px)';
-  // progress
   const total=document.documentElement.scrollHeight-window.innerHeight;
   pbar.style.width=(sy/total*100)+'%';
   sv*=.92;
