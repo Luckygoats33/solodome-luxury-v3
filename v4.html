@@ -1,0 +1,1095 @@
+<title>Solodome — The Shape of Sound</title>
+<style>
+:root {
+  --ink: 10 10 10;
+  --ink-hex: #0a0a0a;
+  --ink-el: #151413;
+  --ink-card: #1c1b1a;
+  --gold: 196 162 101;
+  --gold-hex: #C4A265;
+  --gold-light: 220 200 160;
+  --amber: 235 165 50;
+  --neon: 160 120 255;
+  --neon-hex: #A078FF;
+  --orange: 245 140 60;
+  --stone: 130 125 118;
+  --stone-lt: 168 162 154;
+  --white-hex: #FAFAF8;
+  --txt: #E8E4DE;
+  --serif: 'Baskerville','Palatino Linotype','Book Antiqua',Palatino,Georgia,serif;
+  --sans: 'Segoe UI',system-ui,-apple-system,Helvetica,Arial,sans-serif;
+  --ease: cubic-bezier(.23,1,.32,1);
+  --ease-out: cubic-bezier(.16,1,.3,1);
+  --ease-spring: cubic-bezier(.34,1.56,.64,1);
+  --mx: clamp(24px,8vw,120px);
+  --max-w: 1100px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:auto}
+body{
+  background:rgb(var(--ink))!important;color:var(--txt);
+  font-family:var(--sans);font-weight:300;
+  font-size:clamp(15px,1.1vw,17px);line-height:1.7;
+  overflow-x:hidden;cursor:none;
+}
+
+/* === SCROLL PROGRESS === */
+.scroll-progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:200}
+.scroll-progress-bar{height:100%;width:0;background:linear-gradient(90deg,rgb(var(--gold)),rgb(var(--neon)));transition:width .1s linear}
+
+/* === CURSOR === */
+.cursor-dot{
+  position:fixed;width:8px;height:8px;
+  background:rgb(var(--gold));border-radius:50%;
+  pointer-events:none;z-index:9999;
+  mix-blend-mode:difference;transition:transform .15s var(--ease);
+}
+.cursor-dot.hovering{transform:scale(4);background:rgb(var(--neon))}
+.cursor-trail-dot{
+  position:fixed;width:6px;height:6px;
+  background:rgb(var(--gold));border-radius:50%;
+  pointer-events:none;z-index:9998;opacity:0;
+  mix-blend-mode:difference;
+}
+
+/* === GRAIN === */
+.grain{
+  position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat:repeat;background-size:256px;
+}
+
+/* === WAVE BG === */
+#waveBg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+
+/* === NAV === */
+.nav{
+  position:fixed;top:41px;left:0;right:0;z-index:100;
+  padding:0 var(--mx);height:72px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .6s var(--ease);
+}
+.nav.scrolled{background:rgb(var(--ink)/.92);backdrop-filter:blur(30px) saturate(1.6);-webkit-backdrop-filter:blur(30px) saturate(1.6)}
+.nav-logo{font-size:11px;font-weight:500;letter-spacing:.5em;text-transform:uppercase;color:rgb(var(--gold-light));text-decoration:none}
+.nav-links{display:flex;gap:clamp(20px,3vw,40px);list-style:none;align-items:center}
+.nav-links a{
+  font-size:10px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;
+  color:rgb(var(--stone-lt));text-decoration:none;transition:color .3s var(--ease);position:relative;
+}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:rgb(var(--gold));transition:width .5s var(--ease)}
+.nav-links a:hover{color:rgb(var(--gold-light))}
+.nav-links a:hover::after{width:100%}
+.nav-cta{color:rgb(var(--gold))!important;border:1px solid rgb(var(--gold)/.3);padding:8px 24px;transition:all .4s var(--ease)!important}
+.nav-cta:hover{background:rgb(var(--gold))!important;color:rgb(var(--ink))!important}
+.nav-cta::after{display:none!important}
+
+/* === HAMBURGER === */
+.nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:101}
+.nav-burger span{display:block;width:24px;height:1.5px;background:rgb(var(--gold));transition:all .4s var(--ease)}
+.nav-burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.mobile-menu{
+  position:fixed;inset:0;z-index:99;
+  background:rgb(var(--ink)/.97);backdrop-filter:blur(40px);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .5s var(--ease);
+}
+.mobile-menu.open{opacity:1;pointer-events:all}
+.mobile-menu-links{display:flex;flex-direction:column;gap:32px;text-align:center}
+.mobile-menu-links a{
+  font-family:var(--serif);font-size:clamp(28px,6vw,48px);font-style:italic;
+  color:var(--white-hex);text-decoration:none;opacity:0;transform:translateY(20px);
+  transition:opacity .5s var(--ease),transform .5s var(--ease),color .3s;
+}
+.mobile-menu.open .mobile-menu-links a{opacity:1;transform:translateY(0)}
+.mobile-menu.open .mobile-menu-links a:nth-child(1){transition-delay:.05s}
+.mobile-menu.open .mobile-menu-links a:nth-child(2){transition-delay:.1s}
+.mobile-menu.open .mobile-menu-links a:nth-child(3){transition-delay:.15s}
+.mobile-menu.open .mobile-menu-links a:nth-child(4){transition-delay:.2s}
+.mobile-menu.open .mobile-menu-links a:nth-child(5){transition-delay:.25s}
+.mobile-menu.open .mobile-menu-links a:nth-child(6){transition-delay:.3s}
+.mobile-menu-links a:hover{color:rgb(var(--gold))}
+
+/* === HERO === */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;padding:0 var(--mx)}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;max-width:1300px;margin:0 auto;width:100%}
+.hero-content{position:relative;z-index:2}
+.hero-eyebrow{font-size:11px;font-weight:400;letter-spacing:.5em;text-transform:uppercase;color:rgb(var(--gold));margin-bottom:20px;opacity:0;animation:fadeUp .8s .2s var(--ease) forwards}
+.hero-title{
+  font-family:var(--serif);font-size:clamp(44px,6vw,96px);
+  font-weight:400;font-style:italic;line-height:.9;
+  letter-spacing:-.02em;color:var(--white-hex);margin-bottom:30px;
+}
+.hero-title .char{display:inline-block;opacity:0;transform:translateY(60px) rotateX(-40deg);animation:charIn .8s var(--ease-out) forwards}
+.hero-title .word{display:inline-block;white-space:pre}
+.hero-sub{
+  font-size:clamp(14px,1.2vw,18px);color:rgb(var(--stone-lt));
+  max-width:420px;font-weight:300;opacity:0;animation:fadeUp 1s 1.4s var(--ease) forwards;
+}
+.hero-cta-wrap{display:flex;gap:16px;margin-top:40px;opacity:0;animation:fadeUp 1s 1.7s var(--ease) forwards}
+.hero-dome-wrap{
+  position:relative;display:flex;align-items:center;justify-content:center;
+  transition:transform .05s linear;will-change:transform;
+}
+.hero-dome-wrap canvas{width:100%;max-width:520px;height:auto;aspect-ratio:6/7;display:block}
+.hero-orbit{
+  position:absolute;top:50%;left:50%;border-radius:50%;
+  border:1px dashed rgb(var(--gold)/.08);
+  pointer-events:none;
+}
+.hero-orbit:nth-child(2){width:115%;height:115%;transform:translate(-50%,-50%);animation:orbitSpin 30s linear infinite}
+.hero-orbit:nth-child(3){width:135%;height:135%;transform:translate(-50%,-50%);animation:orbitSpin 45s linear infinite reverse}
+.hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:2;opacity:0;animation:fadeUp .8s 2.2s var(--ease) forwards}
+.hero-scroll span{display:block;width:1px;height:60px;background:linear-gradient(to bottom,rgb(var(--gold)/.6),transparent);animation:scrollPulse 2.5s var(--ease) infinite}
+
+@keyframes charIn{to{opacity:1;transform:translateY(0) rotateX(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:.8;transform:scaleY(1.3)}}
+@keyframes orbitSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+
+/* === BUTTONS === */
+.btn-wrap{display:inline-block;position:relative}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:11px;font-weight:400;letter-spacing:.25em;text-transform:uppercase;
+  text-decoration:none;padding:16px 40px;transition:all .5s var(--ease);
+  position:relative;overflow:hidden;
+}
+.btn-primary{background:rgb(var(--gold));color:rgb(var(--ink));border:none}
+.btn-primary:hover{letter-spacing:.35em}
+.btn-ghost{background:transparent;color:rgb(var(--gold-light));border:1px solid rgb(var(--gold)/.3)}
+.btn-ghost:hover{background:rgb(var(--gold)/.1);border-color:rgb(var(--gold)/.6)}
+
+/* === MARQUEE === */
+.marquee{overflow:hidden;white-space:nowrap;padding:28px 0;border-top:1px solid rgb(var(--gold)/.08);border-bottom:1px solid rgb(var(--gold)/.08);position:relative}
+.marquee-track{display:inline-flex;will-change:transform}
+.marquee-item{
+  font-size:clamp(12px,1.2vw,16px);font-weight:300;letter-spacing:.3em;
+  text-transform:uppercase;color:rgb(var(--stone));padding:0 40px;flex-shrink:0;
+}
+.marquee-item .dot{display:inline-block;width:4px;height:4px;background:rgb(var(--gold)/.4);border-radius:50%;vertical-align:middle;margin-right:40px}
+
+/* === SECTIONS === */
+.s{padding:clamp(80px,15vh,160px) var(--mx);position:relative;z-index:1}
+.s__inner{max-width:var(--max-w);margin:0 auto}
+
+/* === REVEALS === */
+.reveal{opacity:0;transform:translateY(50px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal-heading{transition-duration:1.2s;transition-timing-function:var(--ease-spring);transform:translateY(60px)}
+.reveal-text{transition-duration:.7s;transform:translateY(30px)}
+.reveal-card{transition-duration:.8s;transition-timing-function:var(--ease-out);transition-delay:calc(var(--i,0) * .12s)}
+.reveal-left{opacity:0;transform:translateX(-60px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal-right{opacity:0;transform:translateX(60px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.visible,.reveal-heading.visible,.reveal-text.visible,.reveal-card.visible,.reveal-left.visible,.reveal-right.visible{opacity:1;transform:translate(0)}
+
+/* === TYPOGRAPHY === */
+.eyebrow{font-size:11px;font-weight:400;letter-spacing:.35em;text-transform:uppercase;color:rgb(var(--gold));margin-bottom:clamp(8px,1.5vw,16px)}
+.h-xl{font-size:clamp(36px,5.5vw,80px);font-weight:700;line-height:.95;letter-spacing:-.02em;text-wrap:balance;margin-bottom:5vh}
+.h-lg{font-size:clamp(28px,3.5vw,52px);font-weight:700;line-height:1.05;letter-spacing:-.015em;text-wrap:balance;margin-bottom:3vh}
+.h-md{font-size:clamp(18px,1.8vw,24px);font-weight:600;line-height:1.25}
+.body-text{color:rgb(var(--stone-lt));max-width:48ch;line-height:1.8;font-weight:300}
+.gradient-text{background:linear-gradient(135deg,rgb(var(--gold-light)),rgb(var(--gold)),rgb(var(--amber)));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* === ABOUT === */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:center}
+.about-visual{position:relative;aspect-ratio:1;display:flex;align-items:center;justify-content:center}
+.about-visual canvas{width:100%;height:100%;border-radius:16px}
+.about-body{font-family:var(--serif);font-style:italic;font-size:clamp(16px,1.3vw,20px);color:rgb(var(--stone-lt));line-height:1.8}
+.about-rule{width:50px;height:1px;background:rgb(var(--gold)/.4);margin:24px 0}
+
+/* === FEATURES === */
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.feature-card{
+  background:var(--ink-el);padding:clamp(30px,4vw,50px);position:relative;overflow:hidden;
+  transition:background .5s var(--ease),transform .6s var(--ease-spring);
+  border:1px solid rgb(var(--gold)/.04);transform-style:preserve-3d;
+}
+.feature-card .card-highlight{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s}
+.feature-card:hover .card-highlight{opacity:1}
+.feature-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,rgb(var(--gold)/.5),transparent);
+  transform:scaleX(0);transition:transform .8s var(--ease);
+}
+.feature-card:hover::before{transform:scaleX(1)}
+.feature-card:hover{background:var(--ink-card)}
+.feature-icon{
+  width:48px;height:48px;margin-bottom:24px;display:flex;align-items:center;justify-content:center;
+  border:1px solid rgb(var(--gold)/.15);border-radius:12px;color:rgb(var(--gold));
+  transition:all .5s var(--ease);
+}
+.feature-card:hover .feature-icon{background:rgb(var(--gold)/.08);border-color:rgb(var(--gold)/.3);transform:translateY(-4px)}
+.feature-icon svg{width:22px;height:22px}
+.feature-title{font-size:16px;font-weight:600;margin-bottom:12px;color:var(--white-hex)}
+.feature-desc{font-size:14px;color:rgb(var(--stone));line-height:1.7}
+
+/* === STATS === */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--ink-el);border-top:1px solid rgb(var(--gold)/.06);border-bottom:1px solid rgb(var(--gold)/.06)}
+.stat{padding:clamp(40px,6vh,80px) clamp(20px,3vw,40px);text-align:center}
+.stat-number{font-size:clamp(36px,4vw,64px);font-weight:700;line-height:1;color:var(--white-hex);margin-bottom:8px;font-variant-numeric:tabular-nums}
+.stat-label{font-size:10px;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:rgb(var(--stone))}
+
+/* === APPLICATIONS === */
+.apps-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px}
+.app-card{
+  padding:clamp(40px,5vw,70px);background:var(--ink-el);position:relative;overflow:hidden;
+  transition:all .5s var(--ease),transform .6s var(--ease-spring);cursor:pointer;
+  transform-style:preserve-3d;
+}
+.app-card .card-highlight{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s}
+.app-card:hover .card-highlight{opacity:1}
+.app-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgb(var(--gold)/.03),transparent);opacity:0;transition:opacity .5s var(--ease)}
+.app-card:hover::after{opacity:1}
+.app-card:hover{background:var(--ink-card)}
+.app-icon{font-size:32px;margin-bottom:20px;display:block;filter:grayscale(1) brightness(1.5);transition:filter .4s var(--ease)}
+.app-card:hover .app-icon{filter:grayscale(0) brightness(1)}
+.app-title{font-size:clamp(20px,2vw,28px);font-weight:600;color:var(--white-hex);margin-bottom:12px}
+.app-desc{font-size:14px;color:rgb(var(--stone));line-height:1.7;max-width:40ch}
+
+/* === COLORS (interactive) === */
+.color-viewer{display:flex;flex-direction:column;align-items:center;margin-bottom:5vh}
+.color-viewer canvas{width:100%;max-width:420px;aspect-ratio:6/7;display:block;transition:transform .6s var(--ease),filter .6s var(--ease)}
+.color-viewer canvas.flash{animation:colorFlash .6s var(--ease)}
+.color-name-display{font-family:var(--serif);font-size:clamp(18px,2vw,28px);font-style:italic;color:var(--white-hex);margin-top:24px;text-align:center;transition:opacity .3s}
+@keyframes colorFlash{0%{transform:scale(1);filter:brightness(1)}40%{transform:scale(1.04);filter:brightness(1.4)}100%{transform:scale(1);filter:brightness(1)}}
+.color-swatches{display:flex;gap:clamp(12px,2vw,24px);justify-content:center;margin-top:32px}
+.swatch{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  background:none;border:none;cursor:pointer;padding:8px;transition:transform .4s var(--ease-spring);
+}
+.swatch:hover{transform:scale(1.1)}
+.swatch-dot{
+  width:clamp(32px,4vw,48px);height:clamp(32px,4vw,48px);border-radius:50%;
+  border:2px solid transparent;transition:border-color .4s var(--ease),box-shadow .4s var(--ease);
+}
+.swatch.active .swatch-dot{border-color:rgb(var(--gold));box-shadow:0 0 20px rgb(var(--gold)/.3)}
+.swatch-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgb(var(--stone));transition:color .3s}
+.swatch.active .swatch-label,.swatch:hover .swatch-label{color:rgb(var(--gold))}
+
+/* === QUOTE === */
+.quote-section{min-height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative}
+.quote-content{position:relative;z-index:2;max-width:800px;padding:0 var(--mx)}
+.quote-text{font-family:var(--serif);font-size:clamp(24px,3vw,44px);font-weight:400;font-style:italic;line-height:1.4;color:var(--white-hex);margin-bottom:30px}
+.quote-text .word-reveal{display:inline-block;opacity:.12;transition:opacity .4s var(--ease),transform .4s var(--ease);transform:translateY(4px)}
+.quote-text .word-reveal.lit{opacity:1;transform:translateY(0)}
+.quote-attr{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgb(var(--gold));opacity:0;transition:opacity .6s var(--ease)}
+.quote-attr.visible{opacity:1}
+
+/* === COLLECTION === */
+.collection-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,30px)}
+.product-card{
+  position:relative;overflow:hidden;border:1px solid rgb(var(--gold)/.04);
+  transition:border-color .5s var(--ease),transform .6s var(--ease-spring);
+  background:var(--ink-el);transform-style:preserve-3d;
+}
+.product-card .card-highlight{position:absolute;inset:0;pointer-events:none;z-index:2;opacity:0;transition:opacity .3s}
+.product-card:hover .card-highlight{opacity:1}
+.product-card:hover{border-color:rgb(var(--gold)/.2)}
+.product-visual{aspect-ratio:4/5;position:relative;overflow:hidden;background:linear-gradient(180deg,var(--ink-card),var(--ink-el))}
+.product-visual canvas{width:100%;height:100%;transition:transform 1s var(--ease)}
+.product-card:hover .product-visual canvas{transform:scale(1.04)}
+.product-info{padding:clamp(20px,2.5vw,32px)}
+.product-name{font-size:18px;font-weight:600;color:var(--white-hex);margin-bottom:4px}
+.product-sub{font-size:12px;color:rgb(var(--stone));margin-bottom:8px}
+.product-price{font-size:14px;color:rgb(var(--gold));letter-spacing:.05em}
+.product-tag{position:absolute;top:16px;right:16px;font-size:9px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgb(var(--ink));background:rgb(var(--gold));padding:5px 12px;z-index:3}
+.product-btn{
+  display:block;margin-top:16px;text-align:center;padding:12px;
+  font-size:10px;letter-spacing:.25em;text-transform:uppercase;
+  color:rgb(var(--gold));border:1px solid rgb(var(--gold)/.2);
+  text-decoration:none;transition:all .4s var(--ease);
+}
+.product-btn:hover{background:rgb(var(--gold)/.1);border-color:rgb(var(--gold)/.5)}
+
+/* === CTA === */
+.cta-section{min-height:70vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden}
+.cta-bg{position:absolute;inset:0;background:radial-gradient(ellipse 100% 80% at 50% 50%,rgb(var(--gold)/.08) 0%,transparent 70%);animation:ctaPulse 6s ease-in-out infinite}
+@keyframes ctaPulse{0%,100%{opacity:.6}50%{opacity:1}}
+.cta-content{position:relative;z-index:2}
+.cta-title{font-family:var(--serif);font-size:clamp(36px,5vw,72px);font-weight:400;font-style:italic;line-height:1.1;color:var(--white-hex);margin-bottom:20px}
+.cta-body{font-size:clamp(14px,1.1vw,17px);color:rgb(var(--stone-lt));max-width:480px;margin:0 auto 40px;line-height:1.8}
+
+/* === FOOTER === */
+.footer{padding:60px var(--mx);border-top:1px solid rgb(var(--gold)/.06)}
+.footer-inner{max-width:var(--max-w);margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.footer-copy{font-size:11px;color:rgb(var(--stone));letter-spacing:.1em}
+.footer-links{display:flex;gap:30px}
+.footer-links a{font-size:11px;color:rgb(var(--stone));text-decoration:none;letter-spacing:.1em;transition:color .3s var(--ease)}
+.footer-links a:hover{color:rgb(var(--gold))}
+
+/* === MOBILE === */
+@media(max-width:768px){
+  body{cursor:auto}
+  .cursor-dot,.cursor-trail-dot{display:none}
+  .nav-links{display:none}
+  .nav-burger{display:flex}
+  .hero{padding:100px var(--mx) 60px}
+  .hero-grid{grid-template-columns:1fr;text-align:center}
+  .hero-content{order:1}
+  .hero-dome-wrap{order:0;margin-bottom:20px}
+  .hero-dome-wrap canvas{max-width:280px}
+  .hero-orbit{display:none}
+  .hero-sub{margin:0 auto}
+  .hero-cta-wrap{justify-content:center;flex-wrap:wrap}
+  .hero-scroll{display:none}
+  .about-grid{grid-template-columns:1fr}
+  .features-grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .apps-grid{grid-template-columns:1fr}
+  .collection-grid{grid-template-columns:1fr}
+  .footer-inner{flex-direction:column;gap:20px;text-align:center}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
+
+<!-- VERSION BANNER -->
+<div id="version-banner" style="position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(10,10,10,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(196,162,101,.15);padding:10px 24px;display:flex;align-items:center;justify-content:center;gap:8px;font-family:'Segoe UI',system-ui,sans-serif;font-size:11px;letter-spacing:.15em;text-transform:uppercase">
+<span style="color:rgba(196,162,101,.6);margin-right:12px">Version</span>
+<a href="index.html" style="color:rgba(168,162,154,.8);padding:5px 16px;text-decoration:none;border:1px solid rgba(196,162,101,.15);transition:all .3s" onmouseover="this.style.color='#C4A265';this.style.borderColor='rgba(196,162,101,.4)'" onmouseout="this.style.color='rgba(168,162,154,.8)';this.style.borderColor='rgba(196,162,101,.15)'">V3</a>
+<a href="v4.html" style="color:#0a0a0a;background:#C4A265;padding:5px 16px;text-decoration:none;font-weight:600;letter-spacing:.12em">V4</a>
+</div>
+
+<!-- SCROLL PROGRESS -->
+<div class="scroll-progress" style="top:41px"><div class="scroll-progress-bar" id="progressBar"></div></div>
+
+<!-- CURSOR -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div id="cursorTrail"></div>
+
+<!-- WAVE BACKGROUND -->
+<canvas id="waveBg"></canvas>
+
+<!-- GRAIN -->
+<div class="grain"></div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">Solodome</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#applications">Applications</a></li>
+    <li><a href="#colors">Colors</a></li>
+    <li><a href="#collection">Collection</a></li>
+    <li><a href="#contact" class="nav-cta">Experience</a></li>
+  </ul>
+  <button class="nav-burger" id="burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-links">
+    <a href="#about">About</a>
+    <a href="#features">Features</a>
+    <a href="#applications">Applications</a>
+    <a href="#colors">Colors</a>
+    <a href="#collection">Collection</a>
+    <a href="#contact">Experience</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-grid">
+    <div class="hero-content" data-parallax="-0.12">
+      <div class="hero-eyebrow">Solodome Audio</div>
+      <h1 class="hero-title" id="heroTitle"></h1>
+      <p class="hero-sub">Created by top sound engineers. Featured at NBA All-Star Weekend. A life-changing, immersive experience through science-based sound.</p>
+      <div class="hero-cta-wrap">
+        <div class="btn-wrap"><a href="#collection" class="btn btn-primary btn-magnetic">Explore Collection</a></div>
+        <div class="btn-wrap"><a href="#about" class="btn btn-ghost btn-magnetic">Our Story</a></div>
+      </div>
+    </div>
+    <div class="hero-dome-wrap" id="heroDomeWrap">
+      <canvas id="heroDome" width="600" height="700"></canvas>
+      <div class="hero-orbit"></div>
+      <div class="hero-orbit"></div>
+    </div>
+  </div>
+  <div class="hero-scroll"><span></span></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item"><span class="dot"></span>Immersive Sound</span>
+    <span class="marquee-item"><span class="dot"></span>Made in California</span>
+    <span class="marquee-item"><span class="dot"></span>The Shape of Sound</span>
+    <span class="marquee-item"><span class="dot"></span>Sound Therapy</span>
+    <span class="marquee-item"><span class="dot"></span>24K Speakers</span>
+    <span class="marquee-item"><span class="dot"></span>Infinite Customization</span>
+    <span class="marquee-item"><span class="dot"></span>Wellness Redefined</span>
+    <span class="marquee-item"><span class="dot"></span>Immersive Sound</span>
+    <span class="marquee-item"><span class="dot"></span>Made in California</span>
+    <span class="marquee-item"><span class="dot"></span>The Shape of Sound</span>
+    <span class="marquee-item"><span class="dot"></span>Sound Therapy</span>
+    <span class="marquee-item"><span class="dot"></span>24K Speakers</span>
+    <span class="marquee-item"><span class="dot"></span>Infinite Customization</span>
+    <span class="marquee-item"><span class="dot"></span>Wellness Redefined</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="s" id="about">
+  <div class="s__inner about-grid">
+    <div class="about-visual reveal-left">
+      <canvas id="aboutDome" width="600" height="600"></canvas>
+    </div>
+    <div class="reveal-right" data-parallax="-0.06">
+      <div class="eyebrow">The Vision</div>
+      <h2 class="h-lg">What Started as a Chair Might Just Change Medicine Forever</h2>
+      <div class="about-rule"></div>
+      <p class="about-body">The Solodome isn't furniture. It's an instrument — a precision-tuned acoustic chamber that wraps you in directional, full-spectrum sound. Endorsed by Grammy-winning artists and trusted by wellness clinics nationwide. Every curve is calibrated to transform how sound meets the body.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="s" id="features">
+  <div class="s__inner">
+    <div class="reveal reveal-heading" style="text-align:center;margin-bottom:8vh">
+      <div class="eyebrow">Engineering</div>
+      <h2 class="h-xl">Built to Be Felt</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card tilt-card reveal reveal-card" style="--i:0">
+        <div class="card-highlight"></div>
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+        <div class="feature-title">Directional Sound</div>
+        <div class="feature-desc">Precision driver array creates a focused sound field that envelops only the listener, preserving room silence.</div>
+      </div>
+      <div class="feature-card tilt-card reveal reveal-card" style="--i:1">
+        <div class="card-highlight"></div>
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+        <div class="feature-title">Studio-Grade Drivers</div>
+        <div class="feature-desc">The same transducer technology trusted by Grammy-winning studios, tuned for the dome's unique acoustic geometry.</div>
+      </div>
+      <div class="feature-card tilt-card reveal reveal-card" style="--i:2">
+        <div class="card-highlight"></div>
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 6v6l4 2"/></svg></div>
+        <div class="feature-title">Therapeutic Frequencies</div>
+        <div class="feature-desc">Built-in frequency programs deliver clinically studied sound therapy protocols — from stress relief to deep meditation.</div>
+      </div>
+      <div class="feature-card tilt-card reveal reveal-card" style="--i:3">
+        <div class="card-highlight"></div>
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.24 12.24a6 6 0 00-8.49-8.49L5 10.5V19h8.5l6.74-6.76z"/><path d="M16 8L2 22M17.5 15H9"/></svg></div>
+        <div class="feature-title">Full Customization</div>
+        <div class="feature-desc">Choose your shell color, interior material, base finish, and speaker configuration. Every dome is built to order in Southern California.</div>
+      </div>
+      <div class="feature-card tilt-card reveal reveal-card" style="--i:4">
+        <div class="card-highlight"></div>
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="feature-title">Acoustic Isolation</div>
+        <div class="feature-desc">Multi-layer shell construction and premium acoustic foam create a private sound sanctuary — audible outside only as a whisper.</div>
+      </div>
+      <div class="feature-card tilt-card reveal reveal-card" style="--i:5">
+        <div class="card-highlight"></div>
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <div class="feature-title">Smart Integration</div>
+        <div class="feature-desc">Bluetooth 5.0, USB-C, and 3.5mm connectivity. Compatible with every major streaming platform, DAW, and sound device.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats" id="statsSection">
+  <div class="stat reveal reveal-card" style="--i:0">
+    <div class="stat-number" data-target="24" data-suffix="K">—</div>
+    <div class="stat-label">Followers Worldwide</div>
+  </div>
+  <div class="stat reveal reveal-card" style="--i:1">
+    <div class="stat-number" data-target="5" data-suffix="">—</div>
+    <div class="stat-label">Driver System</div>
+  </div>
+  <div class="stat reveal reveal-card" style="--i:2">
+    <div class="stat-number" data-target="360" data-suffix="°">—</div>
+    <div class="stat-label">Immersive Sound</div>
+  </div>
+  <div class="stat reveal reveal-card" style="--i:3">
+    <div class="stat-number" data-target="2019" data-suffix="">—</div>
+    <div class="stat-label">Est. California</div>
+  </div>
+</div>
+
+<!-- APPLICATIONS -->
+<section class="s" id="applications">
+  <div class="s__inner">
+    <div class="reveal reveal-heading" style="text-align:center;margin-bottom:8vh">
+      <div class="eyebrow">Applications</div>
+      <h2 class="h-xl">Beyond Listening</h2>
+    </div>
+    <div class="apps-grid">
+      <div class="app-card tilt-card reveal reveal-card" style="--i:0">
+        <div class="card-highlight"></div>
+        <span class="app-icon">&#x1F9E0;</span>
+        <div class="app-title">Sound Therapy & Wellness</div>
+        <div class="app-desc">Clinics across the country are integrating the Solodome into ketamine therapy, meditation programs, and stress-management protocols.</div>
+      </div>
+      <div class="app-card tilt-card reveal reveal-card" style="--i:1">
+        <div class="card-highlight"></div>
+        <span class="app-icon">&#x1F3A7;</span>
+        <div class="app-title">Pro Audio & Recording</div>
+        <div class="app-desc">A reference monitoring environment without room treatment. Hear every detail in a perfectly controlled acoustic space.</div>
+      </div>
+      <div class="app-card tilt-card reveal reveal-card" style="--i:2">
+        <div class="card-highlight"></div>
+        <span class="app-icon">&#x1F49C;</span>
+        <div class="app-title">Autism & Sensory Regulation</div>
+        <div class="app-desc">A safe, enveloping chamber for sensory-seeking individuals. Therapeutic sound in a calming, private enclosure.</div>
+      </div>
+      <div class="app-card tilt-card reveal reveal-card" style="--i:3">
+        <div class="card-highlight"></div>
+        <span class="app-icon">&#x1F3AE;</span>
+        <div class="app-title">Immersive Gaming</div>
+        <div class="app-desc">Positional audio that puts you inside the game. Feel explosions. Hear footsteps behind you. Truly disappear into another world.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLORS -->
+<section class="s" id="colors">
+  <div class="s__inner">
+    <div class="reveal reveal-heading" style="text-align:center;margin-bottom:6vh">
+      <div class="eyebrow">Infinite Expression</div>
+      <h2 class="h-xl gradient-text">Your Color. Your Dome.</h2>
+    </div>
+    <div class="color-viewer reveal">
+      <canvas id="colorDome" width="600" height="700"></canvas>
+      <div class="color-name-display" id="colorName">Amber Gold</div>
+    </div>
+    <div class="color-swatches reveal reveal-text">
+      <button class="swatch active" data-color="gold"><span class="swatch-dot" style="background:#C4A265"></span><span class="swatch-label">Gold</span></button>
+      <button class="swatch" data-color="charcoal"><span class="swatch-dot" style="background:#4a4a50"></span><span class="swatch-label">Charcoal</span></button>
+      <button class="swatch" data-color="orange"><span class="swatch-dot" style="background:#e87030"></span><span class="swatch-label">Sunset</span></button>
+      <button class="swatch" data-color="white"><span class="swatch-dot" style="background:#e8e4de"></span><span class="swatch-label">Clinical</span></button>
+      <button class="swatch" data-color="cosmic"><span class="swatch-dot" style="background:#a060e0"></span><span class="swatch-label">Cosmic</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-section s" id="quoteSection">
+  <div class="quote-content">
+    <p class="quote-text" id="quoteText">What started as a chair might just change medicine forever. The Solodome delivers frequencies the body was designed to receive — but modern life has stripped away.</p>
+    <div class="quote-attr" id="quoteAttr">— Josh Chaney, Founder</div>
+  </div>
+</section>
+
+<!-- COLLECTION -->
+<section class="s" id="collection">
+  <div class="s__inner">
+    <div class="reveal reveal-heading" style="text-align:center;margin-bottom:8vh">
+      <div class="eyebrow">Collection</div>
+      <h2 class="h-xl">Three Tiers. One Experience.</h2>
+    </div>
+    <div class="collection-grid" id="collectionGrid">
+      <div class="product-card tilt-card reveal reveal-card" style="--i:0">
+        <div class="card-highlight"></div>
+        <div class="product-visual"><canvas id="prodCanvas1" width="400" height="500"></canvas></div>
+        <div class="product-info">
+          <div class="product-name">The Classic</div>
+          <div class="product-sub">Essential immersive sound</div>
+          <div class="product-price">From $5,999</div>
+          <a href="#contact" class="product-btn btn-magnetic">Learn More</a>
+        </div>
+      </div>
+      <div class="product-card tilt-card reveal reveal-card" style="--i:1">
+        <div class="card-highlight"></div>
+        <div class="product-visual">
+          <canvas id="prodCanvas2" width="400" height="500"></canvas>
+          <div class="product-tag">Most Popular</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">The Deluxe</div>
+          <div class="product-sub">Premium materials & drivers</div>
+          <div class="product-price">From $7,999</div>
+          <a href="#contact" class="product-btn btn-magnetic">Learn More</a>
+        </div>
+      </div>
+      <div class="product-card tilt-card reveal reveal-card" style="--i:2">
+        <div class="card-highlight"></div>
+        <div class="product-visual"><canvas id="prodCanvas3" width="400" height="500"></canvas></div>
+        <div class="product-info">
+          <div class="product-name">The Auditory</div>
+          <div class="product-sub">Clinical-grade therapeutic system</div>
+          <div class="product-price">From $14,999</div>
+          <a href="#contact" class="product-btn btn-magnetic">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section s" id="contact">
+  <div class="cta-bg"></div>
+  <div class="cta-content reveal">
+    <div class="eyebrow">Experience It</div>
+    <h2 class="cta-title">Step Inside</h2>
+    <p class="cta-body">Book a private demo at our Southern California studio. Feel the Solodome. Let the sound find you.</p>
+    <div class="btn-wrap"><a href="mailto:josh@solodome.com" class="btn btn-primary btn-magnetic">Book a Demo</a></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-copy">&copy; 2026 Solodome Audio. Made in California.</div>
+    <div class="footer-links">
+      <a href="https://www.instagram.com/solodomeaudio" target="_blank">Instagram</a>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+
+/* ═══════ STATE ═══════ */
+let mx=0,my=0,scrollY=0,scrollVel=0,prevScrollY=0;
+let heroVisible=true,isMobile=window.innerWidth<=768;
+let tiltX=0,tiltY=0,targetTiltX=0,targetTiltY=0;
+const trailPositions=[];
+const TRAIL_LEN=12;
+
+/* ═══════ DOME COLORS ═══════ */
+const DOME={
+  gold:{shell:['#b09060','#8a7440','#6e5c30','#5a4a26'],fur:'#c4a040',furHi:'#dcc060',furRGB:'220,192,96',base:'#2a2520',baseDk:'#1a1510',baseLt:'#3a3530',rimDk:'#4a4030',rimLt:'#8a7a60',rimBr:'#c4b490',logo:'rgba(196,162,101,.25)',glow:'rgba(196,162,101,.07)'},
+  charcoal:{shell:['#4a4a4a','#3a3a3a','#2c2c2c','#1e1e1e'],fur:'#4a4a50',furHi:'#6a6a70',furRGB:'106,106,112',base:'#1a1a1c',baseDk:'#101012',baseLt:'#2a2a2e',rimDk:'#2a2a2a',rimLt:'#5a5a5e',rimBr:'#8a8a90',logo:'rgba(140,140,150,.25)',glow:'rgba(100,100,120,.06)'},
+  orange:{shell:['#c06030','#a05020','#854018','#6a3010'],fur:'#e87030',furHi:'#ff9050',furRGB:'255,144,80',base:'#2a1a14',baseDk:'#1a1008',baseLt:'#3a2a20',rimDk:'#4a3020',rimLt:'#8a6040',rimBr:'#c09060',logo:'rgba(232,112,48,.25)',glow:'rgba(232,112,48,.06)'},
+  white:{shell:['#d8d4ce','#c8c4be','#b0aca6','#989490'],fur:'#e8e4de',furHi:'#f8f6f2',furRGB:'248,246,242',base:'#504a44',baseDk:'#3a3530',baseLt:'#605a54',rimDk:'#706a64',rimLt:'#a09a94',rimBr:'#d0cac4',logo:'rgba(80,74,68,.2)',glow:'rgba(200,196,190,.06)'},
+  cosmic:{shell:['#7040b0','#6030a0','#8040c0','#a050e0'],fur:'#c070ff',furHi:'#e0a0ff',furRGB:'224,160,255',base:'#1a1028',baseDk:'#0e0818',baseLt:'#2a1a38',rimDk:'#4a2080',rimLt:'#8040c0',rimBr:'#c080ff',logo:'rgba(200,160,255,.25)',glow:'rgba(140,80,220,.08)'}
+};
+const COLOR_NAMES={gold:'Amber Gold',charcoal:'Charcoal Velvet',orange:'Sunset Orange',white:'Clinical White',cosmic:'Cosmic Custom'};
+let activeColor='gold';
+
+/* ═══════ DOME RENDERER (v2 upgraded) ═══════ */
+function drawDome(ctx,w,h,key,time,hi){
+  const c=DOME[key]||DOME.gold;
+  const cx=w/2,cy=h*.45,rw=w*.38,rh=h*.42;
+  ctx.fillStyle='#0a0a0a';ctx.fillRect(0,0,w,h);
+
+  // Ambient glow
+  const ag=ctx.createRadialGradient(cx,cy,0,cx,cy,rw*2.5);
+  ag.addColorStop(0,c.glow);ag.addColorStop(1,'transparent');
+  ctx.fillStyle=ag;ctx.fillRect(0,0,w,h);
+
+  // Ground shadow
+  ctx.beginPath();ctx.ellipse(cx,h*.86,rw*.55,rw*.06,0,0,Math.PI*2);
+  const sg=ctx.createRadialGradient(cx,h*.86,0,cx,h*.86,rw*.55);
+  sg.addColorStop(0,'rgba(0,0,0,.4)');sg.addColorStop(1,'transparent');
+  ctx.fillStyle=sg;ctx.fill();
+
+  // Pedestal
+  ctx.beginPath();ctx.ellipse(cx,h*.82,rw*.32,rw*.06,0,0,Math.PI*2);
+  const bg=ctx.createLinearGradient(cx-rw*.32,h*.82,cx+rw*.32,h*.82);
+  bg.addColorStop(0,c.baseDk);bg.addColorStop(.35,c.baseLt);bg.addColorStop(.65,c.baseLt);bg.addColorStop(1,c.baseDk);
+  ctx.fillStyle=bg;ctx.fill();
+
+  // Stem
+  ctx.beginPath();ctx.moveTo(cx-rw*.07,h*.72);ctx.lineTo(cx-rw*.05,h*.82);ctx.lineTo(cx+rw*.05,h*.82);ctx.lineTo(cx+rw*.07,h*.72);ctx.closePath();
+  ctx.fillStyle=c.base;ctx.fill();
+
+  // Shell
+  ctx.beginPath();ctx.ellipse(cx,cy,rw,rh,0,0,Math.PI*2);
+  const shellG=ctx.createLinearGradient(cx-rw,cy-rh,cx+rw*.6,cy+rh);
+  shellG.addColorStop(0,c.shell[0]);shellG.addColorStop(.35,c.shell[1]);shellG.addColorStop(.7,c.shell[2]);shellG.addColorStop(1,c.shell[3]);
+  ctx.fillStyle=shellG;ctx.fill();
+
+  // Specular highlight
+  const sx=cx-rw*.22+Math.sin(time*.5)*rw*.05;
+  const sy=cy-rh*.28+Math.cos(time*.4)*rh*.03;
+  ctx.beginPath();ctx.ellipse(sx,sy,rw*.5,rh*.45,-.4,0,Math.PI*2);
+  const spG=ctx.createRadialGradient(sx,sy,0,sx,sy,rw*.5);
+  spG.addColorStop(0,'rgba(255,255,255,.18)');spG.addColorStop(.4,'rgba(255,255,255,.04)');spG.addColorStop(1,'transparent');
+  ctx.fillStyle=spG;ctx.fill();
+
+  // Rim light
+  ctx.beginPath();ctx.ellipse(cx+rw*.35,cy,rw*.55,rh*.85,.2,0,Math.PI*2);
+  const rlG=ctx.createRadialGradient(cx+rw*.5,cy,0,cx+rw*.35,cy,rw*.55);
+  rlG.addColorStop(0,'rgba(255,255,255,.07)');rlG.addColorStop(1,'transparent');
+  ctx.fillStyle=rlG;ctx.fill();
+
+  // Interior opening
+  ctx.save();ctx.beginPath();
+  ctx.ellipse(cx,cy,rw*.78,rh*.85,0,.18,Math.PI-.18);
+  ctx.quadraticCurveTo(cx,cy+rh*.55,cx+rw*.78*Math.cos(.18),cy-rh*.85*Math.sin(.18));
+  ctx.closePath();
+  const ig=ctx.createRadialGradient(cx,cy*.92,rw*.05,cx,cy,rw*.8);
+  ig.addColorStop(0,c.furHi);ig.addColorStop(.25,c.fur);ig.addColorStop(.6,c.shell[2]);ig.addColorStop(1,'rgba(0,0,0,.7)');
+  ctx.fillStyle=ig;ctx.fill();
+
+  // Interior texture
+  const tc=hi?50:25;
+  for(let i=0;i<tc;i++){
+    const a=(i/tc)*Math.PI*.75+.4;
+    const d=rw*(.18+(i%4)*.14);
+    const fx=cx+Math.cos(a)*d*.65;
+    const fy=cy+Math.sin(a)*d*.35-rh*.08;
+    ctx.beginPath();ctx.arc(fx,fy,rw*(.008+(.02*((i*7)%5)/5)),0,Math.PI*2);
+    ctx.fillStyle='rgba('+c.furRGB+','+((.02+.03*((i*3)%5)/5))+')';
+    ctx.fill();
+  }
+  ctx.restore();
+
+  // Chrome rim
+  ctx.beginPath();ctx.ellipse(cx,cy,rw*.79,rh*.855,0,.14,Math.PI-.14,false);
+  const rmG=ctx.createLinearGradient(cx-rw,cy,cx+rw,cy);
+  rmG.addColorStop(0,c.rimDk);rmG.addColorStop(.25,c.rimLt);rmG.addColorStop(.5,c.rimBr);rmG.addColorStop(.75,c.rimLt);rmG.addColorStop(1,c.rimDk);
+  ctx.strokeStyle=rmG;ctx.lineWidth=hi?5:3.5;ctx.stroke();
+
+  // Logo
+  ctx.fillStyle=c.logo;
+  ctx.font='italic '+(rw*.35)+'px Baskerville,Palatino Linotype,Georgia,serif';
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText('S',cx,cy-rh*.06);
+
+  // Hero particles
+  if(hi){
+    for(let i=0;i<8;i++){
+      const pa=time*.3+i*Math.PI*.25;
+      const pr=rw*1.15+Math.sin(time+i)*rw*.15;
+      const px=cx+Math.cos(pa)*pr;
+      const py=cy+Math.sin(pa)*pr*.6;
+      const ps=1.5+Math.sin(time*2+i)*.8;
+      ctx.beginPath();ctx.arc(px,py,ps,0,Math.PI*2);
+      ctx.fillStyle='rgba('+c.furRGB+','+((.15+Math.sin(time*1.5+i)*.1))+')';
+      ctx.fill();
+    }
+  }
+}
+
+/* ═══════ CURSOR SYSTEM ═══════ */
+const dot=document.getElementById('cursorDot');
+const trailContainer=document.getElementById('cursorTrail');
+const trailDots=[];
+
+function initCursor(){
+  if(isMobile)return;
+  for(let i=0;i<TRAIL_LEN;i++){
+    const d=document.createElement('div');
+    d.className='cursor-trail-dot';
+    trailContainer.appendChild(d);
+    trailDots.push(d);
+  }
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY},{passive:true});
+  document.querySelectorAll('a,button,.swatch,.product-card,.app-card,.feature-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>dot.classList.add('hovering'));
+    el.addEventListener('mouseleave',()=>dot.classList.remove('hovering'));
+  });
+}
+
+let cdx=0,cdy=0;
+function updateCursor(){
+  if(isMobile)return;
+  cdx+=(mx-cdx)*.15;cdy+=(my-cdy)*.15;
+  dot.style.left=(cdx-4)+'px';dot.style.top=(cdy-4)+'px';
+  trailPositions.unshift({x:mx,y:my});
+  if(trailPositions.length>TRAIL_LEN)trailPositions.pop();
+  trailDots.forEach((d,i)=>{
+    const p=trailPositions[i];
+    if(!p)return;
+    d.style.left=(p.x-3)+'px';
+    d.style.top=(p.y-3)+'px';
+    d.style.opacity=(.3*(1-i/TRAIL_LEN));
+    d.style.transform='scale('+(1-i/TRAIL_LEN*.6)+')';
+  });
+}
+
+/* ═══════ NAV ═══════ */
+const nav=document.getElementById('nav');
+const burger=document.getElementById('burger');
+const mobileMenu=document.getElementById('mobileMenu');
+
+burger.addEventListener('click',()=>{
+  burger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow=mobileMenu.classList.contains('open')?'hidden':'';
+});
+mobileMenu.querySelectorAll('a').forEach(a=>{
+  a.addEventListener('click',()=>{
+    burger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow='';
+  });
+});
+
+/* ═══════ HERO TITLE ═══════ */
+const heroTitle=document.getElementById('heroTitle');
+const titleText='The Shape\nof Sound';
+let charIdx=0;
+titleText.split('\n').forEach((line,li,lines)=>{
+  line.split(' ').forEach((word,wi,words)=>{
+    const ws=document.createElement('span');ws.className='word';
+    for(let i=0;i<word.length;i++){
+      const ch=document.createElement('span');ch.className='char';
+      ch.textContent=word[i];ch.style.animationDelay=(.3+charIdx*.04)+'s';
+      ws.appendChild(ch);charIdx++;
+    }
+    heroTitle.appendChild(ws);
+    if(wi<words.length-1){const sp=document.createElement('span');sp.className='word';sp.innerHTML='&nbsp;';heroTitle.appendChild(sp);}
+  });
+  if(li<lines.length-1)heroTitle.appendChild(document.createElement('br'));
+});
+
+/* ═══════ STATIC DOMES ═══════ */
+drawDome(document.getElementById('aboutDome').getContext('2d'),600,600,'gold',0,false);
+drawDome(document.getElementById('colorDome').getContext('2d'),600,700,'gold',0,true);
+['charcoal','gold','orange'].forEach((c,i)=>{
+  const cv=document.getElementById('prodCanvas'+(i+1));
+  if(cv)drawDome(cv.getContext('2d'),400,500,c,i*.5,false);
+});
+
+/* ═══════ WAVE BACKGROUND ═══════ */
+const waveBg=document.getElementById('waveBg');
+const wCtx=waveBg.getContext('2d');
+let wW,wH;
+function sizeWave(){wW=waveBg.width=window.innerWidth;wH=waveBg.height=window.innerHeight}
+sizeWave();
+
+function renderWaves(t){
+  wCtx.clearRect(0,0,wW,wH);
+  const scrollP=scrollY/(document.documentElement.scrollHeight-window.innerHeight||1);
+  const waveCount=4+Math.floor(scrollP*3);
+  const amp=15+scrollP*25;
+  const freq=.004+scrollP*.002;
+  for(let l=0;l<waveCount;l++){
+    wCtx.beginPath();
+    const yBase=wH*(.15+l/(waveCount-1)*.7);
+    for(let x=0;x<wW;x+=6){
+      const wave=Math.sin(x*freq+t*1.2+l*.9)*amp*Math.sin(x/wW*Math.PI);
+      if(x===0)wCtx.moveTo(x,yBase+wave);else wCtx.lineTo(x,yBase+wave);
+    }
+    const r=196-scrollP*40,g=162-scrollP*50,b=101+scrollP*120;
+    wCtx.strokeStyle='rgba('+Math.round(r)+','+Math.round(g)+','+Math.round(b)+','+(0.025+scrollP*.015)+')';
+    wCtx.lineWidth=1;wCtx.stroke();
+  }
+}
+
+/* ═══════ HERO DOME ═══════ */
+const heroDome=document.getElementById('heroDome');
+const hCtx=heroDome.getContext('2d');
+const heroDomeWrap=document.getElementById('heroDomeWrap');
+
+function renderHero(t){
+  if(!heroVisible)return;
+  drawDome(hCtx,600,700,'gold',t,true);
+  // 3D tilt
+  targetTiltX=((mx/window.innerWidth)-.5)*12;
+  targetTiltY=((my/window.innerHeight)-.5)*-8;
+  tiltX+=(targetTiltX-tiltX)*.06;
+  tiltY+=(targetTiltY-tiltY)*.06;
+  if(!isMobile)heroDomeWrap.style.transform='perspective(1000px) rotateY('+tiltX+'deg) rotateX('+tiltY+'deg)';
+}
+
+/* ═══════ PARALLAX ═══════ */
+const parallaxEls=document.querySelectorAll('[data-parallax]');
+function updateParallax(){
+  parallaxEls.forEach(el=>{
+    const speed=parseFloat(el.dataset.parallax);
+    const rect=el.getBoundingClientRect();
+    const offset=(rect.top+rect.height/2-window.innerHeight/2)*speed;
+    el.style.transform='translateY('+offset+'px)';
+  });
+}
+
+/* ═══════ MAGNETIC BUTTONS ═══════ */
+if(!isMobile){
+  document.querySelectorAll('.btn-magnetic').forEach(btn=>{
+    const wrap=btn.closest('.btn-wrap')||btn;
+    wrap.addEventListener('mousemove',e=>{
+      const r=wrap.getBoundingClientRect();
+      const x=e.clientX-r.left-r.width/2;
+      const y=e.clientY-r.top-r.height/2;
+      btn.style.transition='none';
+      btn.style.transform='translate('+x*.25+'px,'+y*.25+'px)';
+    });
+    wrap.addEventListener('mouseleave',()=>{
+      btn.style.transition='transform .5s cubic-bezier(.34,1.56,.64,1)';
+      btn.style.transform='translate(0,0)';
+    });
+  });
+}
+
+/* ═══════ 3D CARD TILT ═══════ */
+if(!isMobile){
+  document.querySelectorAll('.tilt-card').forEach(card=>{
+    card.addEventListener('mousemove',e=>{
+      const r=card.getBoundingClientRect();
+      const x=(e.clientX-r.left)/r.width-.5;
+      const y=(e.clientY-r.top)/r.height-.5;
+      card.style.transition='none';
+      card.style.transform='perspective(600px) rotateX('+(-y*8)+'deg) rotateY('+(x*8)+'deg)';
+      const hl=card.querySelector('.card-highlight');
+      if(hl)hl.style.background='radial-gradient(circle at '+((x+.5)*100)+'% '+((y+.5)*100)+'%,rgba(255,255,255,.06),transparent 60%)';
+    });
+    card.addEventListener('mouseleave',()=>{
+      card.style.transition='transform .6s cubic-bezier(.34,1.56,.64,1)';
+      card.style.transform='perspective(600px) rotateX(0) rotateY(0)';
+    });
+  });
+}
+
+/* ═══════ COLOR SELECTOR ═══════ */
+const colorDome=document.getElementById('colorDome');
+const colorCtx=colorDome.getContext('2d');
+const colorNameEl=document.getElementById('colorName');
+document.querySelectorAll('.swatch').forEach(sw=>{
+  sw.addEventListener('click',()=>{
+    const key=sw.dataset.color;
+    if(key===activeColor)return;
+    activeColor=key;
+    document.querySelectorAll('.swatch').forEach(s=>s.classList.toggle('active',s.dataset.color===key));
+    colorDome.classList.remove('flash');
+    void colorDome.offsetWidth;
+    colorDome.classList.add('flash');
+    colorNameEl.style.opacity='0';
+    setTimeout(()=>{
+      drawDome(colorCtx,600,700,key,0,true);
+      colorNameEl.textContent=COLOR_NAMES[key];
+      colorNameEl.style.opacity='1';
+    },240);
+  });
+});
+
+/* ═══════ SCROLL-LINKED QUOTE ═══════ */
+const quoteText=document.getElementById('quoteText');
+const quoteAttr=document.getElementById('quoteAttr');
+const quoteSection=document.getElementById('quoteSection');
+const quoteWords=quoteText.textContent.trim().split(/\s+/);
+quoteText.innerHTML=quoteWords.map(w=>'<span class="word-reveal">'+w+'</span>').join(' ');
+const wordEls=quoteText.querySelectorAll('.word-reveal');
+let quoteActive=false;
+
+function updateQuote(){
+  if(!quoteActive)return;
+  const rect=quoteSection.getBoundingClientRect();
+  const start=window.innerHeight*.8;
+  const end=-rect.height*.3;
+  const progress=Math.max(0,Math.min(1,(start-rect.top)/(start-end)));
+  const active=Math.floor(progress*wordEls.length);
+  wordEls.forEach((w,i)=>w.classList.toggle('lit',i<active));
+  if(progress>.9)quoteAttr.classList.add('visible');
+}
+
+/* ═══════ TEXT SCRAMBLE STATS ═══════ */
+function scrambleCount(el){
+  const target=parseInt(el.dataset.target);
+  const suffix=el.dataset.suffix||'';
+  const digits=target.toString();
+  const len=digits.length;
+  const chars='0123456789';
+  const dur=1800;
+  const start=performance.now();
+  function tick(now){
+    const p=Math.min(1,(now-start)/dur);
+    let result='';
+    for(let i=0;i<len;i++){
+      const cp=Math.max(0,Math.min(1,p*(len+2)-i));
+      if(cp>=1)result+=digits[i];
+      else result+=chars[Math.floor(Math.random()*10)];
+    }
+    el.textContent=result+suffix;
+    if(p<1)requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+/* ═══════ REVEAL OBSERVER ═══════ */
+const revealObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:.12,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.reveal,.reveal-heading,.reveal-text,.reveal-card,.reveal-left,.reveal-right').forEach(el=>revealObs.observe(el));
+
+/* ═══════ HERO VISIBILITY ═══════ */
+new IntersectionObserver(entries=>{
+  heroVisible=entries[0].isIntersecting;
+},{threshold:.05}).observe(document.getElementById('hero'));
+
+/* ═══════ QUOTE VISIBILITY ═══════ */
+new IntersectionObserver(entries=>{
+  quoteActive=entries[0].isIntersecting;
+},{threshold:.05}).observe(quoteSection);
+
+/* ═══════ STATS OBSERVER ═══════ */
+const statObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting&&!e.target.dataset.done){
+      e.target.dataset.done='1';
+      scrambleCount(e.target);
+    }
+  });
+},{threshold:.5});
+document.querySelectorAll('.stat-number').forEach(el=>statObs.observe(el));
+
+/* ═══════ MARQUEE (JS-driven) ═══════ */
+const marqueeTrack=document.getElementById('marqueeTrack');
+let marqueeX=0,marqueeW=0;
+function initMarquee(){marqueeW=marqueeTrack.scrollWidth/2}
+setTimeout(initMarquee,100);
+
+function updateMarquee(){
+  const speed=1+Math.min(scrollVel*.08,4);
+  marqueeX-=speed;
+  if(marqueeW&&marqueeX<=-marqueeW)marqueeX+=marqueeW;
+  marqueeTrack.style.transform='translateX('+marqueeX+'px)';
+}
+
+/* ═══════ SCROLL PROGRESS ═══════ */
+const progressBar=document.getElementById('progressBar');
+function updateProgress(){
+  const total=document.documentElement.scrollHeight-window.innerHeight;
+  progressBar.style.width=(scrollY/total*100)+'%';
+}
+
+/* ═══════ EVENTS ═══════ */
+window.addEventListener('scroll',()=>{
+  scrollY=window.scrollY;
+  scrollVel=Math.abs(scrollY-prevScrollY);
+  prevScrollY=scrollY;
+  nav.classList.toggle('scrolled',scrollY>80);
+},{passive:true});
+
+window.addEventListener('resize',()=>{
+  isMobile=window.innerWidth<=768;
+  sizeWave();
+  initMarquee();
+});
+
+/* ═══════ SMOOTH ANCHORS ═══════ */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+
+/* ═══════ MAIN LOOP ═══════ */
+let time=0;
+(function loop(){
+  requestAnimationFrame(loop);
+  time=performance.now()*.001;
+  renderHero(time);
+  renderWaves(time);
+  updateCursor();
+  updateParallax();
+  updateMarquee();
+  updateQuote();
+  updateProgress();
+  scrollVel*=.9;
+})();
+
+initCursor();
+
+})();
+</script>
