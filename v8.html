@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080810">
+<meta name="description" content="SoloDome — Handcrafted personal audio chairs. Studio-quality immersive sound, vibroacoustic therapy, and sculptural design. Starting at $5,999. Built in California.">
+<meta name="keywords" content="SoloDome, audio chair, immersive sound, vibroacoustic, personal listening room, luxury audio, sound chair">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://luckygoats33.github.io/solodome-luxury-v3/v8.html">
+<meta property="og:title" content="SoloDome — A Room Above the Noise">
+<meta property="og:description" content="Handcrafted personal audio chairs with studio-quality immersive sound and vibroacoustic therapy. Starting at $5,999.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://luckygoats33.github.io/solodome-luxury-v3/v8.html">
+<meta property="og:image" content="https://luckygoats33.github.io/solodome-luxury-v3/assets/v2-elements/11-deluxe-zenith.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SoloDome — A Room Above the Noise">
+<meta name="twitter:description" content="Handcrafted personal audio chairs. Studio-quality sound meets sculptural design.">
+<title>SoloDome — A Room Above the Noise</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "SoloDome Audio",
+  "url": "https://solodome.com",
+  "logo": "https://solodome.com/logo.png",
+  "description": "Handcrafted personal audio chairs for immersive listening, wellness and personalized sound.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Chatsworth",
+    "addressRegion": "CA",
+    "addressCountry": "US"
+  },
+  "founder": {
+    "@type": "Person",
+    "name": "Josh Chaney"
+  }
+}
+</script>
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "SoloDome Classic",
+    "description": "The essential private listening room. Compact, sculptural and complete with 4-speaker binaural sound.",
+    "brand": {"@type": "Brand", "name": "SoloDome"},
+    "offers": {"@type": "Offer", "price": "5999", "priceCurrency": "USD", "availability": "https://schema.org/InStock"}
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "SoloDome Deluxe",
+    "description": "A larger architecture of comfort with expanded sound field and vibroacoustic therapy platform.",
+    "brand": {"@type": "Brand", "name": "SoloDome"},
+    "offers": {"@type": "Offer", "price": "7999", "priceCurrency": "USD", "availability": "https://schema.org/InStock"}
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "SoloDome Auditory",
+    "description": "Personalized audio profiling for hearing considerations. Custom-calibrated to the individual listener.",
+    "brand": {"@type": "Brand", "name": "SoloDome"},
+    "offers": {"@type": "Offer", "price": "14999", "priceCurrency": "USD", "availability": "https://schema.org/InStock"}
+  }
+]
+</script>
+<style>
+:root{
+  --bg:#080810;
+  --bg2:#0c0c18;
+  --bg3:#10101f;
+  --surface:rgba(255,255,255,.02);
+  --surface-h:rgba(255,255,255,.04);
+  --border:rgba(255,255,255,.06);
+  --border-h:rgba(255,255,255,.12);
+  --text:#f0eff4;
+  --text2:rgba(240,239,244,.7);
+  --text3:rgba(240,239,244,.4);
+  --accent:#b8a4ff;
+  --accent2:#8b70e8;
+  --accent-dim:rgba(184,164,255,.08);
+  --accent-glow:rgba(184,164,255,.15);
+  --warm:#f5e6d0;
+  --warm2:rgba(245,230,208,.6);
+  --heading:'Instrument Serif',Georgia,serif;
+  --body:'Instrument Sans','Segoe UI',system-ui,sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --ease-out:cubic-bezier(0,.55,.45,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+  --mx:clamp(24px,6vw,100px);
+  --col:min(1200px,100% - var(--mx)*2);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-weight:400;font-size:clamp(15px,1.05vw,17px);line-height:1.75;overflow-x:hidden}
+::selection{background:var(--accent);color:var(--bg)}
+img{display:block;max-width:100%;height:auto}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent-dim);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--accent2)}
+
+/* CURSOR */
+.cur{position:fixed;top:0;left:0;width:20px;height:20px;border:1.5px solid var(--accent);border-radius:50%;pointer-events:none;z-index:10001;mix-blend-mode:difference;transition:width .4s var(--ease),height .4s var(--ease),border-radius .4s var(--ease),opacity .3s}
+.cur.grow{width:60px;height:60px}
+.cur.hide{opacity:0}
+.cur-dot{position:fixed;top:0;left:0;width:4px;height:4px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:10001}
+@media(pointer:coarse){.cur,.cur-dot{display:none}}
+
+/* GRAIN */
+.grain{position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px}
+
+/* PROGRESS */
+.progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:10000;overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent2),var(--accent),var(--warm))}
+
+/* VERSION BANNER */
+.vbanner{position:fixed;top:2px;left:50%;transform:translateX(-50%);z-index:10000;background:rgba(8,8,16,.85);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:100px;padding:6px 8px;display:flex;align-items:center;gap:4px;font-family:var(--body);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.vbanner a{padding:5px 14px;text-decoration:none;border-radius:100px;transition:all .3s var(--ease);color:var(--text3)}
+.vbanner a:hover{color:var(--text)}
+.vbanner .active{color:var(--bg);background:var(--accent);font-weight:600}
+
+/* NAV */
+header{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px var(--mx);display:flex;align-items:center;justify-content:space-between;mix-blend-mode:difference}
+.logo{font-family:var(--body);font-size:11px;font-weight:600;letter-spacing:.6em;text-transform:uppercase;color:var(--text);text-decoration:none;transition:opacity .3s}
+.logo:hover{opacity:.7}
+.nav-right{display:flex;align-items:center;gap:24px}
+.nav-cta{font-size:10px;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--text);text-decoration:none;padding:10px 24px;border:1px solid var(--border);border-radius:100px;transition:all .4s var(--ease)}
+.nav-cta:hover{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+@media(max-width:768px){.nav-cta{display:none}}
+
+/* HAMBURGER */
+.hamburger{position:relative;width:32px;height:32px;background:none;border:none;cursor:pointer;z-index:1001;display:flex;align-items:center;justify-content:center}
+.hamburger span{position:absolute;width:22px;height:1.5px;background:var(--text);transition:all .5s var(--ease)}
+.hamburger span:nth-child(1){transform:translateY(-5px)}
+.hamburger span:nth-child(2){width:14px;transform:translateX(4px)}
+.hamburger span:nth-child(3){transform:translateY(5px)}
+.hamburger.open span:nth-child(1){transform:rotate(45deg);width:24px}
+.hamburger.open span:nth-child(2){opacity:0;transform:translateX(20px)}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg);width:24px}
+
+/* FULLSCREEN MENU */
+.menu-overlay{position:fixed;inset:0;z-index:999;background:var(--bg);opacity:0;pointer-events:none;transition:opacity .6s var(--ease);display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.menu-overlay.open{opacity:1;pointer-events:all}
+.menu-left{display:flex;flex-direction:column;justify-content:center;padding:clamp(60px,10vh,120px) var(--mx)}
+.menu-nav{display:flex;flex-direction:column;gap:0}
+.menu-item{position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.menu-item a{display:block;font-family:var(--heading);font-size:clamp(36px,5.5vw,72px);font-style:italic;color:var(--text);text-decoration:none;padding:clamp(12px,2vh,24px) 0;transform:translateY(110%);transition:transform .7s var(--ease),color .3s;will-change:transform}
+.menu-overlay.open .menu-item a{transform:translateY(0)}
+.menu-item:nth-child(1) a{transition-delay:.1s}
+.menu-item:nth-child(2) a{transition-delay:.15s}
+.menu-item:nth-child(3) a{transition-delay:.2s}
+.menu-item:nth-child(4) a{transition-delay:.25s}
+.menu-item:nth-child(5) a{transition-delay:.3s}
+.menu-item:nth-child(6) a{transition-delay:.35s}
+.menu-item a:hover{color:var(--accent)}
+.menu-item .num{position:absolute;top:50%;right:0;transform:translateY(-50%);font-family:var(--body);font-size:11px;letter-spacing:.2em;color:var(--text3);opacity:0;transition:opacity .3s}
+.menu-item a:hover~.num,.menu-item:hover .num{opacity:1}
+.menu-right{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.menu-right img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.1);transition:opacity .6s var(--ease),transform .8s var(--ease)}
+.menu-right img.active{opacity:.4;transform:scale(1)}
+.menu-info{position:absolute;bottom:clamp(40px,6vh,80px);left:clamp(30px,4vw,60px);right:clamp(30px,4vw,60px);opacity:0;transition:opacity .5s .4s}
+.menu-overlay.open .menu-info{opacity:1}
+.menu-info p{font-size:12px;color:var(--text3);letter-spacing:.05em;line-height:1.8}
+.menu-info strong{color:var(--accent);display:block;margin-bottom:4px;font-size:10px;letter-spacing:.3em;text-transform:uppercase;font-weight:500}
+@media(max-width:768px){.menu-overlay{grid-template-columns:1fr}.menu-right{display:none}}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+.hero-canvas{position:absolute;inset:0;z-index:0}
+.hero-canvas canvas{width:100%;height:100%}
+.hero-media{position:absolute;inset:0;z-index:1}
+.hero-media img{width:100%;height:100%;object-fit:cover;opacity:.35;filter:saturate(.7)}
+.hero-grad{position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(8,8,16,.3) 0%,rgba(8,8,16,0) 30%,rgba(8,8,16,.4) 70%,rgba(8,8,16,.95) 100%)}
+.hero-content{position:relative;z-index:3;padding:0 var(--mx);width:100%;max-width:var(--col);margin:0 auto}
+.hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:.5em;text-transform:uppercase;color:var(--accent);margin-bottom:clamp(16px,3vh,32px);overflow:hidden}
+.hero-eyebrow span{display:inline-block;transform:translateY(100%);animation:slideUp .8s .6s var(--ease) forwards}
+.hero-title{font-family:var(--heading);font-size:clamp(48px,9vw,140px);font-weight:400;font-style:italic;line-height:.88;letter-spacing:-.03em;margin-bottom:clamp(20px,4vh,40px)}
+.hero-title .line{display:block;overflow:hidden}
+.hero-title .line span{display:inline-block;transform:translateY(105%);animation:slideUp 1s var(--ease) forwards}
+.hero-title .line:nth-child(1) span{animation-delay:.3s}
+.hero-title .line:nth-child(2) span{animation-delay:.45s}
+.hero-title .line:nth-child(3) span{animation-delay:.6s}
+.hero-sub{font-size:clamp(15px,1.2vw,18px);color:var(--text2);max-width:480px;line-height:1.8;margin-bottom:clamp(30px,5vh,50px);opacity:0;animation:fadeIn 1s 1.2s var(--ease) forwards}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;opacity:0;animation:fadeIn 1s 1.5s var(--ease) forwards}
+.hero-scroll{position:absolute;bottom:clamp(30px,5vh,50px);left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0;animation:fadeIn 1s 2s var(--ease) forwards}
+.hero-scroll span{font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--text3)}
+.hero-scroll i{width:1px;height:40px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scrollPulse 2.5s var(--ease) infinite}
+@keyframes slideUp{to{transform:translateY(0)}}
+@keyframes fadeIn{to{opacity:1}}
+@keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:.9;transform:scaleY(1.4)}}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;padding:16px 36px;border-radius:100px;transition:all .5s var(--ease);position:relative;overflow:hidden}
+.btn-primary{background:var(--accent);color:var(--bg)}
+.btn-primary:hover{background:var(--warm);letter-spacing:.28em;box-shadow:0 0 40px var(--accent-glow)}
+.btn-outline{color:var(--text2);border:1px solid var(--border)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.btn-arrow::after{content:'→';display:inline-block;transition:transform .3s var(--ease)}
+.btn-arrow:hover::after{transform:translateX(4px)}
+
+/* SECTIONS */
+section{position:relative}
+.section-pad{padding:clamp(100px,18vh,200px) var(--mx)}
+.container{max-width:var(--col);margin:0 auto}
+
+/* REVEALS */
+.rv{opacity:0;transform:translateY(50px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv-d{transition-delay:calc(var(--d,0) * .1s)}
+.rv.vis{opacity:1;transform:translateY(0)}
+.rv-x{opacity:0;transform:translateX(-60px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv-xr{opacity:0;transform:translateX(60px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv-x.vis,.rv-xr.vis{opacity:1;transform:translateX(0)}
+.rv-scale{opacity:0;transform:scale(.92);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv-scale.vis{opacity:1;transform:scale(1)}
+
+/* TYPE */
+.eyebrow{font-family:var(--body);font-size:10px;font-weight:500;letter-spacing:.45em;text-transform:uppercase;color:var(--accent);margin-bottom:clamp(12px,2vh,20px)}
+.h-display{font-family:var(--heading);font-size:clamp(36px,5vw,76px);font-weight:400;font-style:italic;line-height:.92;letter-spacing:-.02em;text-wrap:balance}
+.h-section{font-family:var(--heading);font-size:clamp(28px,3.5vw,52px);font-weight:400;font-style:italic;line-height:1;letter-spacing:-.01em;text-wrap:balance}
+.body-lg{font-size:clamp(16px,1.3vw,20px);color:var(--text2);line-height:1.8;max-width:540px}
+
+/* MARQUEE */
+.marquee{padding:clamp(20px,3vh,40px) 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;white-space:nowrap}
+.marquee-track{display:flex;gap:clamp(40px,6vw,80px);animation:scroll 30s linear infinite;width:max-content}
+.marquee-track span{font-family:var(--heading);font-size:clamp(14px,1.5vw,20px);font-style:italic;color:var(--text3);display:flex;align-items:center;gap:clamp(40px,6vw,80px)}
+.marquee-track span::after{content:'';width:4px;height:4px;border-radius:50%;background:var(--accent);opacity:.5}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* COLLECTION */
+.collection-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,28px)}
+.product-card{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all .6s var(--ease);text-decoration:none;color:inherit;display:flex;flex-direction:column}
+.product-card:hover{border-color:var(--border-h);transform:translateY(-8px);box-shadow:0 30px 80px rgba(0,0,0,.4),0 0 0 1px var(--border-h)}
+.product-card-img{position:relative;aspect-ratio:1/1;overflow:hidden;background:var(--bg2)}
+.product-card-img img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease),filter .6s}
+.product-card:hover .product-card-img img{transform:scale(1.05);filter:brightness(1.1)}
+.product-card-badge{position:absolute;top:16px;left:16px;font-size:9px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;background:var(--accent);color:var(--bg);padding:6px 14px;border-radius:100px;z-index:2}
+.product-card-body{padding:clamp(20px,2.5vw,32px);flex:1;display:flex;flex-direction:column}
+.product-card-name{font-family:var(--heading);font-size:clamp(22px,2vw,28px);font-style:italic;margin-bottom:8px}
+.product-card-desc{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:auto;padding-bottom:16px}
+.product-card-footer{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid var(--border)}
+.product-card-price{font-size:clamp(18px,1.5vw,24px);font-weight:600;color:var(--accent)}
+.product-card-price small{display:block;font-size:11px;font-weight:400;color:var(--text3);letter-spacing:.05em}
+.product-card-btn{width:40px;height:40px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;transition:all .4s var(--ease)}
+.product-card-btn svg{width:16px;height:16px;stroke:var(--bg);fill:none;stroke-width:2}
+.product-card:hover .product-card-btn{transform:scale(1.15);box-shadow:0 0 20px var(--accent-glow)}
+
+/* SPLIT */
+.split{display:grid;grid-template-columns:1fr 1fr;min-height:clamp(500px,70vh,800px);overflow:hidden}
+.split-media{position:relative;overflow:hidden}
+.split-media img{width:100%;height:100%;object-fit:cover;transition:transform 1.5s var(--ease)}
+.split-media:hover img{transform:scale(1.04)}
+.split-media::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0%,transparent 30%)}
+.split.reverse .split-media::after{background:linear-gradient(-90deg,var(--bg) 0%,transparent 30%)}
+.split-content{display:flex;flex-direction:column;justify-content:center;padding:clamp(40px,6vw,100px)}
+.split-content .body-lg{margin:24px 0 36px}
+.split-rule{width:40px;height:2px;background:var(--accent);margin-bottom:24px;border-radius:1px}
+
+/* FEATURES */
+.features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:16px;overflow:hidden}
+.feature-cell{background:var(--bg);padding:clamp(28px,3vw,48px);transition:background .4s var(--ease)}
+.feature-cell:hover{background:var(--bg2)}
+.feature-icon{width:40px;height:40px;border-radius:12px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.feature-icon svg{width:20px;height:20px;stroke:var(--accent);fill:none;stroke-width:1.5}
+.feature-cell h3{font-family:var(--heading);font-size:clamp(18px,1.3vw,22px);font-style:italic;margin-bottom:8px}
+.feature-cell p{font-size:13px;color:var(--text3);line-height:1.7}
+
+/* FULLWIDTH IMAGE */
+.fw-image{position:relative;height:clamp(400px,60vh,700px);overflow:hidden}
+.fw-image img{width:100%;height:100%;object-fit:cover}
+.fw-image::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,var(--bg) 0%,transparent 20%,transparent 80%,var(--bg) 100%)}
+.fw-image .overlay-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;text-align:center}
+.fw-image .overlay-text h2{font-family:var(--heading);font-size:clamp(32px,4.5vw,72px);font-style:italic;line-height:.9;text-shadow:0 4px 30px rgba(0,0,0,.5)}
+
+/* QUOTE */
+.quote-wrap{text-align:center;padding:clamp(80px,14vh,160px) var(--mx)}
+.quote-text{font-family:var(--heading);font-size:clamp(22px,2.8vw,42px);font-weight:400;font-style:italic;line-height:1.4;max-width:800px;margin:0 auto 24px}
+.quote-text .word{display:inline-block;opacity:.08;transition:opacity .35s var(--ease),transform .35s var(--ease);transform:translateY(3px)}
+.quote-text .word.lit{opacity:1;transform:translateY(0)}
+.quote-attr{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);opacity:0;transition:opacity .6s}
+.quote-attr.vis{opacity:1}
+
+/* HORIZONTAL SCROLL */
+.h-scroll-wrap{position:relative;overflow:hidden}
+.h-scroll-track{display:flex;gap:clamp(12px,1.5vw,20px);padding:clamp(40px,5vh,80px) var(--mx);overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.h-scroll-track::-webkit-scrollbar{display:none}
+.h-scroll-card{flex:0 0 clamp(280px,30vw,380px);scroll-snap-align:start;aspect-ratio:3/4;border-radius:12px;overflow:hidden;position:relative;transition:transform .5s var(--ease)}
+.h-scroll-card:hover{transform:scale(.97)}
+.h-scroll-card img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.h-scroll-card:hover img{transform:scale(1.08)}
+.h-scroll-card .caption{position:absolute;bottom:0;left:0;right:0;padding:clamp(16px,2vw,28px);background:linear-gradient(to top,rgba(8,8,16,.9),transparent);opacity:0;transform:translateY(10px);transition:all .4s var(--ease)}
+.h-scroll-card:hover .caption{opacity:1;transform:translateY(0)}
+.h-scroll-card .caption h4{font-family:var(--heading);font-style:italic;font-size:clamp(16px,1.3vw,20px)}
+.h-scroll-card .caption p{font-size:11px;color:var(--text3);margin-top:4px}
+.h-scroll-indicator{display:flex;justify-content:center;gap:6px;padding:16px 0 0}
+.h-scroll-indicator i{width:24px;height:2px;border-radius:1px;background:var(--border);transition:all .3s}
+.h-scroll-indicator i.active{width:40px;background:var(--accent)}
+
+/* CTA */
+.cta-section{text-align:center;position:relative;overflow:hidden;padding:clamp(100px,18vh,200px) var(--mx)}
+.cta-glow{position:absolute;top:50%;left:50%;width:600px;height:600px;transform:translate(-50%,-50%);background:radial-gradient(circle,var(--accent-glow),transparent 60%);opacity:.4;animation:ctaPulse 5s ease-in-out infinite;pointer-events:none}
+@keyframes ctaPulse{0%,100%{transform:translate(-50%,-50%) scale(.8);opacity:.3}50%{transform:translate(-50%,-50%) scale(1.2);opacity:.6}}
+.cta-section .container{position:relative;z-index:2}
+.cta-section .body-lg{margin:20px auto 40px;text-align:center}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:clamp(40px,6vh,80px) var(--mx)}
+.footer-inner{max-width:var(--col);margin:0 auto;display:grid;grid-template-columns:1fr auto auto;gap:clamp(40px,5vw,80px);align-items:start}
+.footer-brand{font-family:var(--body);font-size:10px;letter-spacing:.5em;text-transform:uppercase;color:var(--text3)}
+.footer-brand p{margin-top:12px;font-size:12px;letter-spacing:.02em;color:var(--text3);max-width:280px;line-height:1.7}
+.footer-col h5{font-size:10px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--text3);margin-bottom:16px}
+.footer-col a{display:block;font-size:13px;color:var(--text2);text-decoration:none;margin-bottom:10px;transition:color .3s}
+.footer-col a:hover{color:var(--accent)}
+.footer-bottom{max-width:var(--col);margin:40px auto 0;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:11px;color:var(--text3)}
+.footer-bottom a{color:var(--text3);text-decoration:none;transition:color .3s}
+.footer-bottom a:hover{color:var(--accent)}
+
+/* MOBILE */
+@media(max-width:900px){
+  .collection-grid{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr}
+  .split-media{min-height:300px}
+  .features-grid{grid-template-columns:1fr 1fr}
+  .footer-inner{grid-template-columns:1fr;gap:32px}
+  .footer-bottom{flex-direction:column;gap:8px}
+}
+@media(max-width:600px){
+  .features-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<!-- PROGRESS -->
+<div class="progress"><i id="pbar"></i></div>
+
+<!-- CURSOR -->
+<div class="cur" id="cur"></div>
+<div class="cur-dot" id="cdot"></div>
+
+<!-- GRAIN -->
+<div class="grain"></div>
+
+<!-- VERSION BANNER -->
+<nav class="vbanner" aria-label="Version switcher">
+  <a href="https://solodome.com/" target="_blank" rel="noopener">V1</a>
+  <a href="https://solodome-cinematic.pages.dev/" target="_blank" rel="noopener">V2</a>
+  <a href="index.html">V3</a>
+  <a href="v4.html">V4</a>
+  <a href="v5.html">V5</a>
+  <a href="v7.html">V7</a>
+  <a href="v8.html" class="active">V8</a>
+</nav>
+
+<!-- HEADER -->
+<header>
+  <a href="#" class="logo" aria-label="SoloDome home">Solodome</a>
+  <div class="nav-right">
+    <a href="#collection" class="nav-cta">Shop Now</a>
+    <button class="hamburger" id="burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- FULLSCREEN MENU -->
+<div class="menu-overlay" id="menuOverlay" aria-hidden="true" role="dialog">
+  <div class="menu-left">
+    <nav class="menu-nav" aria-label="Main navigation">
+      <div class="menu-item"><a href="#collection" data-img="0">Collection</a><span class="num">01</span></div>
+      <div class="menu-item"><a href="#technology" data-img="1">Technology</a><span class="num">02</span></div>
+      <div class="menu-item"><a href="#experience" data-img="2">Experience</a><span class="num">03</span></div>
+      <div class="menu-item"><a href="#gallery" data-img="3">Gallery</a><span class="num">04</span></div>
+      <div class="menu-item"><a href="configure.html" data-img="4">Configure</a><span class="num">05</span></div>
+      <div class="menu-item"><a href="contact.html" data-img="5">Contact</a><span class="num">06</span></div>
+    </nav>
+  </div>
+  <div class="menu-right">
+    <img src="assets/v2-elements/classic.jpg" alt="" class="active" data-menu-img="0">
+    <img src="assets/v2-elements/11-deluxe-zenith.jpg" alt="" data-menu-img="1">
+    <img src="assets/v2-elements/05-classic-sunrise.jpg" alt="" data-menu-img="2">
+    <img src="assets/v2-elements/07-deluxe-overhead.jpg" alt="" data-menu-img="3">
+    <img src="assets/v2-elements/13-signature-aurora.jpg" alt="" data-menu-img="4">
+    <img src="assets/v2-elements/interior-installation.jpg" alt="" data-menu-img="5">
+    <div class="menu-info">
+      <strong>Chatsworth, California</strong>
+      <p>Every SoloDome is handcrafted to order. Four speakers, focused low-frequency energy, and enveloping comfort — built for the individual listener.</p>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero" aria-label="Introduction">
+  <div class="hero-canvas"><canvas id="heroCanvas"></canvas></div>
+  <div class="hero-media"><img src="assets/v2-elements/02-blue-hour-profile.jpg" alt="SoloDome chair at blue hour" width="1920" height="1080"></div>
+  <div class="hero-grad"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow"><span>Personal audio architecture</span></div>
+    <h1 class="hero-title">
+      <span class="line"><span>A room</span></span>
+      <span class="line"><span>above the</span></span>
+      <span class="line"><span>noise.</span></span>
+    </h1>
+    <p class="hero-sub">A sculptural audio chair that turns everyday listening into an immersive, private environment. Four speakers. One perfect position.</p>
+    <div class="hero-actions">
+      <a href="#collection" class="btn btn-primary btn-arrow">Shop Collection</a>
+      <a href="#experience" class="btn btn-outline">Explore</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><span>Scroll</span><i></i></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track" id="marquee">
+    <span>Binaural 2.1 Sound</span><span>Vibroacoustic Therapy</span><span>Handcrafted in California</span><span>20Hz–20kHz</span><span>Four-Speaker Architecture</span><span>Studio-Quality Immersion</span><span>XLR &amp; Bluetooth</span><span>Custom Audio Profiling</span>
+    <span>Binaural 2.1 Sound</span><span>Vibroacoustic Therapy</span><span>Handcrafted in California</span><span>20Hz–20kHz</span><span>Four-Speaker Architecture</span><span>Studio-Quality Immersion</span><span>XLR &amp; Bluetooth</span><span>Custom Audio Profiling</span>
+  </div>
+</div>
+
+<!-- COLLECTION -->
+<section class="section-pad" id="collection" aria-label="Product collection">
+  <div class="container">
+    <header class="rv" style="text-align:center;margin-bottom:clamp(40px,6vh,80px)">
+      <div class="eyebrow">The Collection</div>
+      <h2 class="h-display">Three models.<br>One philosophy.</h2>
+    </header>
+    <div class="collection-grid">
+      <a href="classic.html" class="product-card rv rv-d" style="--d:0" aria-label="Shop SoloDome Classic — $5,999">
+        <div class="product-card-img"><img src="assets/v2-elements/classic.jpg" alt="SoloDome Classic" width="600" height="600" loading="lazy"></div>
+        <div class="product-card-body">
+          <h3 class="product-card-name">Classic</h3>
+          <p class="product-card-desc">The essential private listening room. Compact, sculptural, and complete.</p>
+          <div class="product-card-footer">
+            <div class="product-card-price">$5,999<small>Starting price</small></div>
+            <span class="product-card-btn"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+          </div>
+        </div>
+      </a>
+      <a href="deluxe.html" class="product-card rv rv-d" style="--d:1" aria-label="Shop SoloDome Deluxe — $7,999">
+        <div class="product-card-img">
+          <span class="product-card-badge">Most Popular</span>
+          <img src="assets/v2-elements/deluxe.jpg" alt="SoloDome Deluxe" width="600" height="600" loading="lazy">
+        </div>
+        <div class="product-card-body">
+          <h3 class="product-card-name">Deluxe</h3>
+          <p class="product-card-desc">A larger architecture of comfort with expanded sound field and vibroacoustic platform.</p>
+          <div class="product-card-footer">
+            <div class="product-card-price">$7,999<small>Starting price</small></div>
+            <span class="product-card-btn"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+          </div>
+        </div>
+      </a>
+      <a href="auditory.html" class="product-card rv rv-d" style="--d:2" aria-label="Shop SoloDome Auditory — $14,999">
+        <div class="product-card-img">
+          <span class="product-card-badge">Custom</span>
+          <img src="assets/v2-elements/13-signature-aurora.jpg" alt="SoloDome Auditory" width="600" height="600" loading="lazy">
+        </div>
+        <div class="product-card-body">
+          <h3 class="product-card-name">Auditory</h3>
+          <p class="product-card-desc">Personalized clarity, calibrated to the listener. Custom audio profiling for hearing considerations.</p>
+          <div class="product-card-footer">
+            <div class="product-card-price">$14,999<small>Starting price</small></div>
+            <span class="product-card-btn"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SPLIT — IMMERSION -->
+<section class="split" id="experience" aria-label="Experience">
+  <div class="split-media rv-x"><img src="assets/v2-elements/frame-001.jpg" alt="SoloDome exterior view" width="800" height="900" loading="lazy"></div>
+  <div class="split-content rv-xr">
+    <div class="split-rule"></div>
+    <div class="eyebrow">Immersion</div>
+    <h2 class="h-section">A room built around the listener.</h2>
+    <p class="body-lg">Four speakers, focused low-frequency energy, and enveloping comfort create an experience no conventional system can match. The world outside can wait.</p>
+    <a href="#collection" class="btn btn-primary btn-arrow">Shop Now</a>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section-pad" id="technology" aria-label="Technology">
+  <div class="container">
+    <header class="rv" style="text-align:center;margin-bottom:clamp(40px,6vh,80px)">
+      <div class="eyebrow">Engineered for presence</div>
+      <h2 class="h-display">Designed as a<br>complete system.</h2>
+    </header>
+    <div class="features-grid rv-scale">
+      <article class="feature-cell">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></div>
+        <h3>Binaural sound field</h3>
+        <p>Four-speaker 2.1 architecture places clarity exactly where it belongs — around you.</p>
+      </article>
+      <article class="feature-cell">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3>Vibroacoustic platform</h3>
+        <p>Low frequencies translated into physical vibration for meditation, recovery, and deep listening.</p>
+      </article>
+      <article class="feature-cell">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <h3>Professional connectivity</h3>
+        <p>Bluetooth 5.3, 3.5mm, RCA, and XLR inputs for any source — from phone to studio hardware.</p>
+      </article>
+      <article class="feature-cell">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <h3>Handcrafted precision</h3>
+        <p>Built to order in Chatsworth, California. Every surface finished, every joint aligned by hand.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FULL-WIDTH IMAGE -->
+<div class="fw-image rv-scale" aria-hidden="true">
+  <img src="assets/v2-elements/11-deluxe-zenith.jpg" alt="SoloDome Deluxe from above" width="1920" height="1080" loading="lazy">
+  <div class="overlay-text">
+    <h2>Four speakers.<br>One perfect position.</h2>
+  </div>
+</div>
+
+<!-- SPLIT REVERSE — VIBROACOUSTIC -->
+<section class="split reverse" aria-label="Vibroacoustic therapy">
+  <div class="split-content rv-x">
+    <div class="split-rule"></div>
+    <div class="eyebrow">Resonance</div>
+    <h2 class="h-section">Hear it. Feel it.</h2>
+    <p class="body-lg">The integrated vibroacoustic platform translates low frequencies into a physical layer — bringing new depth to meditation, recovery, breathwork, and deep listening.</p>
+    <a href="#collection" class="btn btn-primary btn-arrow">Shop Now</a>
+  </div>
+  <div class="split-media rv-xr"><img src="assets/v2-elements/vibroacoustic.jpg" alt="Vibroacoustic therapy platform detail" width="800" height="900" loading="lazy"></div>
+</section>
+
+<!-- HORIZONTAL SCROLL GALLERY -->
+<section class="section-pad h-scroll-wrap" id="gallery" aria-label="Gallery">
+  <div class="container rv">
+    <div class="eyebrow">One shape. Six perspectives.</div>
+    <h2 class="h-section" style="margin-bottom:clamp(30px,4vh,50px)">Source chair, expanded world.</h2>
+  </div>
+  <div class="h-scroll-track" id="hScroll">
+    <div class="h-scroll-card"><img src="assets/v2-elements/07-deluxe-overhead.jpg" alt="Overhead view" loading="lazy"><div class="caption"><h4>Overhead</h4><p>The Deluxe from above</p></div></div>
+    <div class="h-scroll-card"><img src="assets/v2-elements/09-deluxe-back.jpg" alt="Rear shell" loading="lazy"><div class="caption"><h4>Rear Shell</h4><p>Sculptural form</p></div></div>
+    <div class="h-scroll-card"><img src="assets/v2-elements/04-stratosphere-detail.jpg" alt="Detail" loading="lazy"><div class="caption"><h4>Stratosphere</h4><p>Surface detail</p></div></div>
+    <div class="h-scroll-card"><img src="assets/v2-elements/14-signature-eclipse.jpg" alt="Eclipse" loading="lazy"><div class="caption"><h4>Eclipse</h4><p>Signature after dark</p></div></div>
+    <div class="h-scroll-card"><img src="assets/v2-elements/05-classic-sunrise.jpg" alt="Sunrise" loading="lazy"><div class="caption"><h4>Sunrise</h4><p>Classic at first light</p></div></div>
+    <div class="h-scroll-card"><img src="assets/v2-elements/interior-installation.jpg" alt="Installation" loading="lazy"><div class="caption"><h4>Installation</h4><p>In situ</p></div></div>
+  </div>
+  <div class="h-scroll-indicator" id="hIndicator"><i class="active"></i><i></i><i></i><i></i><i></i><i></i></div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-wrap" id="quoteSection" aria-label="Founder quote">
+  <blockquote>
+    <p class="quote-text" id="qText">What started as a chair might just change medicine forever. The Solodome delivers frequencies the body was designed to receive — but modern life has stripped away.</p>
+    <cite class="quote-attr" id="qAttr">Josh Chaney, Founder</cite>
+  </blockquote>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" aria-label="Call to action">
+  <div class="cta-glow"></div>
+  <div class="container rv">
+    <div class="eyebrow">Built to order</div>
+    <h2 class="h-display">Your own architecture<br>of attention.</h2>
+    <p class="body-lg" style="margin:20px auto 40px;text-align:center">Select your model, finish, and audio options. Every SoloDome is handcrafted in Chatsworth, California.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="#collection" class="btn btn-primary btn-arrow">Shop Now</a>
+      <a href="configure.html" class="btn btn-outline">Configure Yours</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer aria-label="Site footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      Solodome
+      <p>Handcrafted personal audio chairs for immersive listening, wellness, and personalized sound.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Shop</h5>
+      <a href="classic.html">Classic</a>
+      <a href="deluxe.html">Deluxe</a>
+      <a href="auditory.html">Auditory</a>
+      <a href="configure.html">Configure</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="about.html">About</a>
+      <a href="technology.html">Technology</a>
+      <a href="contact.html">Contact</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 SoloDome Audio. Chatsworth, California.</span>
+    <span><a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="shipping.html">Shipping</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+const isMob=window.matchMedia('(pointer:coarse)').matches;
+let mx=0,my=0,sy=0;
+
+/* CURSOR */
+if(!isMob){
+  const cur=document.getElementById('cur'),cdot=document.getElementById('cdot');
+  let cx=0,cy=0,dx=0,dy=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY},{passive:true});
+  (function anim(){
+    cx+=(mx-cx)*.08;cy+=(my-cy)*.08;
+    dx+=(mx-dx)*.2;dy+=(my-dy)*.2;
+    cur.style.transform='translate('+(cx-10)+'px,'+(cy-10)+'px)';
+    cdot.style.transform='translate('+(dx-2)+'px,'+(dy-2)+'px)';
+    requestAnimationFrame(anim);
+  })();
+  document.querySelectorAll('a,button,.product-card,.h-scroll-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>cur.classList.add('grow'));
+    el.addEventListener('mouseleave',()=>cur.classList.remove('grow'));
+  });
+}
+
+/* HAMBURGER MENU */
+const burger=document.getElementById('burger');
+const overlay=document.getElementById('menuOverlay');
+const menuLinks=overlay.querySelectorAll('.menu-item a');
+const menuImgs=overlay.querySelectorAll('[data-menu-img]');
+
+burger.addEventListener('click',()=>{
+  const open=!overlay.classList.contains('open');
+  overlay.classList.toggle('open',open);
+  burger.classList.toggle('open',open);
+  burger.setAttribute('aria-expanded',open);
+  overlay.setAttribute('aria-hidden',!open);
+  document.body.style.overflow=open?'hidden':'';
+});
+
+menuLinks.forEach(link=>{
+  link.addEventListener('mouseenter',()=>{
+    const idx=link.dataset.img;
+    menuImgs.forEach(img=>img.classList.toggle('active',img.dataset.menuImg===idx));
+  });
+  link.addEventListener('click',()=>{
+    overlay.classList.remove('open');
+    burger.classList.remove('open');
+    burger.setAttribute('aria-expanded','false');
+    overlay.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+  });
+});
+
+/* HERO CANVAS — PARTICLE AURORA */
+const canvas=document.getElementById('heroCanvas');
+const ctx=canvas.getContext('2d');
+let W,H;
+function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight}
+resize();
+window.addEventListener('resize',resize,{passive:true});
+
+const particles=[];
+const COUNT=80;
+for(let i=0;i<COUNT;i++){
+  particles.push({
+    x:Math.random()*2000,y:Math.random()*1200,
+    vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.15,
+    r:Math.random()*1.5+.5,
+    a:Math.random()*.3+.1,
+    hue:Math.random()>.5?'184,164,255':'245,230,208'
+  });
+}
+
+function drawParticles(){
+  ctx.clearRect(0,0,W,H);
+  for(const p of particles){
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0)p.x=W;if(p.x>W)p.x=0;
+    if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+    ctx.beginPath();
+    ctx.arc(p.x*(W/2000),p.y*(H/1200),p.r,0,Math.PI*2);
+    ctx.fillStyle='rgba('+p.hue+','+p.a+')';
+    ctx.fill();
+  }
+  if(!isMob){
+    for(let i=0;i<particles.length;i++){
+      for(let j=i+1;j<particles.length;j++){
+        const dx=(particles[i].x*(W/2000))-(particles[j].x*(W/2000));
+        const dy=(particles[i].y*(H/1200))-(particles[j].y*(H/1200));
+        const dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<120){
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x*(W/2000),particles[i].y*(H/1200));
+          ctx.lineTo(particles[j].x*(W/2000),particles[j].y*(H/1200));
+          ctx.strokeStyle='rgba(184,164,255,'+((.15)*(1-dist/120))+')';
+          ctx.lineWidth=.5;
+          ctx.stroke();
+        }
+      }
+    }
+  }
+}
+
+/* SCROLL */
+const pbar=document.getElementById('pbar');
+window.addEventListener('scroll',()=>{sy=window.scrollY},{passive:true});
+
+/* REVEALS */
+const rvObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');rvObs.unobserve(e.target)}})},{threshold:.08,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.rv,.rv-d,.rv-x,.rv-xr,.rv-scale').forEach(el=>rvObs.observe(el));
+
+/* QUOTE SCROLL */
+const qSec=document.getElementById('quoteSection');
+const qText=document.getElementById('qText');
+const qAttr=document.getElementById('qAttr');
+const words=qText.textContent.trim().split(/\s+/);
+qText.innerHTML=words.map(w=>'<span class="word">'+w+'</span>').join(' ');
+const wEls=qText.querySelectorAll('.word');
+let qVis=false;
+new IntersectionObserver(es=>{qVis=es[0].isIntersecting},{threshold:.05}).observe(qSec);
+
+function updateQuote(){
+  if(!qVis)return;
+  const r=qSec.getBoundingClientRect();
+  const start=window.innerHeight*.85,end=-r.height*.25;
+  const p=Math.max(0,Math.min(1,(start-r.top)/(start-end)));
+  const n=Math.floor(p*wEls.length);
+  wEls.forEach((w,i)=>w.classList.toggle('lit',i<n));
+  if(p>.9)qAttr.classList.add('vis');
+}
+
+/* HORIZONTAL SCROLL INDICATOR */
+const hScroll=document.getElementById('hScroll');
+const indicators=document.querySelectorAll('#hIndicator i');
+if(hScroll){
+  hScroll.addEventListener('scroll',()=>{
+    const pct=hScroll.scrollLeft/(hScroll.scrollWidth-hScroll.clientWidth);
+    const idx=Math.round(pct*(indicators.length-1));
+    indicators.forEach((ind,i)=>ind.classList.toggle('active',i===idx));
+  },{passive:true});
+}
+
+/* PARALLAX MEDIA IN SPLITS */
+function parallaxSplits(){
+  document.querySelectorAll('.split-media img,.fw-image img').forEach(img=>{
+    const r=img.parentElement.getBoundingClientRect();
+    if(r.bottom>0&&r.top<window.innerHeight){
+      const p=(window.innerHeight-r.top)/(window.innerHeight+r.height);
+      img.style.transform='scale(1.1) translateY('+((p-.5)*-30)+'px)';
+    }
+  });
+}
+
+/* MAGNETIC BUTTONS */
+if(!isMob){
+  document.querySelectorAll('.btn,.nav-cta,.product-card-btn').forEach(btn=>{
+    btn.addEventListener('mousemove',e=>{
+      const r=btn.getBoundingClientRect();
+      const x=e.clientX-r.left-r.width/2;
+      const y=e.clientY-r.top-r.height/2;
+      btn.style.transition='none';
+      btn.style.transform='translate('+x*.2+'px,'+y*.2+'px)';
+    });
+    btn.addEventListener('mouseleave',()=>{
+      btn.style.transition='transform .5s cubic-bezier(.34,1.56,.64,1)';
+      btn.style.transform='translate(0,0)';
+    });
+  });
+}
+
+/* SMOOTH ANCHORS */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+
+/* MAIN LOOP */
+(function loop(){
+  requestAnimationFrame(loop);
+  drawParticles();
+  updateQuote();
+  if(!isMob)parallaxSplits();
+  const total=document.documentElement.scrollHeight-window.innerHeight;
+  if(total>0)pbar.style.width=(sy/total*100)+'%';
+})();
+
+})();
+</script>
+</body>
+</html>
