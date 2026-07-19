@@ -47,10 +47,6 @@ img{display:block;max-width:100%;height:auto}
 ::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--accent-dim);border-radius:3px}
-.cur{position:fixed;top:0;left:0;width:20px;height:20px;border:1.5px solid var(--accent);border-radius:50%;pointer-events:none;z-index:10001;mix-blend-mode:difference;transition:width .4s var(--ease),height .4s var(--ease),opacity .3s}
-.cur.grow{width:60px;height:60px}
-.cur-dot{position:fixed;top:0;left:0;width:4px;height:4px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:10001}
-@media(pointer:coarse){.cur,.cur-dot{display:none}}
 .grain{position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.02;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px}
 .progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:10000;overflow:hidden}
 .progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent-solid),var(--accent),var(--warm))}
@@ -222,8 +218,6 @@ footer{border-top:1px solid var(--border);padding:clamp(48px,7vh,90px) var(--mx)
 </head>
 <body>
 <div class="progress"><i id="pbar"></i></div>
-<div class="cur" id="cur"></div>
-<div class="cur-dot" id="cdot"></div>
 <div class="grain"></div>
 
 <nav class="vbanner" aria-label="Version switcher">
@@ -281,22 +275,22 @@ footer{border-top:1px solid var(--border);padding:clamp(48px,7vh,90px) var(--mx)
 
 <div class="marquee" aria-hidden="true"><div class="marquee-track"><span>Binaural 2.1 Sound</span><span>Vibroacoustic Therapy</span><span>Handcrafted in California</span><span>20Hz–20kHz</span><span>Four-Speaker Architecture</span><span>Studio-Quality Immersion</span><span>XLR &amp; Bluetooth</span><span>Custom Audio Profiling</span><span>Binaural 2.1 Sound</span><span>Vibroacoustic Therapy</span><span>Handcrafted in California</span><span>20Hz–20kHz</span><span>Four-Speaker Architecture</span><span>Studio-Quality Immersion</span><span>XLR &amp; Bluetooth</span><span>Custom Audio Profiling</span></div></div>
 
-<section class="section-pad" id="collection" aria-label="Product collection">
-  <div class="container">
+<section class="section-pad" id="collection" aria-label="Product collection" style="position:relative;overflow:hidden">
+  <h2 class="h-display" style="opacity:.05;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:clamp(80px,14vw,220px);pointer-events:none;z-index:0;white-space:nowrap;line-height:.85">Three models.<br>One philosophy.</h2>
+  <div class="container" style="position:relative;z-index:1">
     <header class="rv" style="text-align:center;margin-bottom:clamp(40px,6vh,80px)">
       <div class="eyebrow">The Collection</div>
-      <h2 class="h-display">Three models.<br>One philosophy.</h2>
     </header>
     <div class="collection-grid">
-      <a href="#collection" class="product-card rv rv-d" style="--d:0" aria-label="SoloDome Classic — $5,999">
+      <a href="classic.html" class="product-card rv rv-d" style="--d:0" aria-label="SoloDome Classic — $5,999">
         <div class="product-card-img"><img src="assets/v2-elements/classic.jpg" alt="SoloDome Classic" width="600" height="600" loading="lazy"></div>
         <div class="product-card-body"><h3 class="product-card-name">Classic</h3><p class="product-card-desc">The essential private listening room. Compact, sculptural, and complete.</p><div class="product-card-footer"><div class="product-card-price">$5,999<small>Starting price</small></div><span class="product-card-btn"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div></div>
       </a>
-      <a href="#collection" class="product-card rv rv-d" style="--d:1" aria-label="SoloDome Deluxe — $7,999">
+      <a href="deluxe.html" class="product-card rv rv-d" style="--d:1" aria-label="SoloDome Deluxe — $7,999">
         <div class="product-card-img"><span class="product-card-badge">Most Popular</span><img src="assets/v2-elements/deluxe.jpg" alt="SoloDome Deluxe" width="600" height="600" loading="lazy"></div>
         <div class="product-card-body"><h3 class="product-card-name">Deluxe</h3><p class="product-card-desc">A larger architecture of comfort with expanded sound field and vibroacoustic platform.</p><div class="product-card-footer"><div class="product-card-price">$7,999<small>Starting price</small></div><span class="product-card-btn"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div></div>
       </a>
-      <a href="#collection" class="product-card rv rv-d" style="--d:2" aria-label="SoloDome Auditory — $14,999">
+      <a href="auditory.html" class="product-card rv rv-d" style="--d:2" aria-label="SoloDome Auditory — $14,999">
         <div class="product-card-img"><span class="product-card-badge">Custom</span><img src="assets/v2-elements/13-signature-aurora.jpg" alt="SoloDome Auditory" width="600" height="600" loading="lazy"></div>
         <div class="product-card-body"><h3 class="product-card-name">Auditory</h3><p class="product-card-desc">Personalized clarity, calibrated to the listener. Custom audio profiling for hearing considerations.</p><div class="product-card-footer"><div class="product-card-price">$14,999<small>Starting price</small></div><span class="product-card-btn"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div></div>
       </a>
@@ -392,13 +386,6 @@ footer{border-top:1px solid var(--border);padding:clamp(48px,7vh,90px) var(--mx)
 'use strict';
 const isMob=window.matchMedia('(pointer:coarse)').matches;
 let mx=0,my=0,sy=0;
-if(!isMob){
-  const cur=document.getElementById('cur'),cdot=document.getElementById('cdot');
-  let cx=0,cy=0,dx=0,dy=0;
-  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY},{passive:true});
-  (function anim(){cx+=(mx-cx)*.08;cy+=(my-cy)*.08;dx+=(mx-dx)*.2;dy+=(my-dy)*.2;cur.style.transform='translate('+(cx-10)+'px,'+(cy-10)+'px)';cdot.style.transform='translate('+(dx-2)+'px,'+(dy-2)+'px)';requestAnimationFrame(anim)})();
-  document.querySelectorAll('a,button,.product-card,.h-scroll-card').forEach(el=>{el.addEventListener('mouseenter',()=>cur.classList.add('grow'));el.addEventListener('mouseleave',()=>cur.classList.remove('grow'))});
-}
 const burger=document.getElementById('burger'),overlay=document.getElementById('menuOverlay'),menuLinks=overlay.querySelectorAll('.menu-item a'),menuImgs=overlay.querySelectorAll('[data-menu-img]');
 burger.addEventListener('click',()=>{const open=!overlay.classList.contains('open');overlay.classList.toggle('open',open);burger.classList.toggle('open',open);burger.setAttribute('aria-expanded',open);overlay.setAttribute('aria-hidden',!open);document.body.style.overflow=open?'hidden':''});
 menuLinks.forEach(link=>{link.addEventListener('mouseenter',()=>{const idx=link.dataset.img;menuImgs.forEach(img=>img.classList.toggle('active',img.dataset.menuImg===idx))});link.addEventListener('click',()=>{overlay.classList.remove('open');burger.classList.remove('open');burger.setAttribute('aria-expanded','false');overlay.setAttribute('aria-hidden','true');document.body.style.overflow=''})});
@@ -417,8 +404,7 @@ function updateQuote(){if(!qVis)return;const r=qSec.getBoundingClientRect(),star
 const hScroll=document.getElementById('hScroll'),indicators=document.querySelectorAll('#hIndicator i');
 if(hScroll)hScroll.addEventListener('scroll',()=>{const pct=hScroll.scrollLeft/(hScroll.scrollWidth-hScroll.clientWidth),idx=Math.round(pct*(indicators.length-1));indicators.forEach((ind,i)=>ind.classList.toggle('active',i===idx))},{passive:true});
 function parallaxSplits(){document.querySelectorAll('.split-media img,.fw-image img').forEach(img=>{const r=img.parentElement.getBoundingClientRect();if(r.bottom>0&&r.top<window.innerHeight){const p=(window.innerHeight-r.top)/(window.innerHeight+r.height);img.style.transform='scale(1.08) translateY('+((p-.5)*-25)+'px)'}})}
-if(!isMob)document.querySelectorAll('.btn,.nav-cta,.product-card-btn').forEach(btn=>{btn.addEventListener('mousemove',e=>{const r=btn.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;btn.style.transition='none';btn.style.transform='translate('+x*.2+'px,'+y*.2+'px)'});btn.addEventListener('mouseleave',()=>{btn.style.transition='transform .5s cubic-bezier(.34,1.56,.64,1)';btn.style.transform='translate(0,0)'})});
-document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})}));
+document.querySelectorAll('a[href^="#"]').forEach(a=>{if(!a.classList.contains('product-card'))a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
 (function loop(){requestAnimationFrame(loop);drawParticles();updateQuote();if(!isMob)parallaxSplits();const total=document.documentElement.scrollHeight-window.innerHeight;if(total>0)pbar.style.width=(sy/total*100)+'%'})();
 })();
 </script>
