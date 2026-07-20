@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#08080f">
+<meta name="description" content="SoloDome — Handcrafted personal audio chairs. Studio-quality immersive sound, vibroacoustic therapy, and sculptural design. Starting at $5,999. Built in California.">
+<meta name="keywords" content="SoloDome, audio chair, immersive sound, vibroacoustic, personal listening room, luxury audio, sound chair">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://luckygoats33.github.io/solodome-luxury-v3/v10.html">
+<meta property="og:title" content="SoloDome — A Room Above the Noise">
+<meta property="og:description" content="Handcrafted personal audio chairs with studio-quality immersive sound and vibroacoustic therapy. Starting at $5,999.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://luckygoats33.github.io/solodome-luxury-v3/v10.html">
+<meta property="og:image" content="https://luckygoats33.github.io/solodome-luxury-v3/assets/v2-elements/11-deluxe-zenith.jpg">
+<title>SoloDome — A Room Above the Noise</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"SoloDome Audio","url":"https://solodome.com","description":"Handcrafted personal audio chairs for immersive listening, wellness and personalized sound.","address":{"@type":"PostalAddress","addressLocality":"Chatsworth","addressRegion":"CA","addressCountry":"US"},"founder":{"@type":"Person","name":"Josh Chaney"}}
+</script>
+<script type="application/ld+json">
+[{"@context":"https://schema.org","@type":"Product","name":"SoloDome Classic","description":"The essential private listening room with 4-speaker binaural sound.","brand":{"@type":"Brand","name":"SoloDome"},"offers":{"@type":"Offer","price":"5999","priceCurrency":"USD","availability":"https://schema.org/InStock"}},{"@context":"https://schema.org","@type":"Product","name":"SoloDome Deluxe","description":"A larger architecture of comfort with expanded sound field and vibroacoustic therapy.","brand":{"@type":"Brand","name":"SoloDome"},"offers":{"@type":"Offer","price":"7999","priceCurrency":"USD","availability":"https://schema.org/InStock"}},{"@context":"https://schema.org","@type":"Product","name":"SoloDome Auditory","description":"Personalized audio profiling. Custom-calibrated to the individual listener.","brand":{"@type":"Brand","name":"SoloDome"},"offers":{"@type":"Offer","price":"14999","priceCurrency":"USD","availability":"https://schema.org/InStock"}}]
+</script>
+<style>
+:root{
+  --bg:#08080f;--bg2:#0c0c18;--bg3:#10101e;
+  --surface:rgba(255,255,255,.03);--surface-h:rgba(255,255,255,.06);
+  --border:rgba(255,255,255,.08);--border-h:rgba(255,255,255,.16);
+  --text:#f0f0f5;--text2:rgba(240,240,245,.85);--text3:rgba(240,240,245,.55);
+  --accent:#c4b5fd;--accent2:#a78bfa;--accent-solid:#8b5cf6;
+  --accent-dim:rgba(196,181,253,.1);--accent-glow:rgba(139,92,246,.2);
+  --warm:#fde68a;--warm-dim:rgba(253,230,138,.1);
+  --heading:'Instrument Serif',Georgia,serif;
+  --body:'Instrument Sans','Segoe UI',system-ui,sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);--ease-spring:cubic-bezier(.34,1.56,.64,1);
+  --mx:clamp(24px,6vw,100px);--col:min(1200px,100% - var(--mx)*2);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-weight:400;font-size:clamp(15px,1.05vw,17px);line-height:1.75;overflow-x:hidden}
+::selection{background:var(--accent-solid);color:#fff}
+img,video{display:block;max-width:100%;height:auto}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent-dim);border-radius:3px}
+
+/* Grain */
+.grain{position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.02;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px}
+
+/* Progress */
+.progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:10000;overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent-solid),var(--accent),var(--warm))}
+
+/* Version Dropdown */
+.vdrop{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:10000;font-family:var(--body)}
+.vdrop-btn{display:flex;align-items:center;gap:6px;padding:7px 18px;background:rgba(10,10,18,.85);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:100px;cursor:pointer;font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);transition:all .3s var(--ease)}
+.vdrop-btn:hover{border-color:var(--border-h);color:var(--warm)}
+.vdrop-btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;transition:transform .3s var(--ease)}
+.vdrop.open .vdrop-btn svg{transform:rotate(180deg)}
+.vdrop-menu{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%) scale(.95);opacity:0;pointer-events:none;background:rgba(10,10,18,.95);backdrop-filter:blur(30px);border:1px solid var(--border-h);border-radius:16px;padding:8px;display:grid;grid-template-columns:repeat(5,1fr);gap:4px;min-width:260px;transition:all .3s var(--ease)}
+.vdrop.open .vdrop-menu{opacity:1;pointer-events:all;transform:translateX(-50%) scale(1)}
+.vdrop-menu a{padding:8px 14px;text-decoration:none;border-radius:10px;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);text-align:center;transition:all .2s var(--ease);white-space:nowrap}
+.vdrop-menu a:hover{color:var(--text);background:var(--surface-h)}
+.vdrop-menu a.active{color:var(--bg);background:var(--accent);font-weight:700}
+
+/* Header */
+header{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px var(--mx);display:flex;align-items:center;justify-content:space-between;transition:backdrop-filter .4s,background .4s}
+header.scrolled{background:rgba(8,8,15,.8);backdrop-filter:blur(20px)}
+.nav-left{display:flex;align-items:center;gap:20px}
+.logo{font-family:var(--body);font-size:11px;font-weight:600;letter-spacing:.6em;text-transform:uppercase;color:var(--text);text-decoration:none;transition:opacity .3s}
+.logo:hover{opacity:.7}
+.nav-right{display:flex;align-items:center;gap:20px}
+.nav-cta{font-size:10px;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--text);text-decoration:none;padding:10px 24px;border:1px solid var(--border-h);border-radius:100px;transition:all .4s var(--ease)}
+.nav-cta:hover{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+@media(max-width:768px){.nav-cta{display:none}}
+
+/* Hamburger */
+.hamburger{position:relative;width:36px;height:36px;background:none;border:none;cursor:pointer;z-index:1001;display:flex;align-items:center;justify-content:center}
+.hamburger span{position:absolute;width:22px;height:1.5px;background:var(--text);transition:all .5s var(--ease)}
+.hamburger span:nth-child(1){transform:translateY(-6px)}
+.hamburger span:nth-child(2){width:16px}
+.hamburger span:nth-child(3){transform:translateY(6px)}
+.hamburger.open span:nth-child(1){transform:rotate(45deg);width:24px}
+.hamburger.open span:nth-child(2){opacity:0;transform:translateX(20px)}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg);width:24px}
+
+/* Menu Overlay */
+.menu-overlay{position:fixed;inset:0;z-index:999;background:var(--bg);opacity:0;pointer-events:none;transition:opacity .6s var(--ease);display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.menu-overlay.open{opacity:1;pointer-events:all}
+.menu-left{display:flex;flex-direction:column;justify-content:center;padding:clamp(80px,12vh,140px) var(--mx)}
+.menu-nav{display:flex;flex-direction:column}
+.menu-item{position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.menu-item a{display:block;font-family:var(--heading);font-size:clamp(36px,5.5vw,72px);font-style:italic;color:var(--text);text-decoration:none;padding:clamp(14px,2.5vh,28px) 0;transform:translateY(110%);transition:transform .7s var(--ease),color .3s}
+.menu-overlay.open .menu-item a{transform:translateY(0)}
+.menu-item:nth-child(1) a{transition-delay:.1s}
+.menu-item:nth-child(2) a{transition-delay:.15s}
+.menu-item:nth-child(3) a{transition-delay:.2s}
+.menu-item:nth-child(4) a{transition-delay:.25s}
+.menu-item:nth-child(5) a{transition-delay:.3s}
+.menu-item:nth-child(6) a{transition-delay:.35s}
+.menu-item a:hover{color:var(--accent)}
+.menu-right{position:relative;overflow:hidden}
+.menu-right img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.4}
+@media(max-width:900px){.menu-overlay{grid-template-columns:1fr}.menu-right{display:none}}
+
+/* Hero */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+.hero-media{position:absolute;inset:0;z-index:0}
+.hero-media video,.hero-media img{width:100%;height:100%;object-fit:cover}
+.hero-canvas{position:absolute;inset:0;z-index:1}
+.hero-grad{position:absolute;inset:0;z-index:2;background:linear-gradient(135deg,rgba(8,8,15,.92) 0%,rgba(8,8,15,.6) 40%,rgba(8,8,15,.3) 70%,rgba(8,8,15,.1) 100%)}
+.hero-content{position:relative;z-index:3;padding:0 var(--mx);max-width:720px}
+.hero-eyebrow{font-size:clamp(10px,.85vw,13px);font-weight:600;letter-spacing:.35em;text-transform:uppercase;color:var(--accent);margin-bottom:clamp(16px,3vh,32px)}
+.hero-title{font-family:var(--heading);font-size:clamp(48px,7.5vw,110px);font-weight:400;font-style:italic;line-height:1;margin-bottom:clamp(20px,3vh,36px);color:var(--text)}
+.hero-sub{font-size:clamp(15px,1.15vw,18px);color:var(--text2);max-width:460px;margin-bottom:clamp(28px,4vh,48px);line-height:1.8}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;font-family:var(--body);font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;border-radius:100px;transition:all .5s var(--ease);cursor:pointer;border:none}
+.btn-primary{background:var(--accent-solid);color:#fff}
+.btn-primary:hover{background:var(--accent2);box-shadow:0 0 50px var(--accent-glow)}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border-h)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.hero-scroll{position:absolute;bottom:clamp(24px,4vh,48px);left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--text3);font-size:9px;letter-spacing:.3em;text-transform:uppercase}
+.hero-scroll i{width:1px;height:40px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scrollPulse 2s ease infinite}
+@keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(.7)}50%{opacity:1;transform:scaleY(1)}}
+
+/* Sections */
+.section{padding:clamp(80px,12vh,160px) var(--mx)}
+.section-eyebrow{font-size:clamp(10px,.75vw,12px);font-weight:600;letter-spacing:.35em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.section-title{font-family:var(--heading);font-size:clamp(32px,4vw,64px);font-style:italic;line-height:1.1;margin-bottom:clamp(16px,2vh,28px)}
+.section-desc{font-size:clamp(15px,1.1vw,17px);color:var(--text2);max-width:560px;line-height:1.8}
+
+/* Collection — Product Cards */
+.collection{position:relative;overflow:hidden}
+.collection-ghost{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--heading);font-size:clamp(60px,12vw,200px);font-style:italic;white-space:nowrap;color:rgba(255,255,255,.02);pointer-events:none;z-index:0}
+.collection-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,32px);position:relative;z-index:1;max-width:1200px;margin:0 auto}
+@media(max-width:900px){.collection-grid{grid-template-columns:1fr;max-width:400px}}
+.product-card{position:relative;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden;text-decoration:none;color:var(--text);transition:all .5s var(--ease);cursor:pointer}
+.product-card:hover{border-color:var(--border-h);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.product-card-badge{position:absolute;top:16px;right:16px;background:var(--accent-solid);color:#fff;font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:5px 14px;border-radius:100px;z-index:2}
+.product-card-img{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--bg2)}
+.product-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.product-card:hover .product-card-img img{transform:scale(1.05)}
+.product-card-body{padding:clamp(20px,2.5vw,32px);flex:1;display:flex;flex-direction:column}
+.product-card-name{font-family:var(--heading);font-size:clamp(22px,2vw,28px);font-style:italic;margin-bottom:8px}
+.product-card-desc{font-size:14px;color:var(--text3);line-height:1.6;margin-bottom:auto;padding-bottom:20px}
+.product-card-footer{display:flex;align-items:flex-end;justify-content:space-between;padding-top:16px;border-top:1px solid var(--border)}
+.product-card-price{display:flex;flex-direction:column}
+.product-card-price strong{font-size:clamp(20px,1.8vw,26px);font-weight:700;color:var(--warm)}
+.product-card-price small{font-size:11px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase}
+.product-card-btn{width:44px;height:44px;border-radius:50%;border:1px solid var(--border-h);display:flex;align-items:center;justify-content:center;transition:all .4s var(--ease)}
+.product-card:hover .product-card-btn{background:var(--accent-solid);border-color:var(--accent-solid)}
+.product-card-btn svg{width:18px;height:18px;stroke:var(--text);fill:none;stroke-width:2;transition:stroke .3s}
+.product-card:hover .product-card-btn svg{stroke:#fff}
+
+/* Configurator */
+.configurator{background:var(--bg2)}
+.config-wrap{max-width:1200px;margin:0 auto}
+.config-tabs{display:flex;gap:8px;margin-bottom:clamp(32px,4vh,56px);flex-wrap:wrap}
+.config-tab{padding:10px 28px;border:1px solid var(--border);border-radius:100px;background:none;color:var(--text3);font-family:var(--body);font-size:12px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .4s var(--ease)}
+.config-tab:hover{border-color:var(--border-h);color:var(--text)}
+.config-tab.active{background:var(--accent-solid);border-color:var(--accent-solid);color:#fff}
+.config-display{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(32px,5vw,80px);align-items:start}
+@media(max-width:900px){.config-display{grid-template-columns:1fr}}
+.config-image{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/3;background:var(--bg)}
+.config-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s var(--ease)}
+.config-image img.active{opacity:1}
+.config-detail{display:flex;flex-direction:column;gap:24px}
+.config-name{font-family:var(--heading);font-size:clamp(28px,3.5vw,48px);font-style:italic}
+.config-desc{font-size:15px;color:var(--text2);line-height:1.8}
+.config-specs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.config-spec{padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:12px}
+.config-spec dt{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);margin-bottom:4px}
+.config-spec dd{font-size:15px;font-weight:600;color:var(--text)}
+.config-price{font-size:clamp(28px,3vw,40px);font-weight:700;color:var(--warm)}
+.config-price small{font-size:13px;font-weight:400;color:var(--text3);margin-left:8px}
+.config-cta{display:flex;gap:16px;flex-wrap:wrap}
+
+/* Comparison Table */
+.compare{background:var(--bg3)}
+.compare-table-wrap{max-width:900px;margin:clamp(32px,4vh,56px) auto 0;overflow-x:auto}
+.compare-table{width:100%;border-collapse:collapse;font-size:14px}
+.compare-table th,.compare-table td{padding:14px 20px;text-align:left;border-bottom:1px solid var(--border)}
+.compare-table th{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--text3)}
+.compare-table td:first-child{color:var(--text3);font-size:13px;letter-spacing:.05em}
+.compare-table td{font-weight:500}
+.compare-table .check{color:var(--accent);font-size:18px}
+.compare-table .price-cell{color:var(--warm);font-weight:700;font-size:16px}
+.compare-table thead th:not(:first-child){text-align:center}
+.compare-table tbody td:not(:first-child){text-align:center}
+
+/* Audio Demo */
+.audio-demo{background:var(--bg2)}
+.audio-wrap{max-width:800px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:32px}
+.audio-vis{width:100%;height:200px;border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--border)}
+.audio-vis canvas{width:100%;height:100%}
+.audio-play{width:80px;height:80px;border-radius:50%;background:var(--accent-solid);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .4s var(--ease);box-shadow:0 0 0 0 var(--accent-glow)}
+.audio-play:hover{transform:scale(1.08);box-shadow:0 0 40px var(--accent-glow)}
+.audio-play.playing{background:var(--warm);box-shadow:0 0 60px rgba(253,230,138,.3)}
+.audio-play svg{width:28px;height:28px;fill:#fff;transition:fill .3s}
+.audio-play.playing svg{fill:var(--bg)}
+.audio-label{font-size:13px;color:var(--text3);letter-spacing:.1em;text-align:center}
+
+/* Technology Grid */
+.tech-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2vw,24px);max-width:1200px;margin:clamp(32px,4vh,56px) auto 0}
+@media(max-width:900px){.tech-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:500px){.tech-grid{grid-template-columns:1fr}}
+.tech-card{padding:clamp(24px,3vw,36px);background:var(--surface);border:1px solid var(--border);border-radius:16px;transition:all .4s var(--ease)}
+.tech-card:hover{border-color:var(--border-h);transform:translateY(-2px)}
+.tech-icon{width:48px;height:48px;border-radius:12px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.tech-icon svg{width:24px;height:24px;stroke:var(--accent);fill:none;stroke-width:1.5}
+.tech-card h3{font-family:var(--heading);font-size:clamp(18px,1.4vw,22px);font-style:italic;margin-bottom:8px}
+.tech-card p{font-size:14px;color:var(--text3);line-height:1.6}
+
+/* Gallery */
+.gallery{overflow:hidden}
+.gallery-track{display:flex;gap:clamp(12px,1.5vw,20px);cursor:grab;user-select:none;padding:0 var(--mx)}
+.gallery-track.dragging{cursor:grabbing}
+.gallery-card{flex:0 0 clamp(280px,30vw,400px);aspect-ratio:3/4;border-radius:16px;overflow:hidden;position:relative}
+.gallery-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.gallery-card:hover img{transform:scale(1.05)}
+
+/* Quote */
+.quote-section{min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:clamp(60px,10vh,120px) var(--mx)}
+.quote-text{font-family:var(--heading);font-size:clamp(24px,3.5vw,52px);font-style:italic;line-height:1.4;max-width:900px}
+.quote-text .word{opacity:.12;transition:opacity .4s var(--ease)}
+.quote-text .word.lit{opacity:1}
+.quote-attr{display:block;margin-top:24px;font-family:var(--body);font-size:13px;font-style:normal;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+
+/* Contact CTA */
+.cta-section{position:relative;text-align:center;overflow:hidden}
+.cta-glow{position:absolute;top:50%;left:50%;width:600px;height:600px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);animation:ctaPulse 4s ease infinite;pointer-events:none}
+@keyframes ctaPulse{0%,100%{opacity:.3;transform:translate(-50%,-50%) scale(.9)}50%{opacity:.6;transform:translate(-50%,-50%) scale(1.1)}}
+.cta-content{position:relative;z-index:1}
+.cta-content h2{font-family:var(--heading);font-size:clamp(36px,5vw,72px);font-style:italic;margin-bottom:16px}
+.cta-content p{font-size:15px;color:var(--text2);margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto}
+
+/* Footer */
+footer{padding:clamp(40px,6vh,80px) var(--mx);border-top:1px solid var(--border);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px}
+.footer-left{font-size:12px;color:var(--text3);letter-spacing:.1em}
+.footer-links{display:flex;gap:24px}
+.footer-links a{font-size:11px;color:var(--text3);text-decoration:none;letter-spacing:.15em;text-transform:uppercase;transition:color .3s}
+.footer-links a:hover{color:var(--accent)}
+
+/* Marquee */
+.marquee{overflow:hidden;padding:clamp(20px,3vh,40px) 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.marquee-inner{display:flex;gap:clamp(40px,6vw,80px);animation:marquee 30s linear infinite;width:max-content}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.marquee span{font-family:var(--heading);font-size:clamp(28px,4vw,56px);font-style:italic;white-space:nowrap;color:var(--text3);opacity:.3}
+.marquee span::after{content:'·';margin-left:clamp(40px,6vw,80px);color:var(--accent)}
+
+/* Scroll to top */
+.scroll-top{position:fixed;bottom:30px;right:30px;width:44px;height:44px;border-radius:50%;background:var(--accent-solid);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:999;opacity:0;pointer-events:none;transform:translateY(10px);transition:all .4s var(--ease)}
+.scroll-top.vis{opacity:1;pointer-events:all;transform:translateY(0)}
+.scroll-top:hover{background:var(--accent2);transform:translateY(-2px)}
+.scroll-top svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2.5}
+
+/* Cursor Glow */
+.cursor-glow{position:fixed;width:600px;height:600px;border-radius:50%;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(139,92,246,.06) 0%,transparent 70%);transform:translate(-50%,-50%);transition:opacity .4s}
+
+/* Reveal animations */
+.rv{opacity:0;transform:translateY(40px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.vis{opacity:1;transform:translateY(0)}
+.rv-d{transition-delay:calc(var(--d,0) * .12s)}
+.rv-x{opacity:0;transform:translateX(-40px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv-x.vis{opacity:1;transform:translateX(0)}
+.char-reveal .char{display:inline-block;opacity:0;transform:rotateX(-40deg) translateY(25px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.char-reveal.vis .char{opacity:1;transform:rotateX(0) translateY(0)}
+
+/* Reduced motion */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .rv,.rv-x{opacity:1;transform:none}
+  .char-reveal .char{opacity:1;transform:none}
+}
+</style>
+<link rel="stylesheet" href="cart.css">
+</head>
+<body>
+<div class="grain"></div>
+<div class="progress"><i id="progressBar"></i></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- Version Dropdown -->
+<div class="vdrop" id="vDrop">
+  <button class="vdrop-btn" id="vDropBtn">V10 <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+  <nav class="vdrop-menu" id="vDropMenu">
+    <a href="index.html">V3</a>
+    <a href="v4.html">V4</a>
+    <a href="v5.html">V5</a>
+    <a href="v7.html">V7</a>
+    <a href="v8.html">V8</a>
+    <a href="v9.html">V9</a>
+    <a href="v10.html" class="active">V10</a>
+  </nav>
+</div>
+
+<!-- Header -->
+<header id="hdr">
+  <div class="nav-left">
+    <button class="hamburger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <a href="#hero" class="logo">Solodome</a>
+  </div>
+  <div class="nav-right">
+    <a href="#configurator" class="nav-cta">Configure Yours</a>
+  </div>
+</header>
+
+<!-- Menu Overlay -->
+<div class="menu-overlay" id="menuOverlay">
+  <div class="menu-left">
+    <nav class="menu-nav">
+      <div class="menu-item"><a href="#hero">Home</a></div>
+      <div class="menu-item"><a href="#collection">Collection</a></div>
+      <div class="menu-item"><a href="#configurator">Configure</a></div>
+      <div class="menu-item"><a href="#compare">Compare</a></div>
+      <div class="menu-item"><a href="#audio-demo">Audio Demo</a></div>
+      <div class="menu-item"><a href="#contact">Contact</a></div>
+    </nav>
+  </div>
+  <div class="menu-right">
+    <img src="assets/v2-elements/11-deluxe-zenith.jpg" alt="SoloDome" loading="lazy">
+  </div>
+</div>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero-media">
+    <video autoplay muted loop playsinline poster="assets/v2-elements/11-deluxe-zenith.jpg">
+      <source src="assets/hero-cinematic-desktop.mp4" type="video/mp4">
+    </video>
+  </div>
+  <canvas class="hero-canvas" id="heroCanvas"></canvas>
+  <div class="hero-grad"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow rv" style="--d:0">Personal Audio Architecture</p>
+    <h1 class="hero-title char-reveal">A room above the noise.</h1>
+    <p class="hero-sub rv" style="--d:2">A sculptural audio chair that turns everyday listening into an immersive, private environment. Four speakers. One perfect position.</p>
+    <div class="hero-btns rv" style="--d:3">
+      <a href="#collection" class="btn btn-primary">Shop Collection →</a>
+      <a href="#configurator" class="btn btn-ghost">Explore</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><span>Scroll</span><i></i></div>
+</section>
+
+<!-- Collection -->
+<section class="section collection" id="collection">
+  <div class="collection-ghost">Three models. One philosophy.</div>
+  <p class="section-eyebrow rv">The Collection</p>
+  <h2 class="section-title rv" style="--d:1">Choose your architecture.</h2>
+  <p class="section-desc rv" style="--d:2">Each SoloDome is handcrafted in Chatsworth, California. Three models, one shared pursuit — the perfect listening position.</p>
+  <div class="collection-grid" style="margin-top:clamp(32px,5vh,64px)">
+    <a class="product-card rv rv-d" style="--d:0" data-product="classic" href="#configurator">
+      <span class="product-card-badge">Essential</span>
+      <div class="product-card-img"><img src="assets/v2-elements/classic.jpg" alt="SoloDome Classic" loading="lazy"></div>
+      <div class="product-card-body">
+        <h3 class="product-card-name">Classic</h3>
+        <p class="product-card-desc">Four-speaker binaural sound. Compact, sculptural, and complete.</p>
+        <div class="product-card-footer">
+          <div class="product-card-price"><strong>$5,999</strong><small>Starting price</small></div>
+          <span class="product-card-btn"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </div>
+    </a>
+    <a class="product-card rv rv-d" style="--d:1" data-product="deluxe" href="#configurator">
+      <span class="product-card-badge">Most Popular</span>
+      <div class="product-card-img"><img src="assets/v2-elements/deluxe.jpg" alt="SoloDome Deluxe" loading="lazy"></div>
+      <div class="product-card-body">
+        <h3 class="product-card-name">Deluxe</h3>
+        <p class="product-card-desc">Expanded acoustic chamber with vibroacoustic platform and premium materials.</p>
+        <div class="product-card-footer">
+          <div class="product-card-price"><strong>$7,999</strong><small>Starting price</small></div>
+          <span class="product-card-btn"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </div>
+    </a>
+    <a class="product-card rv rv-d" style="--d:2" data-product="auditory" href="#configurator">
+      <span class="product-card-badge">Flagship</span>
+      <div class="product-card-img"><img src="assets/v2-elements/13-signature-aurora.jpg" alt="SoloDome Auditory" loading="lazy"></div>
+      <div class="product-card-body">
+        <h3 class="product-card-name">Auditory</h3>
+        <p class="product-card-desc">Custom DSP profiling calibrated to your hearing. The ultimate personal instrument.</p>
+        <div class="product-card-footer">
+          <div class="product-card-price"><strong>$14,999</strong><small>Starting price</small></div>
+          <span class="product-card-btn"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee"><div class="marquee-inner" id="marquee"><span>Immersion</span><span>Vibroacoustic</span><span>Handcrafted</span><span>Binaural</span><span>California</span><span>Immersion</span><span>Vibroacoustic</span><span>Handcrafted</span><span>Binaural</span><span>California</span></div></div>
+
+<!-- Configurator -->
+<section class="section configurator" id="configurator">
+  <p class="section-eyebrow rv">Configure</p>
+  <h2 class="section-title rv" style="--d:1">Build yours.</h2>
+  <div class="config-wrap">
+    <div class="config-tabs rv" style="--d:2">
+      <button class="config-tab active" data-model="classic">Classic</button>
+      <button class="config-tab" data-model="deluxe">Deluxe</button>
+      <button class="config-tab" data-model="auditory">Auditory</button>
+    </div>
+    <div class="config-display">
+      <div class="config-image rv-x">
+        <img src="assets/v2-elements/classic.jpg" alt="SoloDome Classic" data-config-img="classic" class="active">
+        <img src="assets/v2-elements/deluxe.jpg" alt="SoloDome Deluxe" data-config-img="deluxe">
+        <img src="assets/v2-elements/13-signature-aurora.jpg" alt="SoloDome Auditory" data-config-img="auditory">
+      </div>
+      <div class="config-detail">
+        <h3 class="config-name" id="cfgName">SoloDome Classic</h3>
+        <p class="config-desc" id="cfgDesc">The essential private listening room. Four speakers deliver binaural sound in a compact, sculptural shell that transforms any corner into a personal concert hall.</p>
+        <div class="config-specs" id="cfgSpecs">
+          <div class="config-spec"><dt>Speakers</dt><dd>4 drivers</dd></div>
+          <div class="config-spec"><dt>Sound Field</dt><dd>Binaural</dd></div>
+          <div class="config-spec"><dt>Material</dt><dd>Fiberglass</dd></div>
+          <div class="config-spec"><dt>Weight</dt><dd>~85 lbs</dd></div>
+        </div>
+        <div class="config-price" id="cfgPrice">$5,999<small>Starting at</small></div>
+        <div class="config-cta">
+          <a href="#" class="btn btn-primary" id="cfgAddCart" data-product="classic">Add to Cart</a>
+          <a href="#contact" class="btn btn-ghost">Contact Sales</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Comparison Table -->
+<section class="section compare" id="compare">
+  <p class="section-eyebrow rv">Compare</p>
+  <h2 class="section-title rv" style="--d:1">Side by side.</h2>
+  <p class="section-desc rv" style="--d:2">Every model shares the same commitment to craftsmanship. The difference is scale, capability, and personalization.</p>
+  <div class="compare-table-wrap rv" style="--d:3">
+    <table class="compare-table">
+      <thead><tr><th></th><th>Classic</th><th>Deluxe</th><th>Auditory</th></tr></thead>
+      <tbody>
+        <tr><td>Speakers</td><td>4 drivers</td><td>6 drivers</td><td>8 drivers</td></tr>
+        <tr><td>Sound Field</td><td>Binaural</td><td>Binaural+</td><td>Custom DSP</td></tr>
+        <tr><td>Vibroacoustic</td><td>—</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>Audio Profiling</td><td>—</td><td>—</td><td class="check">✓</td></tr>
+        <tr><td>Bluetooth 5.3</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>USB-C / AUX</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>Material</td><td>Fiberglass</td><td>Fiberglass</td><td>Carbon composite</td></tr>
+        <tr><td>Handcrafted</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>Price</td><td class="price-cell">$5,999</td><td class="price-cell">$7,999</td><td class="price-cell">$14,999</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Audio Demo -->
+<section class="section audio-demo" id="audio-demo">
+  <p class="section-eyebrow rv">Experience</p>
+  <h2 class="section-title rv" style="--d:1">Hear the difference.</h2>
+  <p class="section-desc rv" style="--d:2" style="margin-bottom:32px">A simulated low-frequency preview of the SoloDome listening experience. Best with headphones.</p>
+  <div class="audio-wrap rv" style="--d:3">
+    <div class="audio-vis"><canvas id="audioCanvas"></canvas></div>
+    <button class="audio-play" id="audioBtn" aria-label="Play audio demo">
+      <svg viewBox="0 0 24 24" id="audioIcon"><polygon points="5,3 19,12 5,21"/></svg>
+    </button>
+    <p class="audio-label">40Hz / 80Hz / 120Hz — Sine wave simulation</p>
+  </div>
+</section>
+
+<!-- Technology -->
+<section class="section" id="technology">
+  <p class="section-eyebrow rv">Technology</p>
+  <h2 class="section-title rv" style="--d:1">Engineered for presence.</h2>
+  <div class="tech-grid">
+    <div class="tech-card rv rv-d" style="--d:0">
+      <div class="tech-icon"><svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div>
+      <h3>Binaural Sound</h3>
+      <p>Precisely angled drivers create a three-dimensional sound field around the listener.</p>
+    </div>
+    <div class="tech-card rv rv-d" style="--d:1">
+      <div class="tech-icon"><svg viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div>
+      <h3>Vibroacoustic</h3>
+      <p>Sub-bass frequencies transmitted through the seat create full-body immersion.</p>
+    </div>
+    <div class="tech-card rv rv-d" style="--d:2">
+      <div class="tech-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg></div>
+      <h3>Connectivity</h3>
+      <p>Bluetooth 5.3, USB-C, and 3.5mm analog — connect any source instantly.</p>
+    </div>
+    <div class="tech-card rv rv-d" style="--d:3">
+      <div class="tech-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h3>Handcrafted</h3>
+      <p>Built by hand in Chatsworth, California. Every unit inspected, tested, and signed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section class="section gallery" id="gallery">
+  <p class="section-eyebrow rv">Gallery</p>
+  <h2 class="section-title rv" style="--d:1">From every angle.</h2>
+  <div class="gallery-track" id="galleryTrack" style="margin-top:clamp(24px,3vh,40px)">
+    <div class="gallery-card"><img src="assets/v2-elements/1-classic-iv.jpg" alt="SoloDome angle 1" loading="lazy"></div>
+    <div class="gallery-card"><img src="assets/v2-elements/2-classic-half.jpg" alt="SoloDome angle 2" loading="lazy"></div>
+    <div class="gallery-card"><img src="assets/v2-elements/7-deluxe-pearl.jpg" alt="SoloDome Deluxe Pearl" loading="lazy"></div>
+    <div class="gallery-card"><img src="assets/v2-elements/11-deluxe-zenith.jpg" alt="SoloDome Deluxe Zenith" loading="lazy"></div>
+    <div class="gallery-card"><img src="assets/v2-elements/13-signature-aurora.jpg" alt="SoloDome Auditory" loading="lazy"></div>
+    <div class="gallery-card"><img src="assets/v2-elements/10-deluxe-onyx.jpg" alt="SoloDome Deluxe Onyx" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- Quote -->
+<section class="quote-section" id="quoteSection">
+  <blockquote class="quote-text" id="quoteText">
+    We didn't set out to build a chair. We set out to build a room — the smallest room that could hold a universe of sound. Every curve, every angle, every frequency is a decision made in service of one listener, one moment, one perfect position.
+    <cite class="quote-attr">Josh Chaney, Founder</cite>
+  </blockquote>
+</section>
+
+<!-- Contact -->
+<section class="section cta-section" id="contact">
+  <div class="cta-glow"></div>
+  <div class="cta-content">
+    <p class="section-eyebrow rv">Get Started</p>
+    <h2 class="rv" style="--d:1;font-family:var(--heading);font-size:clamp(36px,5vw,72px);font-style:italic">Ready to listen differently?</h2>
+    <p class="rv" style="--d:2">Every SoloDome is made to order. Tell us what you're looking for and we'll guide you to the right model.</p>
+    <div class="rv" style="--d:3;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="mailto:info@solodome.com" class="btn btn-primary">Contact Us →</a>
+      <a href="#configurator" class="btn btn-ghost">Configure Yours</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-left">© 2025 SoloDome Audio. Chatsworth, California.</div>
+  <div class="footer-links">
+    <a href="#collection">Collection</a>
+    <a href="#technology">Technology</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<!-- Scroll to Top -->
+<button class="scroll-top" id="scrollTop" aria-label="Scroll to top"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></button>
+
+<script>
+(function(){
+'use strict';
+
+/* ---- DROPDOWN VERSION SWITCHER ---- */
+const vDrop=document.getElementById('vDrop');
+const vDropBtn=document.getElementById('vDropBtn');
+vDropBtn.addEventListener('click',e=>{e.stopPropagation();vDrop.classList.toggle('open')});
+document.addEventListener('click',()=>vDrop.classList.remove('open'));
+document.getElementById('vDropMenu').addEventListener('click',e=>e.stopPropagation());
+
+/* ---- HAMBURGER ---- */
+const burger=document.getElementById('burger');
+const menuOverlay=document.getElementById('menuOverlay');
+burger.addEventListener('click',()=>{burger.classList.toggle('open');menuOverlay.classList.toggle('open');document.body.style.overflow=menuOverlay.classList.contains('open')?'hidden':''});
+menuOverlay.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');menuOverlay.classList.remove('open');document.body.style.overflow=''}));
+
+/* ---- HEADER SCROLL ---- */
+const hdr=document.getElementById('hdr');
+const progressBar=document.getElementById('progressBar');
+const scrollTop=document.getElementById('scrollTop');
+window.addEventListener('scroll',()=>{
+  const sy=window.scrollY;
+  hdr.classList.toggle('scrolled',sy>80);
+  scrollTop.classList.toggle('vis',sy>600);
+  const h=document.documentElement.scrollHeight-innerHeight;
+  if(h>0)progressBar.style.width=(sy/h*100)+'%';
+},{passive:true});
+scrollTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+/* ---- REVEAL ANIMATIONS ---- */
+const rvObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');rvObs.unobserve(e.target)}})},{threshold:.08,rootMargin:'-40px'});
+document.querySelectorAll('.rv,.rv-x').forEach(el=>rvObs.observe(el));
+
+/* ---- CHAR REVEAL ---- */
+document.querySelectorAll('.char-reveal').forEach(el=>{
+  const text=el.textContent;el.innerHTML='';
+  text.split('').forEach((c,i)=>{
+    const s=document.createElement('span');s.className='char';s.textContent=c==='\n'?'\n':c;
+    s.style.transitionDelay=(i*.025)+'s';el.appendChild(s);
+  });
+  rvObs.observe(el);
+});
+
+/* ---- PARTICLES ---- */
+const canvas=document.getElementById('heroCanvas');
+const ctx=canvas.getContext('2d');
+let particles=[];
+const isMobile=window.matchMedia('(pointer:coarse)').matches;
+const PCOUNT=isMobile?20:50;
+function resizeCanvas(){canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight}
+resizeCanvas();window.addEventListener('resize',resizeCanvas);
+for(let i=0;i<PCOUNT;i++){
+  particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.5+.5});
+}
+let heroVis=true;
+new IntersectionObserver(([e])=>{heroVis=e.isIntersecting}).observe(canvas);
+function drawParticles(){
+  if(!heroVis){requestAnimationFrame(drawParticles);return}
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0)p.x=canvas.width;if(p.x>canvas.width)p.x=0;
+    if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0;
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(196,181,253,.3)';ctx.fill();
+  });
+  for(let i=0;i<particles.length;i++){
+    for(let j=i+1;j<particles.length;j++){
+      const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y;
+      const d=Math.sqrt(dx*dx+dy*dy);
+      if(d<180){ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.strokeStyle='rgba(196,181,253,'+(1-d/180)*.12+')';ctx.stroke()}
+    }
+  }
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+
+/* ---- CURSOR GLOW ---- */
+if(!isMobile){
+  const glow=document.getElementById('cursorGlow');
+  document.addEventListener('mousemove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'});
+}
+
+/* ---- CONFIGURATOR ---- */
+const models={
+  classic:{name:'SoloDome Classic',desc:'The essential private listening room. Four speakers deliver binaural sound in a compact, sculptural shell that transforms any corner into a personal concert hall.',specs:[['Speakers','4 drivers'],['Sound Field','Binaural'],['Material','Fiberglass'],['Weight','~85 lbs']],price:'$5,999'},
+  deluxe:{name:'SoloDome Deluxe',desc:'A larger architecture of comfort. Six speakers, vibroacoustic platform, and premium materials create an expanded sound field you feel as much as hear.',specs:[['Speakers','6 drivers'],['Sound Field','Binaural+'],['Material','Fiberglass'],['Weight','~110 lbs']],price:'$7,999'},
+  auditory:{name:'SoloDome Auditory',desc:'Personalized audio profiling with custom DSP calibration. Eight drivers and carbon composite construction for listeners who demand absolute fidelity.',specs:[['Speakers','8 drivers'],['Sound Field','Custom DSP'],['Material','Carbon composite'],['Weight','~95 lbs']],price:'$14,999'}
+};
+const cfgTabs=document.querySelectorAll('.config-tab');
+const cfgImgs=document.querySelectorAll('[data-config-img]');
+const cfgName=document.getElementById('cfgName');
+const cfgDesc=document.getElementById('cfgDesc');
+const cfgSpecs=document.getElementById('cfgSpecs');
+const cfgPrice=document.getElementById('cfgPrice');
+const cfgAddCart=document.getElementById('cfgAddCart');
+
+cfgTabs.forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    const m=tab.dataset.model;
+    const data=models[m];if(!data)return;
+    cfgTabs.forEach(t=>t.classList.remove('active'));tab.classList.add('active');
+    cfgImgs.forEach(img=>{img.classList.toggle('active',img.dataset.configImg===m)});
+    cfgName.textContent=data.name;
+    cfgDesc.textContent=data.desc;
+    cfgSpecs.innerHTML=data.specs.map(s=>'<div class="config-spec"><dt>'+s[0]+'</dt><dd>'+s[1]+'</dd></div>').join('');
+    cfgPrice.innerHTML=data.price+'<small>Starting at</small>';
+    cfgAddCart.dataset.product=m;
+  });
+});
+
+/* ---- AUDIO DEMO ---- */
+const audioBtn=document.getElementById('audioBtn');
+const audioIcon=document.getElementById('audioIcon');
+const audioCanvas=document.getElementById('audioCanvas');
+const actx2d=audioCanvas.getContext('2d');
+let audioCtx,analyser,playing=false,audioTimeout;
+
+function resizeAudioCanvas(){audioCanvas.width=audioCanvas.parentElement.offsetWidth;audioCanvas.height=audioCanvas.parentElement.offsetHeight}
+resizeAudioCanvas();window.addEventListener('resize',resizeAudioCanvas);
+
+function drawIdleWave(t){
+  if(playing)return;
+  const w=audioCanvas.width,h=audioCanvas.height;
+  actx2d.clearRect(0,0,w,h);
+  actx2d.beginPath();
+  for(let x=0;x<w;x++){
+    const y=h/2+Math.sin(x*.02+t*.001)*20+Math.sin(x*.005+t*.0005)*15;
+    x===0?actx2d.moveTo(x,y):actx2d.lineTo(x,y);
+  }
+  actx2d.strokeStyle='rgba(196,181,253,.2)';actx2d.lineWidth=1.5;actx2d.stroke();
+  requestAnimationFrame(()=>drawIdleWave(performance.now()));
+}
+drawIdleWave(0);
+
+function drawFreqBars(){
+  if(!playing||!analyser)return;
+  const w=audioCanvas.width,h=audioCanvas.height;
+  const bufLen=analyser.frequencyBinCount;
+  const data=new Uint8Array(bufLen);
+  analyser.getByteFrequencyData(data);
+  actx2d.clearRect(0,0,w,h);
+  const barW=Math.max(2,(w/bufLen)*2.5);
+  const gap=1;
+  let x=0;
+  for(let i=0;i<bufLen&&x<w;i++){
+    const barH=(data[i]/255)*h*.85;
+    const hue=260+(data[i]/255)*40;
+    actx2d.fillStyle='hsla('+hue+',70%,70%,'+(data[i]/255*.8+.2)+')';
+    actx2d.fillRect(x,h-barH,barW-gap,barH);
+    x+=barW;
+  }
+  requestAnimationFrame(drawFreqBars);
+}
+
+audioBtn.addEventListener('click',()=>{
+  if(playing){stopAudio();return}
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  analyser=audioCtx.createAnalyser();analyser.fftSize=256;
+  const gain=audioCtx.createGain();gain.gain.setValueAtTime(.15,audioCtx.currentTime);
+  [40,80,120].forEach(f=>{
+    const osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=f;
+    osc.connect(gain);osc.start();
+    setTimeout(()=>{gain.gain.linearRampToValueAtTime(0,audioCtx.currentTime+.5);setTimeout(()=>osc.stop(),600)},4000);
+  });
+  gain.connect(analyser);analyser.connect(audioCtx.destination);
+  playing=true;audioBtn.classList.add('playing');
+  audioIcon.innerHTML='<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+  drawFreqBars();
+  audioTimeout=setTimeout(stopAudio,5000);
+});
+
+function stopAudio(){
+  playing=false;audioBtn.classList.remove('playing');
+  audioIcon.innerHTML='<polygon points="5,3 19,12 5,21"/>';
+  clearTimeout(audioTimeout);
+  if(audioCtx){audioCtx.close();audioCtx=null}
+  drawIdleWave(performance.now());
+}
+
+/* ---- GALLERY DRAG ---- */
+const track=document.getElementById('galleryTrack');
+let isDrag=false,startX,scrollL,vel=0;
+track.addEventListener('mousedown',e=>{isDrag=true;startX=e.pageX;scrollL=track.scrollLeft;track.classList.add('dragging');vel=0});
+document.addEventListener('mousemove',e=>{if(!isDrag)return;const dx=e.pageX-startX;track.scrollLeft=scrollL-dx;vel=dx});
+document.addEventListener('mouseup',()=>{if(!isDrag)return;isDrag=false;track.classList.remove('dragging');coast()});
+function coast(){if(Math.abs(vel)<.5)return;track.scrollLeft-=vel;vel*=.93;requestAnimationFrame(coast)}
+track.addEventListener('touchstart',e=>{startX=e.touches[0].pageX;scrollL=track.scrollLeft},{passive:true});
+track.addEventListener('touchmove',e=>{const dx=e.touches[0].pageX-startX;track.scrollLeft=scrollL-dx},{passive:true});
+
+/* ---- QUOTE WORD REVEAL ---- */
+const quoteEl=document.getElementById('quoteText');
+const citeEl=quoteEl.querySelector('cite');
+const citeHTML=citeEl.outerHTML;
+const rawText=quoteEl.textContent.replace(citeEl.textContent,'').trim();
+const words=rawText.split(/\s+/);
+quoteEl.innerHTML=words.map(w=>'<span class="word">'+w+'</span>').join(' ')+citeHTML;
+const wordSpans=quoteEl.querySelectorAll('.word');
+let quoteVis=false;
+new IntersectionObserver(([e])=>{quoteVis=e.isIntersecting},{threshold:.1}).observe(quoteEl);
+window.addEventListener('scroll',()=>{
+  if(!quoteVis)return;
+  const rect=quoteEl.getBoundingClientRect();
+  const progress=Math.max(0,Math.min(1,(window.innerHeight-rect.top)/(window.innerHeight+rect.height)));
+  const litCount=Math.floor(progress*wordSpans.length*1.4);
+  wordSpans.forEach((w,i)=>w.classList.toggle('lit',i<litCount));
+},{passive:true});
+
+/* ---- MAGNETIC BUTTONS (desktop) ---- */
+if(!isMobile){
+  document.querySelectorAll('.btn').forEach(btn=>{
+    btn.addEventListener('mousemove',e=>{
+      const r=btn.getBoundingClientRect();
+      const x=e.clientX-r.left-r.width/2;
+      const y=e.clientY-r.top-r.height/2;
+      btn.style.transform='translate('+x*.12+'px,'+y*.12+'px)';
+    });
+    btn.addEventListener('mouseleave',()=>{btn.style.transform=''});
+  });
+}
+
+/* ---- 3D TILT on product cards (desktop) ---- */
+if(!isMobile){
+  document.querySelectorAll('.product-card').forEach(card=>{
+    card.addEventListener('mousemove',e=>{
+      const r=card.getBoundingClientRect();
+      const x=(e.clientX-r.left)/r.width-.5;
+      const y=(e.clientY-r.top)/r.height-.5;
+      card.style.transform='perspective(800px) rotateY('+x*8+'deg) rotateX('+(-y*8)+'deg) translateY(-4px)';
+    });
+    card.addEventListener('mouseleave',()=>{card.style.transform=''});
+  });
+}
+
+})();
+</script>
+<script src="cart.js"></script>
+<script>
+document.querySelectorAll('.config-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    const btn=document.getElementById('cfgAddCart');
+    if(btn)btn.dataset.product=tab.dataset.model;
+  });
+});
+</script>
+</body>
+</html>
