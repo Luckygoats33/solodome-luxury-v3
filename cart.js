@@ -34,7 +34,7 @@ function buildCartUI(){
 
 // --- INJECT CART ICON into header ---
 function injectCartIcon(){
-  const hdr=document.querySelector('header');
+  const hdr=document.querySelector('header')||document.querySelector('nav.nav')||document.querySelector('nav');
   if(!hdr)return;
   const navRight=hdr.querySelector('.nav-right,.nav-cta-wrap')||hdr;
   const btn=document.createElement('button');
