@@ -281,6 +281,7 @@ body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weigh
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
+<link rel="stylesheet" href="cart.css">
 </head>
 <body>
 
@@ -455,18 +456,18 @@ body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weigh
       <h2 class="h-xl">Three expressions.<br>One acoustic philosophy.</h2>
     </div>
     <div class="products">
-      <a class="p-card tilt rv rv-c" href="#contact" style="--i:0">
+      <a class="p-card tilt rv rv-c" href="#contact" style="--i:0" data-product="classic">
         <div class="tilt-hl"></div>
         <div class="p-card-img"><img src="assets/classic.png" alt="Classic" loading="lazy"></div>
         <div class="p-card-info"><div class="p-card-name">Classic</div><div class="p-card-sub">The original personal sound sanctuary</div><div class="p-card-price">From $5,999</div></div>
       </a>
-      <a class="p-card tilt rv rv-c" href="#contact" style="--i:1">
+      <a class="p-card tilt rv rv-c" href="#contact" style="--i:1" data-product="deluxe">
         <div class="tilt-hl"></div>
         <div class="p-card-tag">Most Popular</div>
         <div class="p-card-img"><img src="assets/deluxe.jpg" alt="Deluxe" loading="lazy"></div>
         <div class="p-card-info"><div class="p-card-name">Deluxe</div><div class="p-card-sub">Greater scale, comfort and presence</div><div class="p-card-price">From $7,999</div></div>
       </a>
-      <a class="p-card tilt rv rv-c" href="#contact" style="--i:2">
+      <a class="p-card tilt rv rv-c" href="#contact" style="--i:2" data-product="auditory">
         <div class="tilt-hl"></div>
         <div class="p-card-img" style="background:var(--ink)"><img src="assets/auditory_deluxe_new.png" alt="Auditory" loading="lazy"></div>
         <div class="p-card-info"><div class="p-card-name">Auditory</div><div class="p-card-sub">Personalized clarity, calibrated to you</div><div class="p-card-price">From $14,999</div></div>
@@ -695,5 +696,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',
 
 })();
 </script>
+<script src="cart.js"></script>
 </body>
 </html>

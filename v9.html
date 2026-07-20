@@ -283,6 +283,7 @@ footer{border-top:1px solid var(--border);padding:clamp(48px,7vh,90px) var(--mx)
 @media(max-width:600px){.features-grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 </style>
+<link rel="stylesheet" href="cart.css">
 </head>
 <body>
 <div class="progress"><i id="pbar"></i></div>
@@ -421,7 +422,7 @@ footer{border-top:1px solid var(--border);padding:clamp(48px,7vh,90px) var(--mx)
         </div>
         <div class="config-price" id="configPrice">$5,999<small>Starting price &middot; Handcrafted in Chatsworth, CA</small></div>
         <div class="config-actions">
-          <a href="#contact" class="btn btn-primary btn-arrow">Shop Now</a>
+          <a href="#" class="btn btn-primary btn-arrow" id="sdAddToCart" data-product="classic">Shop Now</a>
           <a href="#audio-demo" class="btn btn-outline">Hear It</a>
         </div>
       </div>
@@ -712,6 +713,15 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click'
 
 if(stBtn)stBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 })();
+</script>
+<script src="cart.js"></script>
+<script>
+document.querySelectorAll('.config-tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    const btn=document.getElementById('sdAddToCart');
+    if(btn)btn.dataset.product=t.dataset.model;
+  });
+});
 </script>
 </body>
 </html>
