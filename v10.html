@@ -580,7 +580,7 @@ document.querySelectorAll('.rv,.rv-x').forEach(el=>rvObs.observe(el));
 document.querySelectorAll('.char-reveal').forEach(el=>{
   const text=el.textContent;el.innerHTML='';
   text.split('').forEach((c,i)=>{
-    if(c===' '||c==='\n'){el.appendChild(document.createTextNode(c));return}
+    if(c===' '||c==='\n'){const sp=document.createElement('span');sp.className='char';sp.style.width='.3em';sp.innerHTML='&nbsp;';sp.style.transitionDelay=(i*.025)+'s';el.appendChild(sp);return}
     const s=document.createElement('span');s.className='char';s.textContent=c;
     s.style.transitionDelay=(i*.025)+'s';el.appendChild(s);
   });
