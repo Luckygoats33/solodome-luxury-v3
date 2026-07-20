@@ -578,11 +578,17 @@ document.querySelectorAll('.rv,.rv-x').forEach(el=>rvObs.observe(el));
 
 /* ---- CHAR REVEAL ---- */
 document.querySelectorAll('.char-reveal').forEach(el=>{
-  const text=el.textContent;el.innerHTML='';
-  text.split('').forEach((c,i)=>{
-    if(c===' '||c==='\n'){const sp=document.createElement('span');sp.className='char';sp.style.width='.3em';sp.innerHTML='&nbsp;';sp.style.transitionDelay=(i*.025)+'s';el.appendChild(sp);return}
-    const s=document.createElement('span');s.className='char';s.textContent=c;
-    s.style.transitionDelay=(i*.025)+'s';el.appendChild(s);
+  const text=el.textContent.trim();el.innerHTML='';
+  let ci=0;
+  text.split(/\s+/).forEach((word,wi)=>{
+    if(wi>0)el.appendChild(document.createTextNode(' '));
+    const wrap=document.createElement('span');wrap.style.display='inline-block';wrap.style.whiteSpace='nowrap';
+    word.split('').forEach(c=>{
+      const s=document.createElement('span');s.className='char';s.textContent=c;
+      s.style.transitionDelay=(ci*.025)+'s';wrap.appendChild(s);ci++;
+    });
+    ci++;
+    el.appendChild(wrap);
   });
   rvObs.observe(el);
 });
